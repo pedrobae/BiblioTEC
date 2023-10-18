@@ -1,1 +1,2 @@
-
+-- criar tabela instituicao
+INSERT INTO instituicao VALUES ( '', 
