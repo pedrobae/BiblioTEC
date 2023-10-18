@@ -16,7 +16,7 @@ INSERT INTO autor (cod_autor,nome_autor,pais_autor)
 	(12,'George Spafford','Estados Unidos'),
 	(13,'Karina Vazquez','Brasil'),
 	(14,'Mark Manson','Estados Unidos'),
-	(15,'Andreas M. Antonopoulos','Brasil'),
+	(15,'Andreas M. Antonopoulos','Grécia'),
 	(16,'Charles Duhigg','Mexico'),
 	(17,'Timothy Ferriss','Estados Unidos'),
 	(18,'Carol S. Dweck ','Estados Unidos'),
