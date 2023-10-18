@@ -1,29 +1,29 @@
--- criando tabela autor
+-- criar tabela autor
 DROP TABLE IF EXISTS autor CASCADE ; 
 CREATE TABLE autor ( 
 	cod_autor		SMALLINT 	PRIMARY KEY, 
 	nome_autor 		VARCHAR(50) 	NOT NULL, 
 	pais_autor 		VARCHAR(30) 
 ); 
-
+-- criar tabela situação
 DROP TABLE IF EXISTS situacao CASCADE ; 
 CREATE TABLE situacao ( 
 	cod_situacao 		SMALLSERIAL 	PRIMARY KEY, 
 	descr_situacao 		VARCHAR(30) 	NOT NULL 
 ); 
-
+-- criar tabela disciplina
 DROP TABLE IF EXISTS disciplina CASCADE ; 
 CREATE TABLE disciplina ( 
 	cod_disciplina 		SMALLSERIAL 	PRIMARY KEY, 
 	descr_disciplina 	VARCHAR(30) 	NOT NULL 
 ); 
-
+-- criar tabela tipo_matricula
 DROP TABLE IF EXISTS tipo_matricula CASCADE ; 
 CREATE TABLE tipo_matricula ( 
 	cod_tipo_matricula 	SMALLSERIAL 	PRIMARY KEY, 
 	descr_tipo_matricula 	VARCHAR(30) 	NOT NULL 
 ); 
-
+-- criar tabela instituicao
 DROP TABLE IF EXISTS instituicao CASCADE ; 
 CREATE TABLE instituicao ( 
 	cod_instituicao 	SMALLSERIAL 	PRIMARY KEY, 
@@ -31,13 +31,13 @@ CREATE TABLE instituicao (
 	endereco_instituicao 	VARCHAR(500) 	NOT NULL, 
 	etec_fatec 		CHAR(5) 	NOT NULL 
 ); 
-
+-- criar tabela estante
 DROP TABLE IF EXISTS estante CASCADE ; 
 CREATE TABLE estante ( 
 	cod_estante 		SMALLSERIAL 	PRIMARY KEY, 
 	cod_instituicao		SMALLSERIAL 	REFERENCES instituicao(cod_instituicao) 
 ); 
-  
+-- criar tabela livro  
 DROP TABLE IF EXISTS livro CASCADE ; 
 CREATE TABLE livro ( 
 	ISBN 			NUMERIC(10) 	PRIMARY KEY, 
@@ -48,7 +48,7 @@ CREATE TABLE livro (
 	edicao 			SMALLINT,  
 	local_publ 		VARCHAR(30) 
 );  
-
+-- criar tabela exemplar 
 DROP TABLE IF EXISTS exemplar CASCADE ; 
 CREATE TABLE exemplar ( 
 	cod_exemplar 		SMALLINT 	PRIMARY KEY,  
@@ -59,7 +59,7 @@ CREATE TABLE exemplar (
 	cod_situacao 		SMALLSERIAL 	NOT NULL 	REFERENCES situacao(cod_situacao), 
 	estado_exemplar		CHAR(10) 	NOT NULL 
 ); 
-  
+-- criar tabela matricula
 DROP TABLE IF EXISTS matricula CASCADE ; 
 CREATE TABLE matricula ( 
 	cod_matricula 		INTEGER 	PRIMARY KEY, 
@@ -74,19 +74,19 @@ CREATE TABLE matricula (
 	CPF			NUMERIC(11,0),  
 	dt_termino 		DATE 
 ); 
-
+-- criar tabela autoria
 DROP TABLE IF EXISTS autoria CASCADE ; 
 CREATE TABLE autoria ( 
 	cod_autor 		SMALLSERIAL 	REFERENCES autor(cod_autor) 	PRIMARY KEY, 
 	ISBN 			NUMERIC(10) 	REFERENCES livro(ISBN) 		PRIMARY KEY 
 );  
-
+-- criar tabela classificacao
 DROP TABLE IF EXISTS classificacao CASCADE ; 
 CREATE TABLE classificacao ( 
 	cod_disciplina 		SMALLSERIAL 	REFERENCES disciplina(cod_disciplina) 	PRIMARY KEY, 
 	ISBN 			NUMERIC(10) 	REFERENCES livro(ISBN) 			PRIMARY KEY 
 ); 
-
+-- criar tabela reserva
 DROP TABLE IF EXISTS reserva CASCADE ; 
 CREATE TABLE reserva ( 
 	cod_matricula 		INTEGER 	REFERENCES matricula(cod_matricula) 	PRIMARY KEY, 
@@ -95,7 +95,7 @@ CREATE TABLE reserva (
 	dt_reserva 		TIMESTAMP 	NOT NULL, 
 	dt_prevista_emprestimo	DATE 
 ); 
-
+-- criar tabela emprestimo
 DROP TABLE IF EXISTS emprestimo CASCADE ; 
 CREATE TABLE emprestimo ( 
 	cod_matricula 		INTEGER 	REFERENCES matricula(cod_matricula) 	PRIMARY KEY, 
