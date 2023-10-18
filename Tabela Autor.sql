@@ -21,7 +21,7 @@ INSERT INTO autor (cod_autor,nome_autor,pais_autor)
 	(17,'Timothy Ferriss','Estados Unidos'),
 	(18,'Carol S. Dweck ','Estados Unidos'),
 	(19,'Robert T. Kiyosaki','Estados Unidos'),
-	(20,'Mark Manson','Estados Unidos'),
+	(20,'Mark Manson','Estados Unidos');
 	
 	
 	
