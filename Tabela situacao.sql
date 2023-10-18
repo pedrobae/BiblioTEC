@@ -1,7 +1,8 @@
 -- inserindo registros na tabela situacao
 
-insert into situacao (cod_situacao,descr_situacao)
-  values (1,'Disponível'),
+INSERT INTO situacao (cod_situacao,descr_situacao)
+  VALUES
+  (1,'Disponível'),
   (2,'Emprestado'),
   (3,'Reservado'),
   (4,'Reparo/Manutenção'),
