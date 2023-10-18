@@ -1,9 +1,14 @@
 insert into autor (cod_autor,nome_autor,pais_autor)
 values
-(1,'Clarice Lispector','Brasil'),
-(2,'Monteiro Lobato','Brasil'),
-(3,'Machado de Assis','Brasil'),
-(4,'Jorge Amado','Brasil'),
-(5,'Jose de Alencar','Brasil');
+(1,'XXX','Brasil'),
+(2,'XXX','Brasil'),
+(3,'XXX','Brasil'),
+(4,'XXX','Brasil'),
+(5,'XXX','Brasil'),
+(6,'XXX','Brasil'),
+(7,'XXX','Brasil'),
+(8,'XXX','Brasil'),
+(9,'XXX','Brasil'),
+(10,'XXX','Brasil');
 
 		
