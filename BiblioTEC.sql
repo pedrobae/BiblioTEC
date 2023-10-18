@@ -63,7 +63,7 @@ DROP TABLE IF EXISTS matricula CASCADE ;
 CREATE TABLE matricula ( 
 	cod_matricula 		INTEGER 	PRIMARY KEY, 
 	cod_tipo_matricula 	SMALLSERIAL 	NOT NULL 	REFERENCES tipo_matricula(cod_tipo_matricula),  
-	cod_instituicao 	SMALLSERIAL 	PRIMARY KEY 	REFERENCES instituicao(cod_instituicao), 
+	cod_instituicao 	SMALLSERIAL  	REFERENCES instituicao(cod_instituicao), 
 	nome_matricula 		VARCHAR(100) 	NOT NULL, 
 	dt_matricula 		DATE 		NOT NULL, 
 	sexo 			CHAR(1) 	NOT NULL, 
