@@ -1,3 +1,4 @@
+-- criando tabela autor
 DROP TABLE IF EXISTS autor CASCADE ; 
 CREATE TABLE autor ( 
 	cod_autor		SMALLINT 	PRIMARY KEY, 
