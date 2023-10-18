@@ -36,17 +36,3 @@ INSERT INTO disciplina (cod_disciplina, descr_disciplina)
 
 
 
-"Clean Code: A Handbook of Agile Software Craftsmanship" -  e , .
-"The Pragmatic Programmer: Your Journey to Mastery" - Programação, ,  e .
-"Sapiens: Uma Breve História da Humanidade" - .
-"The Innovators: How a Group of Hackers, Geniuses, and Geeks Created the Digital Revolution" - 
-"Python Crash Course: A Hands-On, Project-Based Introduction to Programming" - , .
-"Design Patterns: Elements of Reusable Object-Oriented Software" - Programação e , .
-"The Phoenix Project: A Novel about IT, DevOps, and Helping Your Business Win" - , .
-"Inteligência Artificial: Como a tecnologia está mudando o mundo" - .
-"The Subtle Art of Not Giving a F*ck: A Counterintuitive Approach to Living a Good Life" - , .
-"A Revolução Bitcoin: como criptomoedas e a plataforma blockchain estão desafiando sistemas financeiros" - , e .
-"O Poder do Hábito: Por Que Fazemos o Que Fazemos na Vida e Nos Negócios" - ,  e .
-"Trabalhe 4 Horas por Semana" - Empreendedorismo, produtividade e estilo de vida.
-"Mindset: A Nova Psicologia do Sucesso" - Psicologia, desenvolvimento pessoal.
-"A Sutil Arte de Ligar o F*da-se: Uma Estratégia Inusitada Para Uma Vida Melhor" -.
