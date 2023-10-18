@@ -1,4 +1,4 @@
-
+-- inserindo registros na tabela situacao
 
 insert into situacao (cod_situacao,descr_situacao)
   values (1,'Disponível'),
