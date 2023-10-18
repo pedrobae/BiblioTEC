@@ -1,3 +1,4 @@
+-- inserindo registros na tabela autor
 insert into autor (cod_autor,nome_autor,pais_autor)
 values
 (1,'XXX','Brasil'),
