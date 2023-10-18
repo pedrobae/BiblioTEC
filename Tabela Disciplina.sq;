@@ -1,4 +1,0 @@
--- inserir registros na  tabela disciplina
-
-
-INSERT INTO disciplina (cod_disciplina, descr_disciplina)
