@@ -1,5 +1,9 @@
-INSERT INTO autor (cod_autor,nome_autor,pais_autor)
-VALUES (1,,);
-
+insert into autor (cod_autor,nome_autor,pais_autor)
+values
+(1,'Monteiro Lobato','Brasil'),
+(2,'Monteiro Lobato','Brasil'),
+(3,'Machado de Assis','Brasil'),
+(4,'Jorge Amado','Brasil'),
+(5,'Jose de Alencar','Brasil');
 
 		
