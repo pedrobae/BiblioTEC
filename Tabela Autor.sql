@@ -1,6 +1,7 @@
 -- inserindo registros na tabela autor
-insert into autor (cod_autor,nome_autor,pais_autor)
-values
+
+INSERT INTO autor (cod_autor,nome_autor,pais_autor)
+VALUES
 (1,'XXX','Brasil'),
 (2,'XXX','Brasil'),
 (3,'XXX','Brasil'),
