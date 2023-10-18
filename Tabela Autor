@@ -1,2 +1,5 @@
-INSERT INTO Autor (Cod_autor,nome_autor,nascionalidade_autor)
+INSERT INTO autor (cod_autor,nome_autor,pais_autor)
 VALUES (1,,);
+
+
+		
