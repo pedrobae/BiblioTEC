@@ -101,7 +101,7 @@ CREATE TABLE reserva (
 -- criar tabela emprestimo
 DROP TABLE IF EXISTS emprestimo CASCADE ; 
 CREATE TABLE emprestimo ( 
-	cod_emprestimo		SERIAL		PRIMARY KEY
+	cod_emprestimo		SERIAL		PRIMARY KEY,
 	cod_matricula 		INTEGER 	REFERENCES matricula(cod_matricula), 
 	cod_insituicao		SMALLSERIAL 	REFERENCES instituicao(cod_instituicao), 
 	cod_exemplar 		SMALLINT 	REFERENCES exemplar(cod_exemplar), 
