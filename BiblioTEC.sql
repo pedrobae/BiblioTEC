@@ -42,7 +42,7 @@ DROP TABLE IF EXISTS livro CASCADE ;
 CREATE TABLE livro ( 
 	ISBN 			NUMERIC(10) 	PRIMARY KEY, 
 	titulo 			VARCHAR(100) 	NOT NULL, 
-	subtitulo 		VARCHAR(100) 	NOT NULL, 
+	subtitulo 		VARCHAR(100) , 
 	dt_publ 		DATE 		NOT NULL,  
 	editora 		VARCHAR(50) 	NOT NULL,
 	edicao 			SMALLINT,  
