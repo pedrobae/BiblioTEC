@@ -34,8 +34,9 @@ CREATE TABLE instituicao (
 -- criar tabela estante
 DROP TABLE IF EXISTS estante CASCADE ; 
 CREATE TABLE estante ( 
-	cod_estante 		SMALLSERIAL 	PRIMARY KEY, 
-	cod_instituicao		SMALLSERIAL 	REFERENCES instituicao(cod_instituicao) 
+	cod_estante 		SMALLSERIAL , 
+	cod_instituicao		SMALLSERIAL 	REFERENCES instituicao(cod_instituicao) ,
+	PRIMARY KEY (cod_estante, cod_instituicao)
 ); 
 -- criar tabela livro  
 DROP TABLE IF EXISTS livro CASCADE ; 
@@ -77,23 +78,22 @@ CREATE TABLE matricula (
 -- criar tabela autoria
 DROP TABLE IF EXISTS autoria CASCADE ; 
 CREATE TABLE autoria ( 
-	cod_autoria		SERIAL		PRIMARY KEY,
 	cod_autor 		SMALLSERIAL 	REFERENCES autor(cod_autor), 
-	ISBN 			NUMERIC(10) 	REFERENCES livro(ISBN)
+	ISBN 			NUMERIC(10) 	REFERENCES livro(ISBN),
+	PRIMARY KEY (cod_autor, ISBN)
 );  
 -- criar tabela classificacao
 DROP TABLE IF EXISTS classificacao CASCADE ; 
 CREATE TABLE classificacao ( 
-	cod_classificacao	SERIAL		PRIMARY KEY,
 	cod_disciplina 		SMALLSERIAL 	REFERENCES disciplina(cod_disciplina) , 
-	ISBN 			NUMERIC(10) 	REFERENCES livro(ISBN) 
+	ISBN 			NUMERIC(10) 	REFERENCES livro(ISBN) ,
+	PRIMARY KEY (cod_disciplina, ISBN)
 ); 
 -- criar tabela reserva
 DROP TABLE IF EXISTS reserva CASCADE ; 
 CREATE TABLE reserva ( 
 	cod_reserva		SERIAL		PRIMARY KEY,
 	cod_matricula 		INTEGER 	REFERENCES matricula(cod_matricula), 
-	cod_insituicao		SMALLSERIAL 	REFERENCES instituicao(cod_instituicao), 
 	cod_exemplar 		SMALLINT 	REFERENCES exemplar(cod_exemplar), 
 	dt_reserva 		TIMESTAMP 	NOT NULL, 
 	dt_prevista_emprestimo	DATE 
@@ -103,7 +103,6 @@ DROP TABLE IF EXISTS emprestimo CASCADE ;
 CREATE TABLE emprestimo ( 
 	cod_emprestimo		SERIAL		PRIMARY KEY,
 	cod_matricula 		INTEGER 	REFERENCES matricula(cod_matricula), 
-	cod_insituicao		SMALLSERIAL 	REFERENCES instituicao(cod_instituicao), 
 	cod_exemplar 		SMALLINT 	REFERENCES exemplar(cod_exemplar), 
 	dt_emprestimo 		TIMESTAMP 	NOT NULL, 
 	dt_prevista_devolucao 	DATE 		NOT NULL, 
