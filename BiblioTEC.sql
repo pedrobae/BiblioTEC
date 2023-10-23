@@ -105,7 +105,8 @@ CREATE TABLE reserva (
 	cod_matricula 		INTEGER 	REFERENCES matricula(cod_matricula), 
 	cod_exemplar 		SMALLINT 	REFERENCES exemplar(cod_exemplar), 
 	dt_reserva 		TIMESTAMP 	NOT NULL, 
-	dt_prevista_emprestimo	DATE 
+	dt_prevista_emprestimo	DATE 		NOT NULL,
+	dt_emprestimo		DATE
 ); 
 -- criar tabela emprestimo
 DROP TABLE IF EXISTS emprestimo CASCADE ; 
