@@ -12,7 +12,6 @@ INSERT INTO livros (ISBN, titulo, subtitulo, dt_publ, editora, edicao, local_pub
         (978-1593279912, 'Python Crash Course', 'A Hands-On, Project-Based Introduction to Programming', 2019-05-08, 'No Starch Press', 2, 'São Francisco, EUA'),
         (978-0201633610, 'Design Patterns', 'Elements of Reusable Object-Oriented Software', 1994-10-31, 'Addison-Wesley Professional', 1, 'Boston, EUA'),
         (978-1942788003, 'The Phoenix Project', 'A Novel About IT, DevOps, and Helping Your Business Win', 2013-01-10, 'IT Revolution Press', 1, 'Portland, EUA'),
-        (978-1942788003, 'The DevOps Handbook', 'How to Create World-Class Agility, Reliability, and Security in Technology Organizations', 2016-10-06, 'IT Revolution Press', 1, 'Portland, EUA'),
         (978-0062457714, 'The Subtle Art of Not Giving a F*ck', 'A Counterintuitive Approach to Living a Good Life', 2016-09-13, 'HarperOne', 1, 'Nova York, EUA'),
         (978-0062885422, 'Everything Is F*cked', 'A Book About Hope', 2019-05-14, 'Harper', 1, 'Nova York, EUA'),
         (978-1491954386, 'Mastering Bitcoin', 'Unlocking Digital Cryptocurrencies', 2014-12-24, 'O´Reilly Media', 1, 'California, EUA'),
