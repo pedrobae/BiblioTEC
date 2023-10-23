@@ -64,7 +64,7 @@ CREATE TABLE exemplar (
 	cod_exemplar 		SMALLINT 	PRIMARY KEY,  
 	ISBN 			NUMERIC(10) 	REFERENCES livro(ISBN),  
 	dt_aquisicao 		DATE 		NOT NULL,  
-	cod_instituição		SMALLSERIAL 	REFERENCES instituicao(cod_instituicao), 
+--	cod_instituição		SMALLSERIAL 	REFERENCES instituicao(cod_instituicao), 
 	cod_estante 		SMALLSERIAL	REFERENCES estante(cod_estante), 
 	cod_situacao 		SMALLSERIAL 	NOT NULL 	REFERENCES situacao(cod_situacao), 
 	estado_exemplar		CHAR(10) 	NOT NULL 
