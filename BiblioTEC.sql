@@ -31,6 +31,7 @@ CREATE TABLE instituicao (
 	endereco_instituicao 	VARCHAR(500) 	NOT NULL, 
 	etec_fatec 		CHAR(5) 	NOT NULL 
 ); 
+/*
 -- criar tabela estante
 DROP TABLE IF EXISTS estante CASCADE ; 
 CREATE TABLE estante ( 
@@ -38,6 +39,20 @@ CREATE TABLE estante (
 	cod_instituicao		SMALLSERIAL 	REFERENCES instituicao(cod_instituicao) ,
 	PRIMARY KEY (cod_estante, cod_instituicao)
 ); 
+*/
+-- criar tabela estante
+DROP TABLE IF EXISTS estante CASCADE ; 
+CREATE TABLE estante ( 
+	cod_estante 		SMALLSERIAL 	PRIMARY KEY ,
+	num_estante		SMALLINT ,
+	cod_instituicao		SMALLSERIAL 	REFERENCES instituicao(cod_instituicao)
+); 
+-- criar tabela estante
+DROP TABLE IF EXISTS estante CASCADE ; 
+CREATE TABLE estante ( 
+	cod_estante 		SMALLSERIAL , 
+	cod_instituicao		SMALLSERIAL 	REFERENCES instituicao(cod_instituicao) ,
+	PRIMARY KEY (cod_estante, cod_instituicao)
 -- criar tabela livro  
 DROP TABLE IF EXISTS livro CASCADE ; 
 CREATE TABLE livro ( 
