@@ -47,12 +47,6 @@ CREATE TABLE estante (
 	num_estante		SMALLINT ,
 	cod_instituicao		SMALLSERIAL 	REFERENCES instituicao(cod_instituicao)
 ); 
--- criar tabela estante
-DROP TABLE IF EXISTS estante CASCADE ; 
-CREATE TABLE estante ( 
-	cod_estante 		SMALLSERIAL , 
-	cod_instituicao		SMALLSERIAL 	REFERENCES instituicao(cod_instituicao) ,
-	PRIMARY KEY (cod_estante, cod_instituicao)
 -- criar tabela livro  
 DROP TABLE IF EXISTS livro CASCADE ; 
 CREATE TABLE livro ( 
