@@ -125,7 +125,10 @@ CREATE TABLE emprestimo (
 	cod_emprestimo		SERIAL		PRIMARY KEY,
 	cod_matricula 		INTEGER 	REFERENCES matricula(cod_matricula), 
 	cod_exemplar 		SMALLINT 	REFERENCES exemplar(cod_exemplar), 
-	dt_emprestimo 		TIMESTAMP 	NOT NULL, 
-	dt_prevista_devolucao 	DATE 		SET DEFAULT = dt_emprestimo + 14, 
+	dt_emprestimo 		DATE	 	NOT NULL, 
+	dt_prevista_devolucao 	DATE ,
 	dt_devolucao 		DATE 
 ); 
+
+UPDATE emprestimo 
+	SET dt_prevista_devolucao = dt_emprestimo + 14
