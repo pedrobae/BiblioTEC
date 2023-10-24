@@ -5,7 +5,7 @@ INSERT INTO situacao (cod_situacao,descr_situacao)
   (1,'Disponível'),
   (2,'Emprestado'),
   (3,'Reparo/Manutenção'),
-  (4,'Perdido'),
+  (4,'Perdido');
 
 
   
