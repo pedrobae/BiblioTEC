@@ -115,7 +115,7 @@ CREATE TABLE reserva (
 	cod_matricula 		INTEGER 	REFERENCES matricula(cod_matricula), 
 	cod_exemplar 		SMALLINT 	REFERENCES exemplar(cod_exemplar), 
 	dt_reserva 		TIMESTAMP 	NOT NULL, 
-	dt_prevista_emprestimo	DATE 		NOT NULL,
+	dt_prevista_emprestimo	DATE 		NOT NULL	CHECK (dt_prevista_emprestimo > dt_reserva),
 	dt_emprestimo		DATE
 ); 
 
@@ -126,6 +126,6 @@ CREATE TABLE emprestimo (
 	cod_matricula 		INTEGER 	REFERENCES matricula(cod_matricula), 
 	cod_exemplar 		SMALLINT 	REFERENCES exemplar(cod_exemplar), 
 	dt_emprestimo 		TIMESTAMP 	NOT NULL, 
-	dt_prevista_devolucao 	DATE 		NOT NULL, 
+	dt_prevista_devolucao 	DATE 		SET DEFAULT = dt_emprestimo + 14, 
 	dt_devolucao 		DATE 
 ); 
