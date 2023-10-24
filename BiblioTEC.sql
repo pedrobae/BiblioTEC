@@ -67,8 +67,8 @@ CREATE TABLE livro (
 -- criar tabela exemplar 
 DROP TABLE IF EXISTS exemplar CASCADE ; 
 CREATE TABLE exemplar ( 
-	cod_exemplar 			SERIAL 		PRIMARY KEY,  
-	ISBN 				NUMERIC(10) 	REFERENCES livro(ISBN),  
+	cod_exemplar 			SERIAL 			PRIMARY KEY,  
+	ISBN 					NUMERIC(10) 	REFERENCES livro(ISBN),  
 	dt_aquisicao 			DATE 			NOT NULL,  
 --	cod_instituição			SMALLSERIAL 	REFERENCES estante(cod_instituicao), 
 	cod_estante 			SMALLSERIAL		REFERENCES estante(cod_estante), 
