@@ -5,24 +5,28 @@ CREATE TABLE autor (
 	nome_autor 		VARCHAR(50) 	NOT NULL, 
 	pais_autor 		VARCHAR(50) 
 ); 
+
 -- criar tabela situação
 DROP TABLE IF EXISTS situacao CASCADE ; 
 CREATE TABLE situacao ( 
 	cod_situacao 		SMALLSERIAL 	PRIMARY KEY, 
 	descr_situacao 		VARCHAR(100) 	NOT NULL 
 ); 
--- criar tabela disciplina
-DROP TABLE IF EXISTS disciplina CASCADE ; 
-CREATE TABLE disciplina ( 
-	cod_disciplina 		SMALLSERIAL 	PRIMARY KEY, 
-	descr_disciplina 	VARCHAR(30) 	NOT NULL 
+
+-- criar tabela tema
+DROP TABLE IF EXISTS tema CASCADE ; 
+CREATE TABLE tema ( 
+	cod_tema 		SMALLSERIAL 	PRIMARY KEY, 
+	descr_tema	 	VARCHAR(30) 	NOT NULL 
 ); 
+
 -- criar tabela tipo_matricula
 DROP TABLE IF EXISTS tipo_matricula CASCADE ; 
 CREATE TABLE tipo_matricula ( 
 	cod_tipo_matricula 	SMALLSERIAL 	PRIMARY KEY, 
 	descr_tipo_matricula 	VARCHAR(100) 	NOT NULL 
 ); 
+
 -- criar tabela instituicao
 DROP TABLE IF EXISTS instituicao CASCADE ; 
 CREATE TABLE instituicao ( 
@@ -31,8 +35,9 @@ CREATE TABLE instituicao (
 	endereco_instituicao 	VARCHAR(500) 	NOT NULL, 
 	etec_fatec 		CHAR(5) 	NOT NULL 
 ); 
-/*
+
 -- criar tabela estante
+/*
 DROP TABLE IF EXISTS estante CASCADE ; 
 CREATE TABLE estante ( 
 	cod_estante 		SMALLSERIAL , 
@@ -40,13 +45,13 @@ CREATE TABLE estante (
 	PRIMARY KEY (cod_estante, cod_instituicao)
 ); 
 */
--- criar tabela estante
 DROP TABLE IF EXISTS estante CASCADE ; 
 CREATE TABLE estante ( 
 	cod_estante 		SMALLSERIAL 	PRIMARY KEY ,
 	num_estante		SMALLINT ,
 	cod_instituicao		SMALLSERIAL 	REFERENCES instituicao(cod_instituicao)
 ); 
+
 -- criar tabela livro  
 DROP TABLE IF EXISTS livro CASCADE ; 
 CREATE TABLE livro ( 
@@ -58,17 +63,19 @@ CREATE TABLE livro (
 	edicao 			SMALLINT,  
 	local_publ 		VARCHAR(50) 
 );  
+
 -- criar tabela exemplar 
 DROP TABLE IF EXISTS exemplar CASCADE ; 
 CREATE TABLE exemplar ( 
 	cod_exemplar 		SMALLINT 	PRIMARY KEY,  
 	ISBN 			NUMERIC(10) 	REFERENCES livro(ISBN),  
 	dt_aquisicao 		DATE 		NOT NULL,  
---	cod_instituição		SMALLSERIAL 	REFERENCES instituicao(cod_instituicao), 
+--	cod_instituição		SMALLSERIAL 	REFERENCES estante(cod_instituicao), 
 	cod_estante 		SMALLSERIAL	REFERENCES estante(cod_estante), 
 	cod_situacao 		SMALLSERIAL 	NOT NULL 	REFERENCES situacao(cod_situacao), 
 	estado_exemplar		CHAR(10) 	NOT NULL 
 ); 
+
 -- criar tabela matricula
 DROP TABLE IF EXISTS matricula CASCADE ; 
 CREATE TABLE matricula ( 
@@ -84,6 +91,7 @@ CREATE TABLE matricula (
 	CPF			NUMERIC(11),  
 	dt_termino 		DATE 
 ); 
+
 -- criar tabela autoria
 DROP TABLE IF EXISTS autoria CASCADE ; 
 CREATE TABLE autoria ( 
@@ -91,6 +99,7 @@ CREATE TABLE autoria (
 	ISBN 			NUMERIC(10) 	REFERENCES livro(ISBN),
 	PRIMARY KEY (cod_autor, ISBN)
 );  
+
 -- criar tabela classificacao
 DROP TABLE IF EXISTS classificacao CASCADE ; 
 CREATE TABLE classificacao ( 
@@ -98,6 +107,7 @@ CREATE TABLE classificacao (
 	ISBN 			NUMERIC(10) 	REFERENCES livro(ISBN) ,
 	PRIMARY KEY (cod_disciplina, ISBN)
 ); 
+
 -- criar tabela reserva
 DROP TABLE IF EXISTS reserva CASCADE ; 
 CREATE TABLE reserva ( 
@@ -108,6 +118,7 @@ CREATE TABLE reserva (
 	dt_prevista_emprestimo	DATE 		NOT NULL,
 	dt_emprestimo		DATE
 ); 
+
 -- criar tabela emprestimo
 DROP TABLE IF EXISTS emprestimo CASCADE ; 
 CREATE TABLE emprestimo ( 
