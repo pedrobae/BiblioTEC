@@ -1,4 +1,4 @@
-INSERT INTO classificacao (ISBN, cod_disciplina)
+INSERT INTO classificacao (ISBN, cod_tema)
         VALUES
         (978-0132350884, 2),
         (978-0132350884, 19),
