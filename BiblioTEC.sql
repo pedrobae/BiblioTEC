@@ -3,13 +3,13 @@ DROP TABLE IF EXISTS autor CASCADE ;
 CREATE TABLE autor ( 
 	cod_autor		SMALLINT 	PRIMARY KEY, 
 	nome_autor 		VARCHAR(50) 	NOT NULL, 
-	pais_autor 		VARCHAR(30) 
+	pais_autor 		VARCHAR(50) 
 ); 
 -- criar tabela situação
 DROP TABLE IF EXISTS situacao CASCADE ; 
 CREATE TABLE situacao ( 
 	cod_situacao 		SMALLSERIAL 	PRIMARY KEY, 
-	descr_situacao 		VARCHAR(30) 	NOT NULL 
+	descr_situacao 		VARCHAR(100) 	NOT NULL 
 ); 
 -- criar tabela disciplina
 DROP TABLE IF EXISTS disciplina CASCADE ; 
@@ -21,7 +21,7 @@ CREATE TABLE disciplina (
 DROP TABLE IF EXISTS tipo_matricula CASCADE ; 
 CREATE TABLE tipo_matricula ( 
 	cod_tipo_matricula 	SMALLSERIAL 	PRIMARY KEY, 
-	descr_tipo_matricula 	VARCHAR(30) 	NOT NULL 
+	descr_tipo_matricula 	VARCHAR(100) 	NOT NULL 
 ); 
 -- criar tabela instituicao
 DROP TABLE IF EXISTS instituicao CASCADE ; 
@@ -56,7 +56,7 @@ CREATE TABLE livro (
 	dt_publ 		DATE 		NOT NULL,  
 	editora 		VARCHAR(50) 	NOT NULL,
 	edicao 			SMALLINT,  
-	local_publ 		VARCHAR(30) 
+	local_publ 		VARCHAR(50) 
 );  
 -- criar tabela exemplar 
 DROP TABLE IF EXISTS exemplar CASCADE ; 
