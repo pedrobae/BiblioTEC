@@ -81,7 +81,7 @@ CREATE TABLE matricula (
 	dt_nscm 		DATE,  
 	email_matricula 	VARCHAR(150),  
 	endereco_matricula 	VARCHAR(500),  
-	CPF			NUMERIC(11,0),  
+	CPF			NUMERIC(11),  
 	dt_termino 		DATE 
 ); 
 -- criar tabela autoria
