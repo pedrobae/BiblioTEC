@@ -1,7 +1,7 @@
--- inserir registros na  tabela disciplina
+-- inserir registros na  tabela tema
 
 
-INSERT INTO disciplina (cod_disciplina, descr_disciplina)
+INSERT INTO tema (cod_tema, descr_tema)
   VALUES
   (1,'Blockchain'),
   (2,'Boas práticas de codificação'),
