@@ -11,20 +11,23 @@ def emprestimo(cod_mat, cod_exemp):
     cur = None
     try:
         con = psycopg2.connect(
-            database = "BiblioTEC", 
+            database = "teste", 
             user = "postgres", 
             password = "123456", 
             host = "localhost",
             port = "5432"
             )
-        cur = con.cursor()   
+        cur = con.cursor()  
         
+        today = date.today()
         insert_script = 'INSERT INTO emprestimo (cod_matricula, cod_exemplar, dt_emprestimo) VALUES (%s, %s, %s)'
-        insert_values = (cod_mat, cod_exemp, date.today)
+        insert_values = (cod_mat, cod_exemp, str(today))
         dt_dev_prev_script = 'UPDATE emprestimo SET dt_prevista_devolucao = dt_emprestimo + 14'
         
         cur.execute(insert_script, insert_values)
         cur.execute(dt_dev_prev_script)
+
+        con.commit()
     
     except Exception as error:
         print(error)
