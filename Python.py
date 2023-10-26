@@ -1,12 +1,18 @@
 import psycopg2
+from datetime import date
+con = None
+cur = None
+try:
+    con = psycopg2.connect(
+        database = "BiblioTEC", 
+        user = "postgres", 
+        password = "123456", 
+        host = "localhost",
+        port = "5432"
+        )
 
-con = psycopg2.connect(
-    database = "BiblioTEC", 
-    user = "postgres", 
-    password = "123456", 
-    host = "localhost",
-    port = "5432"
-    )
+    cur = con.cursor()
+
 
 
 # Registro de Exemplar
@@ -19,5 +25,10 @@ con = psycopg2.connect(
 
 # Transformar Reserva em Emprestimo
 
-
-con.close()
+except Exception as error:
+    print(error)
+finally:
+    if cur is not None:
+        cur.close()
+    if con is not None:
+        con.close()
