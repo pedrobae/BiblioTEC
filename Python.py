@@ -13,17 +13,16 @@ try:
 
     cur = con.cursor()
 
-
-
-# Registro de Exemplar
-
-# Registro de Matricula
-
-# Realizar Emprestimo
-
-# Realizar Reserva (definir a ordem para calcular o data de emprestimo prevista)
-
-# Transformar Reserva em Emprestimo
+    # Registro de Exemplar
+    
+    # Registro de Matricula
+    
+    # Realizar Emprestimo
+    
+    # Realizar Reserva (definir a ordem para calcular o data de emprestimo prevista)
+    
+    # Transformar Reserva em Emprestimo (após uma devolucao)
+    
 
 except Exception as error:
     print(error)
