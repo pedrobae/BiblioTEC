@@ -24,7 +24,7 @@ def emprestimo(cod_mat, cod_exemp):
         dt_dev_prev_script = 'UPDATE emprestimo SET dt_prevista_devolucao = dt_emprestimo + 14'
         
         cur.execute(insert_script, insert_values)
-        cur.esecute(dt_dev_prev_script)
+        cur.execute(dt_dev_prev_script)
     
     except Exception as error:
         print(error)
