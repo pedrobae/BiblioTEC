@@ -3,7 +3,9 @@ from datetime import date
 
 # Registro de Exemplar
 
+
 # Registro de Matricula
+
 
 # Realizar Emprestimo
 def emprestimo(cod_mat, cod_exemp):
@@ -20,12 +22,13 @@ def emprestimo(cod_mat, cod_exemp):
         cur = con.cursor()  
         
         today = date.today()
+        
         insert_script = 'INSERT INTO emprestimo (cod_matricula, cod_exemplar, dt_emprestimo) VALUES (%s, %s, %s)'
         insert_values = (cod_mat, cod_exemp, str(today))
-        dt_dev_prev_script = 'UPDATE emprestimo SET dt_prevista_devolucao = dt_emprestimo + 14'
+        update_script = 'UPDATE emprestimo SET dt_prevista_devolucao = dt_emprestimo + 14'
         
         cur.execute(insert_script, insert_values)
-        cur.execute(dt_dev_prev_script)
+        cur.execute(update_script)
 
         con.commit()
     
@@ -36,7 +39,8 @@ def emprestimo(cod_mat, cod_exemp):
             cur.close()
         if con is not None:
             con.close()
-    
+
+
 # Realizar Reserva (definir a ordem para calcular o data de emprestimo prevista)
 def reserva(cod_mat, cod_exemp):
     con = None
@@ -49,11 +53,13 @@ def reserva(cod_mat, cod_exemp):
             host = "localhost",
             port = "5432"
             )
-        cur = con.cursor()  
+        cur = con.cursor() 
+        
         today = date.today()
         
         select_script = ('SELECT * FROM reserva WHERE cod_exemp = (%s) AND dt_emprestimo IS NULL')
         select_values = (cod_exemp)
+        
         queue = cur.execute(select_script, select_values)
                 
         insert_script = 'INSERT INTO reserva (cod_matricula, cod_exemplar, dt_reserva, dt) VALUES (%s, %s, %s)'
@@ -63,10 +69,9 @@ def reserva(cod_mat, cod_exemp):
         update_values = (str(delay))
         
         cur.execute(insert_script, insert_values)
-        cur.execute(dt_dev_prev_script)
+        cur.execute(update_script, update_values)
 
         con.commit()
-    
     except Exception as error:
         print(error)
     finally:
@@ -91,6 +96,8 @@ try:
 
     cur = con.cursor()   
 
+    
+    con.commit()
 except Exception as error:
     print(error)
 finally:
