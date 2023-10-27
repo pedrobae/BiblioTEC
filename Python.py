@@ -1,5 +1,5 @@
 import psycopg2
-from datetime import date
+import datetime
 
 # Registro de Exemplar
 
@@ -21,7 +21,7 @@ def emprestimo(cod_mat, cod_exemp):
             )
         cur = con.cursor()  
         
-        today = date.today()
+        today = datetime.date.today()
         
         insert_script = 'INSERT INTO emprestimo (cod_matricula, cod_exemplar, dt_emprestimo) VALUES (%s, %s, %s)'
         insert_values = (cod_mat, cod_exemp, str(today))
