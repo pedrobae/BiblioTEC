@@ -96,6 +96,7 @@ try:
 
     cur = con.cursor()   
 
+    # codigo aqui
     
     con.commit()
 except Exception as error:
