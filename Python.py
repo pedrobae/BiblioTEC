@@ -88,7 +88,7 @@ def reserva(cod_mat, cod_exemp):
 # Transformar Reserva em Emprestimo (após uma devolucao)
 
 
-#Exenplo de Conexão
+#Exemlo de Conexão
 con = None
 cur = None
 try:
