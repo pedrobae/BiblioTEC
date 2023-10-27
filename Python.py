@@ -1,5 +1,8 @@
 import psycopg2
-import datetime
+from datetime import datetime
+from datetime import date
+from datetime import timedelta
+
 
 # Registro de Exemplar
 
@@ -56,21 +59,22 @@ def reserva(cod_mat, cod_exemp):
         cur = con.cursor() 
         
         today = date.today()
+        now = datetime.now()
         
-        select_script = ('SELECT * FROM reserva WHERE cod_exemp = (%s) AND dt_emprestimo IS NULL')
-        select_values = (cod_exemp)
-        
-        queue = cur.execute(select_script, select_values)
-                
-        insert_script = 'INSERT INTO reserva (cod_matricula, cod_exemplar, dt_reserva, dt) VALUES (%s, %s, %s)'
-        insert_values = (cod_mat, cod_exemp, str(today))
-        
-        update_script = 'UPDATE emprestimo SET dt_prevista_emprestimo = (%s)'
-        update_values = (str(delay))
-        
-        cur.execute(insert_script, insert_values)
-        cur.execute(update_script, update_values)
+        select_script = ('SELECT * FROM reserva WHERE reserva.cod_exemplar = (%s) AND reserva.dt_emprestimo IS NULL')
+        select_values = (str(cod_exemp))
+        cur.execute(select_script, select_values)
 
+        queue = [today]
+        for tuple in cur.fetchall():
+            queue.append(tuple[4])
+
+        delay = max(queue) + timedelta(14)
+        
+        insert_script = 'INSERT INTO reserva (cod_matricula, cod_exemplar, dt_reserva, dt_prevista_emprestimo) VALUES (%s, %s, %s, %s)'
+        insert_values = (cod_mat, cod_exemp, str(now), str(delay))
+        cur.execute(insert_script, insert_values)
+        
         con.commit()
     except Exception as error:
         print(error)
@@ -79,10 +83,12 @@ def reserva(cod_mat, cod_exemp):
             cur.close()
         if con is not None:
             con.close()
-            
+
+
 # Transformar Reserva em Emprestimo (após uma devolucao)
 
 
+#Exenplo de Conexão
 con = None
 cur = None
 try:
