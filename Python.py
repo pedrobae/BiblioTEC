@@ -9,7 +9,7 @@ from datetime import timedelta
 # Registro de Matricula
 
 
-# Realizar Emprestimo - Checar reservas para atualizar datas previstas e preeencher data de emprestimo)
+# Realizar Emprestimo - Checa reservas para atualizar datas previstas e preeencher data de emprestimo)
 def emprestimo(cod_mat, cod_exemp):
     con = None
     try:
@@ -68,7 +68,7 @@ def emprestimo(cod_mat, cod_exemp):
             con.close()
 
 
-# Realizar Reserva - Definir a ordem para calcular o data de emprestimo prevista
+# Realizar Reserva - Define a ordem para calcular a data de emprestimo prevista
 def reserva(cod_mat, cod_exemp):
     con = None
     try:
