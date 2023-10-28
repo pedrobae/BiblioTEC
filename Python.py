@@ -14,7 +14,7 @@ def emprestimo(cod_mat, cod_exemp):
     con = None
     try:
         with psycopg2.connect(
-                        database = "teste", 
+                        database = "BiblioTEC", 
                         user = "postgres", 
                         password = "123456", 
                         host = "localhost",
@@ -73,7 +73,7 @@ def reserva(cod_mat, cod_exemp):
     con = None
     try:
         with psycopg2.connect(
-                        database = "teste", 
+                        database = "BiblioTEC", 
                         user = "postgres", 
                         password = "123456", 
                         host = "localhost",
@@ -114,7 +114,7 @@ def devolucao(cod_exemp):
     con = None
     try:
         with psycopg2.connect(
-                        database = "teste", 
+                        database = "BiblioTEC", 
                         user = "postgres", 
                         password = "123456", 
                         host = "localhost",
