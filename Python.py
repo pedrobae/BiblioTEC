@@ -98,7 +98,7 @@ def devolucao(cod_exemp):
                         update_emp = 'UPDATE emprestimo SET dt_devolucao = {0} WHERE cod_emprestimo = {1}'.format(str(now), cod_emp)
                         cur.execute(update_emp)
                         
-                        select_res = 'SELECT * FROM reserva WHERE reserva.cod_exemplar = {0} AND reserva.dt_emprestimo IS NULL').format(str(cod_exemp))
+                        select_res = 'SELECT * FROM reserva WHERE reserva.cod_exemplar = {0} AND reserva.dt_emprestimo IS NULL'.format(str(cod_exemp))
                         cur.execute(select_res)
                         
                         reservas = cur.fetchall()
