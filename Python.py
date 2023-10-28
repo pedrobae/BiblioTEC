@@ -115,13 +115,14 @@ def devolucao(cod_exemp):
                     else:
                         print('O livro não esta emprestado')
                         
-        except Exception as error:
-            print(error)
-        finally:
-            if con is not None:
-                con.close()
+    except Exception as error:
+        print(error)
+    finally:
+        if con is not None:
+            con.close()
 
 #Exemplo de Conexão
+'''
 con = None
 cur = None
 try:
@@ -141,3 +142,4 @@ except Exception as error:
 finally:
     if con is not None:
         con.close()
+'''
