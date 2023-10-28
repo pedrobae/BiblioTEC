@@ -22,7 +22,7 @@ def emprestimo(cod_mat, cod_exemp):
         
             with con.cursor() as cur:
         
-                today = datetime.date.today()
+                today = date.today()
                 
                 insert_script = 'INSERT INTO emprestimo (cod_matricula, cod_exemplar, dt_emprestimo) VALUES ({0}, {1}, {2})'.format(cod_mat, cod_exemp, str(today))
                 update_script = 'UPDATE emprestimo SET dt_prevista_devolucao = dt_emprestimo + 14'
