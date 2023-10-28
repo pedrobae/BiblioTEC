@@ -22,9 +22,9 @@ def emprestimo(cod_mat, cod_exemp):
         
             with con.cursor() as cur:
         
-                today = date.today()
+                today = str(date.today())
                 
-                insert_script = 'INSERT INTO emprestimo (cod_matricula, cod_exemplar, dt_emprestimo) VALUES ({0}, {1}, {2})'.format(cod_mat, cod_exemp, str(today))
+                insert_script = "INSERT INTO emprestimo (cod_matricula, cod_exemplar, dt_emprestimo) VALUES ({0}, {1}, '{2}')".format(cod_mat, cod_exemp, today)
                 update_script = 'UPDATE emprestimo SET dt_prevista_devolucao = dt_emprestimo + 14'
                 
                 cur.execute(insert_script)
@@ -62,7 +62,7 @@ def reserva(cod_mat, cod_exemp):
         
                 delay = max(queue) + timedelta(14)
                 
-                insert_script = 'INSERT INTO reserva (cod_matricula, cod_exemplar, dt_reserva, dt_prevista_emprestimo) VALUES ({0}, {1}, {2}, {3})'.format(cod_mat, cod_exemp, str(now), str(delay))
+                insert_script = "INSERT INTO reserva (cod_matricula, cod_exemplar, dt_reserva, dt_prevista_emprestimo) VALUES ({0}, {1}, '{2}', '{3}')".format(cod_mat, cod_exemp, str(now), str(delay))
                 cur.execute(insert_script)
             
     except Exception as error:
@@ -95,7 +95,7 @@ def devolucao(cod_exemp):
                     if emprestimo != []:
                         cod_emp = emprestimo[0][0]
                     
-                        update_emp = 'UPDATE emprestimo SET dt_devolucao = {0} WHERE cod_emprestimo = {1}'.format(str(now), cod_emp)
+                        update_emp = "UPDATE emprestimo SET dt_devolucao = '{0}' WHERE cod_emprestimo = {1}".format(str(today), cod_emp)
                         cur.execute(update_emp)
                         
                         select_res = 'SELECT * FROM reserva WHERE reserva.cod_exemplar = {0} AND reserva.dt_emprestimo IS NULL'.format(str(cod_exemp))
@@ -109,7 +109,7 @@ def devolucao(cod_exemp):
                             cur.execute(select_mat)
                             
                             matricula_reserva = cur.fetchall()
-                            print('O livro esta reservado por', matricula_reserva[3], '- e-mail', matricula_reserva[7])
+                            print('O livro esta reservado por', matricula_reserva[0][3], '- e-mail - ', matricula_reserva[0][7])
                         else:
                             print('O livro não esta emprestado')
                     else:
