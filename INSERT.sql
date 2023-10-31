@@ -466,7 +466,7 @@ INSERT INTO emprestimo (cod_exemplar, cod_matricula, dt_emprestimo, dt_devolucao
 	(22, 40122, '2021-07-03', '2021-11-10'),
 	(23, 40123, '2021-08-07', '2021-10-14'),
 	(24, 40124, '2022-09-12', '2022-11-19'),
-	(25, 40125, '2022-04-09', '2022-05-16'),
+	(25, 40125, '2022-04-09', '2022-05-16');
 
 
 -- Atualizando emprestimos dt prevista de 2 semanas
