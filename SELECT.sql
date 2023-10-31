@@ -17,5 +17,5 @@ SELECT nome_matricula, email_matricula, dt_prevista_emprestimo, titulo
         ON (res.cod_exemplar = ex.cod_exemplar)
                         JOIN livro liv
         ON (ex.ISBN = liv.ISBN)
-            WHERE res.dt_emprestimo = NULL
+            WHERE res.dt_emprestimo IS NULL AND res.cod_exemplar = 'INSERIR CODIGO DO EXEMPLAR'
                 ORDER BY dt_prevista_emprestimo;
