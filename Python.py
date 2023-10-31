@@ -183,3 +183,15 @@ finally:
     if con is not None:
         con.close()
 '''
+
+'''
+emprestimo(40101, 1)
+emprestimo(40102, 1)
+emprestimo(40102, 2)
+reserva(40102, 1)
+reserva(40103, 1)
+reserva(40104, 1)
+devolucao(1)
+emprestimo(40103, 1)
+emprestimo(40102, 1)
+'''
