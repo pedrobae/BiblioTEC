@@ -146,7 +146,7 @@ def devolucao(cod_exemp):
                             cur.execute(select_mat)
                             matricula_reserva = cur.fetchall()
                             
-                            print("O livro está reservado por", matricula_reserva[0][3], "- e-mail - ", matricula_reserva[0][7])
+                            print("O livro está reservado por", matricula_reserva[0][3], "- e-mail: ", matricula_reserva[0][7], "- Codigo de Matricula: ", matricula_reserva[0][0])
                        
                         else:
                             print("O exemplar não está reservado.")
