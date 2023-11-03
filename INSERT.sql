@@ -471,3 +471,6 @@ INSERT INTO emprestimo (cod_exemplar, cod_matricula, dt_emprestimo, dt_devolucao
 
 -- Atualizando emprestimos dt prevista de 2 semanas
 UPDATE emprestimo SET dt_prevista_devolucao = dt_emprestimo + 14
+
+-- Atualizando reservas inativas
+UPDATE reserva SET situcao_res = 'INATIVA'
