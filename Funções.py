@@ -29,7 +29,7 @@ def emprestimo(cod_mat, cod_exemp):
                 emprestimo = cur.fetchall()
                 
                 if emprestimo == []:
-                    select_script = "SELECT * FROM reserva WHERE reserva.cod_exemplar = {0} AND reserva.dt_emprestimo IS NULL".format(str(cod_exemp))
+                    select_script = "SELECT * FROM reserva  r WHERE r.cod_exemplar = {0} AND r.situacao_res = 'ATIVA' ORDER BY r.dt_reserva ASC".format(str(cod_exemp))
                     cur.execute(select_script)
                     queue = []
                     for tuple in cur.fetchall():
@@ -47,7 +47,7 @@ def emprestimo(cod_mat, cod_exemp):
                         cur.execute(insert_emp)
                         cur.execute(update_emp)
                         
-                        update_res = "UPDATE reserva SET dt_emprestimo = '{0}' WHERE cod_reserva = {1}".format(str(today), queue[0][0])
+                        update_res = "UPDATE reserva SET dt_emprestimo = '{0}', situacao_res = 'INATIVA' WHERE cod_reserva = {1}".format(str(today), queue[0][0])
                         cur.execute(update_res)
 
                         delay = today - queue[0][4]
@@ -89,7 +89,7 @@ def reserva(cod_mat, cod_exemp):
                 emprestimo = cur.fetchall()  
                 
                 if emprestimo != []:
-                    select_script = "SELECT * FROM reserva WHERE reserva.cod_exemplar = {0} AND reserva.dt_emprestimo IS NULL".format(str(cod_exemp))
+                    select_script = "SELECT * FROM reserva r WHERE r.cod_exemplar = {0} AND r.situacao_res = 'ATIVA' ORDER BY r.dt_reserva ASC".format(str(cod_exemp))
                     cur.execute(select_script)
                     queue = [today]
                     for tuple in cur.fetchall():
@@ -135,7 +135,7 @@ def devolucao(cod_exemp):
                         update_emp = "UPDATE emprestimo SET dt_devolucao = '{0}' WHERE cod_emprestimo = {1}".format(str(today), cod_emp)
                         cur.execute(update_emp)
                         
-                        select_res = "SELECT * FROM reserva WHERE reserva.cod_exemplar = {0} AND reserva.dt_emprestimo IS NULL".format(str(cod_exemp))
+                        select_res = "SELECT * FROM reserva r WHERE r.cod_exemplar = {0} AND r.situacao_res = 'ATIVA' ORDER BY r.dt_reserva ASC".format(str(cod_exemp))
                         cur.execute(select_res)
                         reservas = cur.fetchall()
                         
