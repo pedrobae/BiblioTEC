@@ -130,3 +130,7 @@ CREATE TABLE emprestimo (
 	dt_devolucao 			DATE 
 ); 
 
+ALTER TABLE reserva
+	ADD COLUMN situacao_res CHAR(9) 		
+		CHECK (situacao_res IN ('ATIVA', 'INATIVA', 'CANCELADA'))
+			DEFAULT 'ATIVA'
