@@ -478,8 +478,6 @@ UPDATE reserva SET situacao_res = 'INATIVA'
 
 --populando matricula
 			
-				
-
 INSERT INTO matricula(cod_matricula, cod_tipo_matricula, cod_instituicao, nome_matricula, dt_matricula, sexo, dt_nscm, email_matricula, endereco_matricula, CPF, dt_termino) 
 
 	VALUES 
@@ -501,3 +499,32 @@ INSERT INTO matricula(cod_matricula, cod_tipo_matricula, cod_instituicao, nome_m
 (40327 , 2 , 5 , 'Beatriz Carvalho' , '01/03/2022' , 'F' , '18/03/1978' , 'beatriz.carvalho@email.com' , 'Rua dos Laboratorios, 987, Cidade Nova - Sao Paulo, SP' , 89012345678 , NULL), 
 (40328 , 2 , 5 , 'Paulo Ferreira' , '01/03/2022' , 'M' , '29/09/1987' , 'paulo.ferreira@email.com' , 'Praca do Conhecimento, 543, Centro - Sao Bernardo do Campo, SP' , 90123456789 , NULL), 
 (40329 , 2 , 5 , 'Renata Santos' , '01/03/2022' , 'F' , '25/12/1983' , 'renata.santos@email.com' , 'Avenida da Ciencia, 654, Parque Tecnologico - Sao Bernardo do Campo, SP' , 01234567890 , NULL);
+
+--populando emprestimo
+INSERT INTO emprestimo (cod_exemplar, cod_matricula, dt_emprestimo, dt_devolucao)  
+VALUES 
+ 
+(1, 40313, '15/09/2023', '16/09/2023'), 
+(6, 40313, '24/09/2023', '28/09/2023'), 
+(20, 40313, '07/08/2023', '12/08/2023'), 
+(2, 40314, '20/09/2023', '25/09/2023'), 
+(2, 40315, '01/08/2023', '03/08/2023'), 
+(3, 40316, '05/08/2023', '07/08/2023'), 
+(4, 40317, '29/08/2023', '03/09/2023'), 
+(5, 40318, '01/09/2023', '07/09/2023'), 
+(14, 40318, '01/09/2023', '07/09/2023'), 
+(6, 40319, '20/09/2023', '23/09/2023'), 
+(7, 40320, '05/02/2023', '09/02/2023'), 
+(8, 40321, '01/02/2023', '06/02/2023'), 
+(9, 40322, '06/08/2023', '07/08/2023'), 
+(10, 40323, '09/09/2023', '14/09/2023'), 
+(11, 40324, '12/08/2023', '16/08/2023'), 
+(12, 40325, '12/04/2023', '18/04/2023'), 
+(30, 40325, '12/04/2023', '18/04/2023'), 
+(13, 40326, '09/09/2023', '11/09/2023'), 
+(20, 40326, '09/09/2023', '11/09/2023'), 
+(14, 40327, '09/09/2023', '13/09/2023'), 
+(15, 40328, '09/09/2023', '15/09/2023'), 
+(16, 40329, '09/09/2023', '17/09/2023'); 
+
+
