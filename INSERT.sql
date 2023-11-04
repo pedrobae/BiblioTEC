@@ -474,3 +474,41 @@ UPDATE emprestimo SET dt_prevista_devolucao = dt_emprestimo + 14
 
 -- Atualizando reservas inativas
 UPDATE reserva SET situacao_res = 'INATIVA'
+
+
+
+--populando tabela matricula colocando mais dados
+
+INSERT INTO matricula(cod_matricula ,  cod_tipo_matricula ,  cod_instituicao ,  nome_matricula ,  dt_matricula ,  sexo ,  dt_nscm ,  email_matricula ,  endereco_matricula ,  CPF ,  dt_termino) ,
+	VALUES
+
+(40300 , 4 , 1 , Victor Santos , 10/01/2000 , M , 10/11/1980 , victor.santos@email.com , Rua das Flores ,  123 ,  Centro - Sao Paulo ,  SP , 123.456.789-00 , NULL ) ,
+(40301 , 4 , 2 , Helena Oliveira , 10/01/2000 , F , 25/07/1975 , helena.oliveira@email.com , Avenida Principal ,  456 ,  Bairro Alegre - Sao Paulo ,  SP , 234.567.890-12 , NULL) ,
+(40302 , 4 , 3 , Gabriel Fernandes , 10/01/2000 , M , 02/04/1988 , gabriel.fernandes@email.com , Praca Central ,  789 ,  Vila Feliz - Sao Paulo ,  SP , 345.678.901-23 , NULL) ,
+(40303 , 4 , 4 , Camila Pereira , 10/01/2000 , F , 15/09/1972 , camila.pereira@email.com , Alameda dos Estudantes ,  1 ,  Bela Vista - Sao Paulo ,  SP , 456.789.012-34 , NULL) ,
+(40304 , 4 , 5 , Renato Almeida , 10/01/2000 , M , 30/12/1985 , renato.almeida@email.com , Rua da Educacao ,  567 ,  Jardim Esperanca - Sao Paulo ,  SP , 567.890.123-45 , NULL) ,
+(40305 , 4 , 5 , Laura Silva , 10/01/2000 , F , 18/06/1990 , laura.silva@email.com , Avenida da Tecnologia ,  2345 ,  Novo Horizonte - Sao Paulo ,  SP , 678.901.234-56 , NULL) ,
+(40306 , 2 , 1 , Marcos Rodrigues , 10/01/2000 , M , 03/01/1978 , marcos.rodrigues@email.com , Rua dos Laboratorios ,  987 ,  Cidade Nova - Sao Paulo ,  SP , 789.012.345-67 , NULL) ,
+(40307 , 2 , 1 , Tatiana Fernandes , 08/02/2015 , F , 29/07/1983 , tatiana.fernandes@email.com , Praca do Conhecimento ,  543 ,  Centro - Sao Paulo ,  SP , 890.123.456-78 , NULL) ,
+(40308 , 2 , 1 , Rafael Cardoso , 08/02/2015 , M , 21/11/1982 , rafael.cardoso@email.com , Avenida da Ciencia ,  654 ,  Parque Tecnologico - Sao Paulo ,  SP , 901.234.567-89 , NULL) ,
+(40309 , 2 , 1 , Adriana Santos , 08/02/2015 , F , 14/03/1976 , adriana.santos@email.com , Rua dos Alunos ,  7890 ,  Bairro dos Estudantes - Sao Paulo ,  SP , 012.345.678-90 , NULL) ,
+(40310 , 2 , 1 , Marcelo Oliveira , 08/02/2015 , M , 08/04/1987 , marcelo.oliveira@email.com , Rua das Inovacoes ,  123 ,  Vila Progresso - Sao Bernardo do Campo ,  SP , 123.456.789-01 , NULL) ,
+(40311 , 2 , 2 , Patricia Pereira , 08/02/2015 , F , 20/02/1980 , patricia.pereira@email.com , Avenida da Eletronica ,  456 ,  Jardim Eletrico - Sao Bernardo do Campo ,  SP , 234.567.890-12 , NULL) ,
+(40312 , 2 , 2 , Lucas Santos , 08/02/2015 , M , 11/06/1993 , lucas.santos@email.com , Praca Central ,  789 ,  Vila Feliz - Sao Bernardo do Campo ,  SP , 345.678.901-23 , NULL) ,
+(40313 , 2 , 2 , Eliana Ferreira , 08/02/2015 , F , 02/12/1979 , eliana.ferreira@email.com , Alameda dos Estudantes ,  1 ,  Bela Vista - Sao Paulo ,  SP , 456.789.012-34 , NULL) ,
+(40314 , 2 , 2 , Felipe Oliveira , 08/02/2015 , M , 17/08/1984 , felipe.oliveira@email.com , Rua da Tecnologia ,  567 ,  Jardim do Conhecimento  - Sao Paulo ,  SP , 567.890.123-45 , NULL) ,
+(40315 , 2 , 2 , Isabel Fernandes , 08/02/2015 , F , 19/03/1991 , isabel.fernandes@email.com , Rua dos Laboratorios ,  987 ,  Cidade Nova - Sao Paulo ,  SP , 678.901.234-56 , NULL) ,
+(40316 , 2 , 2 , Rodrigo Silva , 08/02/2015 , M , 01/07/1986 , rodrigo.silva@email.com , Praca do Conhecimento ,  543 ,  Centro - Sao Paulo ,  SP , 789.012.345-67 , NULL) ,
+(40317 , 3 , 2 , Clara Santos , 08/02/2015 , F , 06/05/1982 , clara.santos@email.com , Avenida da Ciencia ,  654 ,  Parque Tecnologico - Sao Paulo ,  SP , 890.123.456-78 , NULL) ,
+(40318 , 3 , 2 , Andre Ferreira , 08/02/2015 , M , 26/10/1974 , andre.ferreira@email.com , Rua dos Alunos ,  7890 ,  Bairro dos Estudantes - Sao Paulo ,  SP , 901.234.567-89 , NULL) ,
+(40319 , 3 , 3 , Patricia Oliveira , 08/02/2015 , F , 19/01/1992 , patricia.oliveira@email.com , Rua das Inovacoes ,  123 ,  Vila Progresso - Sao Bernardo do Campo ,  SP , 012.345.678-90 , NULL) ,
+(40320 , 3 , 3 , Guilherme Alves , 09/12/2006 , M , 13/11/1977 , guilherme.alves@email.com , Avenida da Eletronica ,  456 ,  Jardim Eletrico - Sao Bernardo do Campo ,  SP , 123.456.789-01 , NULL) ,
+(40321 , 3 , 3 , Juliana Cardoso , 09/12/2006 , F , 08/06/1989 , juliana.cardoso@email.com , Rua dos Laboratorios ,  987 ,  Cidade Nova - Sao Paulo ,  SP , 234.567.890-12 , NULL) ,
+(40322 , 3 , 4 , Marco Santos , 09/12/2006 , M , 17/12/1981 , marco.santos@email.com , Praca do Conhecimento ,  543 ,  Centro - Sao Caetano ,  SP , 345.678.901-23 , NULL) ,
+(40323 , 3 , 4 , Vanessa Carvalho , 09/12/2006 , F , 22/02/1985 , vanessa.carvalho@email.com , Alameda da Tecnologia ,  567 ,  Novo Horizonte - Diadema ,  SP , 456.789.012-34 , NULL) ,
+(40324 , 2 , 4 , Gustavo Fernandes , 09/12/2006 , M , 05/07/1973 , gustavo.fernandes@email.com , Rua dos Alunos ,  7890 ,  Bairro dos Estudantes - Sao Paulo ,  SP , 567.890.123-45 , NULL) ,
+(40325 , 2 , 4 , Mariana Oliveira , 09/12/2006 , F , 20/05/1994 , mariana.oliveira@email.com , Rua das Inovacoes ,  123 ,  Vila Progresso - Sao Bernardo do Campo ,  SP , 678.901.234-56 , NULL) ,
+(40326 , 2 , 4 , Andre Rodrigues , 09/12/2006 , M , 15/11/1980 , andre.rodrigues@email.com , Avenida da Eletronica ,  456 ,  Jardim Eletrico - (Sao Bernardo do Campo ,  SP , 789.012.345-67 , NULL) ,
+(40327 , 2 , 5 , Beatriz Carvalho , 01/03/2022 , F , 18/03/1978 , beatriz.carvalho@email.com , Rua dos Laboratorios ,  987 ,  Cidade Nova - Sao Paulo ,  SP , 890.123.456-78 , NULL) ,
+(40328 , 2 , 5 , Paulo Ferreira , 01/03/2022 , M , 29/09/1987 , paulo.ferreira@email.com , Praca do Conhecimento ,  543 ,  Centro - Sao Bernardo do Campo ,  SP , 901.234.567-89 , NULL) ,
+(40329 , 2 , 5 , Renata Santos , 01/03/2022 , F , 25/12/1983 , renata.santos@email.com , Avenida da Ciencia ,  654 ,  Parque Tecnologico - Sao Bernardo do Campo ,  SP , 012.345.678-90 , NULL) ;
