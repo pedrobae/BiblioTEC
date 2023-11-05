@@ -40,12 +40,16 @@ def emprestimo(cod_mat, cod_exemp):
                         update_emp = "UPDATE emprestimo SET dt_prevista_devolucao = dt_emprestimo + 14"
                         cur.execute(insert_emp)
                         cur.execute(update_emp)
+                        update_exemp = "UPDATE exemplar SET cod_situcao = 2 WHERE cod_exemplar = {0}".format(cod_exemp)
+                        cur.execute(update_exemp)
                         
                     elif cod_mat == queue[0][1]:
                         insert_emp = "INSERT INTO emprestimo (cod_matricula, cod_exemplar, dt_emprestimo) VALUES ({0}, {1}, '{2}')".format(cod_mat, cod_exemp, str(today))
                         update_emp = "UPDATE emprestimo SET dt_prevista_devolucao = dt_emprestimo + 14"
                         cur.execute(insert_emp)
                         cur.execute(update_emp)
+                        update_exemp = "UPDATE exemplar SET cod_situcao = 2 WHERE cod_exemplar = {0}".format(cod_exemp)
+                        cur.execute(update_exemp)
                         
                         update_res = "UPDATE reserva SET dt_emprestimo = '{0}', situacao_res = 'INATIVA' WHERE cod_reserva = {1}".format(str(today), queue[0][0])
                         cur.execute(update_res)
@@ -100,7 +104,7 @@ def reserva(cod_mat, cod_exemp):
                     cur.execute(insert_script)
                     
                 else:
-                        print("O exemplar está disponível.")
+                    print("O exemplar está disponível.")
             
     except Exception as error:
         print(error)
@@ -134,6 +138,9 @@ def devolucao(cod_exemp):
                     
                         update_emp = "UPDATE emprestimo SET dt_devolucao = '{0}' WHERE cod_emprestimo = {1}".format(str(today), cod_emp)
                         cur.execute(update_emp)
+
+                        update_exemp = "UPDATE exemplar SET cod_situcao = 1 WHERE cod_exemplar = {0}".format(cod_exemp)
+                        cur.execute(update_exemp)"
                         
                         select_res = "SELECT * FROM reserva r WHERE r.cod_exemplar = {0} AND r.situacao_res = 'ATIVA' ORDER BY r.dt_reserva ASC".format(str(cod_exemp))
                         cur.execute(select_res)
