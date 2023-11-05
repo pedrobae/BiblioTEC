@@ -137,23 +137,23 @@ INSERT INTO exemplar (ISBN, dt_aquisicao, cod_estante, cod_situacao, estado_exem
 	(0132350884, '2023-10-22', 1, 1, 'Preservado'),
 	(0132350884, '2023-2-22', 1, 1, 'Danificado'),
 	(0132350884, '2023-10-22', 1, 1, 'Preservado'),
-	(0137081073, '2019-12-14', 2, 4, 'Danificado'),
-	(1491904240, '2018-4-1', 1, 3, 'Preservado'),
+	(0137081073, '2019-12-14', 2, 1, 'Danificado'),
+	(1491904240, '2018-4-1', 1, 1, 'Preservado'),
 	(1491904240, '2020-4-10', 1, 1, 'Preservado'),
 	(0345805852, '2018-10-26', 3, 1, 'Danificado'),
 	(0307463630, '2020-6-14', 10, 1, 'Preservado'),
 	(0307463630, '2018-1-24', 1, 1, 'Preservado'),
 	(0307463630, '2019-2-24', 5, 1, 'Preservado'),
-	(0201734843, '2014-3-21', 18, 2, 'Preservado'),
-	(0201734843, '2014-4-21', 17, 3, 'Danificado'),
-	(0201734843, '2013-5-15', 14, 4, 'Preservado'),
-	(0062457714, '2018-6-17', 15, 2, 'Preservado'),
+	(0201734843, '2014-3-21', 18, 1, 'Preservado'),
+	(0201734843, '2014-4-21', 17, 1, 'Danificado'),
+	(0201734843, '2013-5-15', 14, 1, 'Preservado'),
+	(0062457714, '2018-6-17', 15, 1, 'Preservado'),
 	(0062457714, '2019-7-19', 18, 1, 'Danificado'),
 	(0062457714, '2018-8-29', 19, 1, 'Preservado'),
 	(0446677455, '2018-9-30', 1, 1, 'Danificado'),
-	(0446677455, '2017-10-24', 9, 3, 'Preservado'),
-	(0446677455, '2015-11-25', 19, 4, 'Danificado'),
-	(0062464316, '2018-12-20', 8, 3, 'Preservado'),
+	(0446677455, '2017-10-24', 9, 1, 'Preservado'),
+	(0446677455, '2015-11-25', 19, 1, 'Danificado'),
+	(0062464316, '2018-12-20', 8, 1, 'Preservado'),
 	(0062464316, '2021-1-20', 9, 1, 'Preservado'),
 	(0062464316, '2020-1-10', 6, 1, 'Preservado'),
 	(0201616224, '2020-1-19', 5, 1, 'Preservado'),
@@ -161,19 +161,19 @@ INSERT INTO exemplar (ISBN, dt_aquisicao, cod_estante, cod_situacao, estado_exem
 	(0201616224, '2017-2-1', 7, 1, 'Preservado'),
 	(0201616224, '2018-2-15', 5, 1, 'Danificado'),
 	(0345472328, '2019-2-5', 6, 1, 'Preservado'),
-	(0345472328, '2020-2-9', 5, 4, 'Preservado'),
-	(0345472328, '2021-3-7', 4, 3, 'Danificado'),
+	(0345472328, '2020-2-9', 5, 1, 'Preservado'),
+	(0345472328, '2021-3-7', 4, 1, 'Danificado'),
 	(0345472328, '2021-5-4', 8, 1, 'Preservado'),
-	(0132350884, '2022-5-5', 7, 3, 'Preservado'),
-	(0132350884, '2019-4-4', 24, 4, 'Danificado'),
-	(0132350884, '2019-4-9', 8, 4, 'Preservado'),
+	(0132350884, '2022-5-5', 7, 1, 'Preservado'),
+	(0132350884, '2019-4-4', 24, 1, 'Danificado'),
+	(0132350884, '2019-4-9', 8, 1, 'Preservado'),
 	(1942788003, '2018-7-6', 25, 1, 'Danificado'),
 	(1942788003, '2018-8-5', 23, 1, 'Preservado'),
-	(1942788003, '2017-8-4', 23, 3, 'Danificado'),
-	(0345472328, '2017-8-7', 22, 4, 'Preservado'),
-	(0345472328, '2019-7-8', 21, 4, 'Danificado'),
-	(0345472328, '2019-7-9', 21, 3, 'Danificado'),
-	(0446677455, '2020-4-1', 20, 4, 'Preservado'),
+	(1942788003, '2017-8-4', 23, 1, 'Danificado'),
+	(0345472328, '2017-8-7', 22, 1, 'Preservado'),
+	(0345472328, '2019-7-8', 21, 1, 'Danificado'),
+	(0345472328, '2019-7-9', 21, 1, 'Danificado'),
+	(0446677455, '2020-4-1', 20, 1, 'Preservado'),
 	(0446677455, '2022-9-2', 10, 1, 'Preservado'),
 	(0201633610, '2021-5-15', 10, 1, 'Preservado'),
 	(1593276034, '2022-6-18', 16, 1, 'Preservado'),
@@ -184,7 +184,7 @@ INSERT INTO exemplar (ISBN, dt_aquisicao, cod_estante, cod_situacao, estado_exem
 	(1491904240, '2017-4-6', 17, 1, 'Preservado'),
 	(1400069286, '2018-2-26', 19, 1, 'Danificado'),
 	(0812981605, '2019-1-22', 15, 1, 'Preservado'),
-	(0345472328, '2019-5-21', 12, 3, 'Preservado');
+	(0345472328, '2019-5-21', 12, 1, 'Preservado');
 
 --Populando matricula
 INSERT INTO matricula(cod_matricula, cod_tipo_matricula, cod_instituicao, nome_matricula, dt_matricula, sexo, dt_nscm, email_matricula, endereco_matricula, CPF, dt_termino)
@@ -224,6 +224,27 @@ INSERT INTO matricula(cod_matricula, cod_tipo_matricula, cod_instituicao, nome_m
 	(40148, 1, 2, 'Isadora Santos', '2022-02-25', 'F', '1998-01-25', 'isadora.santos@universitymail.com', 'Avenida da Sabedoria, 34 - Praça do Conhecimento - São Paulo/SP', 15923647821, '2025-09-30'),
 	(40158, 1, 2, 'Henrique Pereira', '2021-06-18', 'M', '1999-03-18', 'henrique.pereira@example.com', 'Rua dos Alunos, 67 - Avenida dos Professores - São Paulo/SP', 74185296330, '2024-10-30'),
 	(40149, 1, 3, 'Larissa Vieira', '2022-03-05', 'F', '1998-01-25', 'larissa.vieira@universitymail.com', 'Alameda da Educação, 34 - Praça do Bom Progresso - São Paulo/SP', 15923647823, '2025-09-30');
+
+--populando matricula
+INSERT INTO matricula(cod_matricula, cod_tipo_matricula, cod_instituicao, nome_matricula, dt_matricula, sexo, dt_nscm, email_matricula, endereco_matricula, CPF, dt_termino) 
+	VALUES 
+	(40313 , 2 , 2 , 'Eliana Ferreira' , '08/02/2015' , 'F' , '02/12/1979' , 'eliana.ferreira@email.com' , 'Alameda dos Estudantes, 1, Bela Vista - Sao Paulo, SP' , 45678901234 , NULL), 
+	(40314 , 2 , 2 , 'Felipe Oliveira' , '08/02/2015' , 'M' , '17/08/1984' , 'felipe.oliveira@email.com' , 'Rua da Tecnologia, 567, Jardim do Conhecimento  - Sao Paulo, SP' , 56789012345 , NULL),  
+	(40315 , 2 , 2 , 'Isabel Fernandes' , '08/02/2015' , 'F' , '19/03/1991' , 'isabel.fernandes@email.com' , 'Rua dos Laboratorios, 987, Cidade Nova - Sao Paulo, SP' , 67890123456 , NULL), 
+	(40316 , 2 , 2 , 'Rodrigo Silva' , '08/02/2015' , 'M' , '01/07/1986' , 'rodrigo.silva@email.com' , 'Praca do Conhecimento, 543, Centro - Sao Paulo, SP' , 78901234567 , NULL), 
+	(40317 , 3 , 2 , 'Clara Santos' , '08/02/2015' , 'F' , '06/05/1982' , 'clara.santos@email.com' , 'Avenida da Ciencia, 654, Parque Tecnologico - Sao Paulo, SP' , 89012345678 , NULL), 
+	(40318 , 3 , 2 , 'Andre Ferreira' , '08/02/2015' , 'M' , '26/10/1974' , 'andre.ferreira@email.com' , 'Rua dos Alunos, 7890, Bairro dos Estudantes - Sao Paulo, SP' , 90123456789 , NULL), 
+	(40319 , 3 , 3 , 'Patricia Oliveira' , '08/02/2015' , 'F' , '19/01/1992' , 'patricia.oliveira@email.com' , 'Rua das Inovacoes, 123, Vila Progresso - Sao Bernardo do Campo, SP' , 01234567890 , NULL), 
+	(40320 , 3 , 3 , 'Guilherme Alves' , '09/12/2006' , 'M' , '13/11/1977' , 'guilherme.alves@email.com' , 'Avenida da Eletronica, 456, Jardim Eletrico - Sao Bernardo do Campo, SP' , 12345678901 , NULL), 
+	(40321 , 3 , 3 , 'Juliana Cardoso' , '09/12/2006' , 'F' , '08/06/1989' , 'juliana.cardoso@email.com' , 'Rua dos Laboratorios, 987, Cidade Nova - Sao Paulo, SP' , 23456789012 , NULL), 
+	(40322 , 3 , 4 , 'Marco Santos' , '09/12/2006' , 'M' , '17/12/1981' , 'marco.santos@email.com' , 'Praca do Conhecimento, 543, Centro - Sao Caetano, SP' , 345678.90123 , NULL),  
+	(40323 , 3 , 4 , 'Vanessa Carvalho' , '09/12/2006' , 'F' , '22/02/1985' , 'vanessa.carvalho@email.com' , 'Alameda da Tecnologia, 567, Novo Horizonte - Diadema, SP' , 45678901234 , NULL), 
+	(40324 , 4 , 4 , 'Gustavo Fernandes' , '09/12/2006' , 'M' , '05/07/1973' , 'gustavo.fernandes@email.com' , 'Rua dos Alunos, 7890, Bairro dos Estudantes - Sao Paulo, SP' , 56789012345 , NULL),
+	(40325 , 4 , 4 , 'Mariana Oliveira' , '09/12/2006' , 'F' , '20/05/1994' , 'mariana.oliveira@email.com' , 'Rua das Inovacoes, 123, Vila Progresso - Sao Bernardo do Campo, SP' , 67890123456 , NULL), 
+	(40326 , 2 , 4 , 'Andre Rodrigues' , '09/12/2006' , 'M' , '15/11/1980' , 'andre.rodrigues@email.com' , 'Avenida da Eletronica, 456, Jardim Eletrico - Sao Bernardo do Campo, SP' , 78901234567 , NULL), 
+	(40327 , 2 , 5 , 'Beatriz Carvalho' , '01/03/2022' , 'F' , '18/03/1978' , 'beatriz.carvalho@email.com' , 'Rua dos Laboratorios, 987, Cidade Nova - Sao Paulo, SP' , 89012345678 , NULL), 
+	(40328 , 2 , 5 , 'Paulo Ferreira' , '01/03/2022' , 'M' , '29/09/1987' , 'paulo.ferreira@email.com' , 'Praca do Conhecimento, 543, Centro - Sao Bernardo do Campo, SP' , 90123456789 , NULL), 
+	(40329 , 2 , 5 , 'Renata Santos' , '01/03/2022' , 'F' , '25/12/1983' , 'renata.santos@email.com' , 'Avenida da Ciencia, 654, Parque Tecnologico - Sao Bernardo do Campo, SP' , 01234567890 , NULL);
 
 --Populando Autoria
 INSERT INTO autoria (cod_autor, ISBN)
@@ -474,31 +495,6 @@ UPDATE emprestimo SET dt_prevista_devolucao = dt_emprestimo + 14
 
 -- Atualizando reservas inativas
 UPDATE reserva SET situacao_res = 'INATIVA'
-
-
---populando matricula
-			
-INSERT INTO matricula(cod_matricula, cod_tipo_matricula, cod_instituicao, nome_matricula, dt_matricula, sexo, dt_nscm, email_matricula, endereco_matricula, CPF, dt_termino) 
-
-	VALUES 
-
-(40313 , 2 , 2 , 'Eliana Ferreira' , '08/02/2015' , 'F' , '02/12/1979' , 'eliana.ferreira@email.com' , 'Alameda dos Estudantes, 1, Bela Vista - Sao Paulo, SP' , 45678901234 , NULL), 
-(40314 , 2 , 2 , 'Felipe Oliveira' , '08/02/2015' , 'M' , '17/08/1984' , 'felipe.oliveira@email.com' , 'Rua da Tecnologia, 567, Jardim do Conhecimento  - Sao Paulo, SP' , 56789012345 , NULL),  
-(40315 , 2 , 2 , 'Isabel Fernandes' , '08/02/2015' , 'F' , '19/03/1991' , 'isabel.fernandes@email.com' , 'Rua dos Laboratorios, 987, Cidade Nova - Sao Paulo, SP' , 67890123456 , NULL), 
-(40316 , 2 , 2 , 'Rodrigo Silva' , '08/02/2015' , 'M' , '01/07/1986' , 'rodrigo.silva@email.com' , 'Praca do Conhecimento, 543, Centro - Sao Paulo, SP' , 78901234567 , NULL), 
-(40317 , 3 , 2 , 'Clara Santos' , '08/02/2015' , 'F' , '06/05/1982' , 'clara.santos@email.com' , 'Avenida da Ciencia, 654, Parque Tecnologico - Sao Paulo, SP' , 89012345678 , NULL), 
-(40318 , 3 , 2 , 'Andre Ferreira' , '08/02/2015' , 'M' , '26/10/1974' , 'andre.ferreira@email.com' , 'Rua dos Alunos, 7890, Bairro dos Estudantes - Sao Paulo, SP' , 90123456789 , NULL), 
-(40319 , 3 , 3 , 'Patricia Oliveira' , '08/02/2015' , 'F' , '19/01/1992' , 'patricia.oliveira@email.com' , 'Rua das Inovacoes, 123, Vila Progresso - Sao Bernardo do Campo, SP' , 01234567890 , NULL), 
-(40320 , 3 , 3 , 'Guilherme Alves' , '09/12/2006' , 'M' , '13/11/1977' , 'guilherme.alves@email.com' , 'Avenida da Eletronica, 456, Jardim Eletrico - Sao Bernardo do Campo, SP' , 12345678901 , NULL), 
-(40321 , 3 , 3 , 'Juliana Cardoso' , '09/12/2006' , 'F' , '08/06/1989' , 'juliana.cardoso@email.com' , 'Rua dos Laboratorios, 987, Cidade Nova - Sao Paulo, SP' , 23456789012 , NULL), 
-(40322 , 3 , 4 , 'Marco Santos' , '09/12/2006' , 'M' , '17/12/1981' , 'marco.santos@email.com' , 'Praca do Conhecimento, 543, Centro - Sao Caetano, SP' , 345678.90123 , NULL),  
-(40323 , 3 , 4 , 'Vanessa Carvalho' , '09/12/2006' , 'F' , '22/02/1985' , 'vanessa.carvalho@email.com' , 'Alameda da Tecnologia, 567, Novo Horizonte - Diadema, SP' , 45678901234 , NULL), 
-(40324 , 4 , 4 , 'Gustavo Fernandes' , '09/12/2006' , 'M' , '05/07/1973' , 'gustavo.fernandes@email.com' , 'Rua dos Alunos, 7890, Bairro dos Estudantes - Sao Paulo, SP' , 56789012345 , NULL),
-(40325 , 4 , 4 , 'Mariana Oliveira' , '09/12/2006' , 'F' , '20/05/1994' , 'mariana.oliveira@email.com' , 'Rua das Inovacoes, 123, Vila Progresso - Sao Bernardo do Campo, SP' , 67890123456 , NULL), 
-(40326 , 2 , 4 , 'Andre Rodrigues' , '09/12/2006' , 'M' , '15/11/1980' , 'andre.rodrigues@email.com' , 'Avenida da Eletronica, 456, Jardim Eletrico - Sao Bernardo do Campo, SP' , 78901234567 , NULL), 
-(40327 , 2 , 5 , 'Beatriz Carvalho' , '01/03/2022' , 'F' , '18/03/1978' , 'beatriz.carvalho@email.com' , 'Rua dos Laboratorios, 987, Cidade Nova - Sao Paulo, SP' , 89012345678 , NULL), 
-(40328 , 2 , 5 , 'Paulo Ferreira' , '01/03/2022' , 'M' , '29/09/1987' , 'paulo.ferreira@email.com' , 'Praca do Conhecimento, 543, Centro - Sao Bernardo do Campo, SP' , 90123456789 , NULL), 
-(40329 , 2 , 5 , 'Renata Santos' , '01/03/2022' , 'F' , '25/12/1983' , 'renata.santos@email.com' , 'Avenida da Ciencia, 654, Parque Tecnologico - Sao Bernardo do Campo, SP' , 01234567890 , NULL);
 
 --populando emprestimo
 INSERT INTO emprestimo (cod_exemplar, cod_matricula, dt_emprestimo, dt_devolucao)  
