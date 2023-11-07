@@ -268,7 +268,7 @@ def update_dev(data):
                     elif delta < 3:
                         prob_dev = 0.2
                     elif delta < 180:
-                        prob_dev = 1/delta
+                        prob_dev = 1/(2*delta)
                     else:
                         update_loss = "UPDATE exemplar SET cod_situacao = 4 WHERE cod_exemplar = {0}".format(emp[0])
                         cur.execute(update_loss)
