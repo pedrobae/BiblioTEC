@@ -190,10 +190,8 @@ def timeline_ocu(dt_ini, dt_fim):
         dia = data.weekday()
         # Não ter emprestimos em fim de semana e nos meses de janeiro, julho e dexembro
         if dia > 4:
-            distr[data] = 0
 
         elif mes in [12, 1, 7]:
-            distr[data] = 0
             
         else:
             prob = i/interv.days
