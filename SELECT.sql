@@ -31,7 +31,7 @@ SELECT liv.ISBN, liv.titulo, exe.cod_exemplar, mat.cod_matricula, mat.nome, emp.
     WHERE emp.dt_devolucao IS NULL;
                     
 -- Consultar histórico de aluno/ professor / funcionário
-SELECT mat.nome_matricula, tipo_matricula, cod_exemplar, titulo, dt_emprestimo, dt_devolucao
+SELECT mat.nome_matricula, mat.cod_tipo_matricula, ex.cod_exemplar, liv.titulo, emp.dt_emprestimo, emp.dt_devolucao
     FROM matricula mat JOIN emprestimo emp
         ON (emp.cod_matricula = mat.cod_matricula)
                        JOIN exemplar ex
