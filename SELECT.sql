@@ -30,5 +30,13 @@ SELECT liv.ISBN, liv.titulo, exe.cod_exemplar, mat.cod_matricula, mat.nome, emp.
         ON (mat.cod_matricula = emp.cod_matricula)
     WHERE emp.dt_devolucao IS NULL;
                     
-
 -- Consultar histórico de aluno/ professor / funcionário
+SELECT mat.nome_matricula, tipo_matricula, cod_exemplar, titulo, dt_emprestimo, dt_devolucao
+    FROM matricula mat JOIN emprestimo emp
+        ON (emp.cod_matricula = mat.cod_matricula)
+                       JOIN exemplar ex
+        ON (ex.cod_exemplar= emp.cod_exemplar)
+                       JOIN livro liv
+        ON (ex.ISBN = liv.ISBN )
+    WHERE emp.cod_matricula ='INSERIR CODIGO DE MATRICULA'
+    ORDER BY dt_emprestimo DESC
