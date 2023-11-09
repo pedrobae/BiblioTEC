@@ -1,119 +1,155 @@
 #alterar para o caso do pi e para o postgresql
-from PySympleGUI import QSqlDatabase, QSqlQuery
-import sys
+import PySimpleGUI as sg
+import psycopg2
 
-arquivo = 'agenda.sqlite'
-con = QSqlDatabase.addDatabase("QSQLITE")
-con.setDatabaseName(arquivo)
-if not con.open():
-  print("Erro na base de dados: %s" % con.lastError().databaseText())
-  sys.exit()
-else:
-  createTableQuery = QSqlQuery()
-  createTableQuery.exec('CREATE TABLE IF NOT EXISTS agenda (\
-            id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL,\
-            nome VARCHAR(40) NOT NULL,\
-            email VARCHAR(40) NOT NULL,\
-            celular VARCHAR(20) NOT NULL)')
-  createTableQuery.finish()
+def limpar():
+    window['-ID-'].update('')
+    window['-NOME-'].update('')
+    window['-EMAIL-'].update('')
+    window['-CEL-'].update('')
 
-
-def exibir_menu():
-  print('''
-
-  Escolha uma opção:
-
-  1. Cadastrar uma pessoa
-  2. Listar pessoas cadastradas
-  3. Procurar dados de uma pessoa
-  4. Remover
-  5. Alterar
-  6. Sair
-
-  ''')
-
-
-def matricula():
-  cod_matricula = int(input ('código de matrícula: '))#int
-  cod_tipo_matricula = int(input ('código tipo de matrícula: '))#int
-  cod_instituicao = int(input ('código da instituição: '))#int
-  nome_matricula = input('Nome Completo: ')  # string
-  dt_matricula #current date
-  sexo= input ('Sexo: ')
-  dt_nascimento = ('Data de Nascimento: ')
-  email_matricula = input('E-mail: ')  # string
-  endereco_matricula = input('Endereço: ')  # string
-  CPF = input ('CPF: ')#string
-  dt_termino #não é necessário
-  
-  insertDataQuery = QSqlQuery()
-  insertDataQuery.prepare('INSERT INTO agenda (nome, email, celular) VALUES (?, ?, ?)')
-  insertDataQuery.addBindValue(nome) # dado relativo ao primeiro espaço reservado
-  insertDataQuery.addBindValue(email) # dado relativo ao segundo espaço reservado
-  insertDataQuery.addBindValue(celular) # dado relativo ao terceiro espaço reservado
-  insertDataQuery.exec() # execute a query
-  insertDataQuery.finish() # inative a query
-
-
-def listar():
-  query = QSqlQuery()
-  query.exec("SELECT  cod_matricula, cod_tipo_matricula, cod_instituicao, nome_matricula, sexo, dt_nascimento, email_matricula, endereco_matricula, CPF FROM matricula")
-  # Índices com nomes para melhorar a legibilidade
-  cod_matricula, cod_tipo_matricula, cod_instituicao, nome_matricula, sexo, dt_nascimento, email_matricula, endereco_matricula, CPF = range(3)  # 0, 1 e 2
-  cont = 0
-
-  print(' NOME          | E-MAIL                        | CELULAR')
-  print('-'*74)
-  while query.next():
-    print(f'{query.value(nome):15}| {query.value(email):30}| {query.value(celular):25}')
-    cont += 1  # isso aqui é uma abreviação de cont = cont + 1
-  query.finish()
-  print('\nQuantidade de registros: ', cont, '\n')
-
-
-def buscar():
-  procurado = input('Entre com o nome a procurar: ')
-  query = QSqlQuery()
-  query.prepare("SELECT nome, email, celular FROM agenda WHERE nome LIKE ?")
-  query.addBindValue('%'+procurado+'%')
-  query.exec()
-  # Índices com nomes para melhorar a legibilidade
-  nome, email, celular = range(3)  # 0, 1 e 2
-  cont = 0
-
-  print(' NOME          | E-MAIL                        | CELULAR')
-  print('-'*74)
-  while query.next():
-    print(f'{query.value(nome):15}| {query.value(email):30}| {query.value(celular):25}')
-    cont += 1  # isso aqui é uma abreviação de cont = cont + 1
-  query.finish()
-  print('\nQuantidade de registros: ', cont, '\n')
-
-
-def remover():  # aqui você completa.... :-)
-  pass
-
-
-def alterar():  # aqui você completa.... :-)
-  pass
-
-
-def main():
-  opcao = '0'
-  while opcao!='6':
-    exibir_menu()
-    opcao = input('Entre com a opção desejada: ')
-    print()
-    if opcao == '1': cadastrar()
-    elif opcao == '2': listar()
-    elif opcao == '3': buscar()
-    elif opcao == '4': remover()
-    elif opcao == '5': alterar()
-    elif opcao == '6':
-      con.close()
-      QSqlDatabase.removeDatabase(QSqlDatabase.database().connectionName())
+def atualiza():
+    if len(lista) == 0:
+        limpar()
     else:
-      print('Opção inválida')
+        window['-ID-'].update( lista[indice][0] )
+        window['-NOME-'].update( lista[indice][1] )
+        window['-EMAIL-'].update( lista[indice][2] )
+        window['-CEL-'].update( lista[indice][3] )
 
+def todos():
+    global indice
+    global lista
+    resposta = []
+    with con:
+        with con.cursor() as cursor:
+            cursor.execute("SELECT * FROM amigos;")
+            resposta = cursor.fetchall()
+    lista.clear()
+    for i in range(len(resposta)):
+        lista.append( list(resposta[i]) )
 
-main()
+    sg.popup('Quantidade de registros: ' + str(len(resposta)))
+    indice = 0
+    atualiza()
+
+# Inicialização BD
+con = psycopg2.connect(host="localhost", database="BiblioTEC", user="postgres", password="123456")
+with con:
+    with con.cursor() as cursor:
+        cursor.execute("""CREATE TABLE IF NOT EXISTS matricula (
+            
+  (cod_matricula 			INTEGER 		PRIMARY KEY, 
+	cod_tipo_matricula 		SMALLSERIAL 	NOT NULL 	REFERENCES tipo_matricula(cod_tipo_matricula),  
+	cod_instituicao 		SMALLSERIAL  	REFERENCES instituicao(cod_instituicao), 
+	nome_matricula 			VARCHAR(100) 	NOT NULL, 
+	dt_matricula 			DATE 			NOT NULL, 
+	sexo 					CHAR(1) 		NOT NULL, 
+	dt_nscm 				DATE,  
+	email_matricula 		VARCHAR(150),  
+	endereco_matricula 		VARCHAR(500),  
+	CPF						NUMERIC(11),  
+	dt_termino 				DATE );""")
+
+lista=[]
+indice = 0
+
+layout = [
+    [
+        sg.Text("Código de matricula:", size=(8, 1)),
+        sg.InputText(size=(6, 1), key="-cod_matricula-", focus=False)
+    ],
+  [
+        sg.Text("Código tipo de matricula:", size=(8, 1)),
+        sg.InputText(size=(6, 1), key="-cod_tipo_matricula-", focus=False)
+    ],
+  [
+        sg.Text("Código instituição:", size=(8, 1)),
+        sg.InputText(size=(6, 1), key="-cod_instituicao-", focus=False)
+    ],
+  
+    [
+        sg.Text("Nome Completo:", size=(8, 1)),
+        sg.InputText(size=(40, 1), key="-nome_matricula-", focus=True)
+    ],
+   
+  # colocar dt_matricula, sexo, dt_nascimento, email_matricula, endereco_matricula, CPF, dt_termino
+  [
+        sg.Text("E-mail:", size=(8, 1)),
+        sg.InputText(size=(40, 1), key="-EMAIL-")
+    ],
+    
+    [
+        sg.Button('Limpar', size=(8, 1), key="-LIMPAR-"),
+        sg.Button('Inserir', size=(8, 1), key="-INSERIR-"),
+        sg.Button('Atualizar', size=(8, 1), key="-ATUALIZAR-"),
+        sg.Button('Remover', size=(8, 1), key="-REMOVER-")
+    ],
+    [
+        sg.Button('<<', size=(8, 1), key="-<<-"),
+        sg.Button('Procurar', size=(8, 1), key="-PROCURAR-"),
+        sg.Button('Todos', size=(8, 1), key="-TODOS-"),
+        sg.Button('>>', size=(8, 1), key="->>-")
+    ]
+]
+
+window = sg.Window("Cadastro dos Amigos", layout, use_default_focus=False)
+
+# Run the Event Loop
+while True:
+    event, values = window.read()
+
+    if event == sg.WIN_CLOSED:
+        break
+    elif event == "-LIMPAR-":
+        limpar()
+    elif event == "-INSERIR-":
+        with con:
+            with con.cursor() as cursor:
+                cursor.execute("INSERT INTO amigos (nome, email, celular) VALUES (%s, %s, %s);",
+                    (values['-NOME-'], values['-EMAIL-'], values['-CEL-']))
+        limpar()
+    elif event == "-ATUALIZAR-":
+        with con:
+            with con.cursor() as cursor:
+                cursor.execute("UPDATE matricula SET nome = %s, email = %s, celular = %s WHERE id = %s",
+                    (values['-NOME-'], values['-EMAIL-'], values['-CEL-'], values['-ID-']))
+        lista[indice] = [values['-ID-'], values['-NOME-'], values['-EMAIL-'], values['-CEL-']]        
+    elif event == "-REMOVER-":
+        with con:
+            with con.cursor() as cursor:
+                cursor.execute("DELETE FROM matricula WHERE id = %s", (values['-ID-'],))
+        lista.pop(indice)
+        indice -= 1
+        atualiza()
+    elif event == "-PROCURAR-":
+        with con:
+            with con.cursor() as cursor:
+                cursor.execute("SELECT * FROM matricula WHERE nome LIKE %s;",
+                    ('%'+values['-NOME-']+'%',))
+                resposta = cursor.fetchall()
+                lista.clear()
+                for i in range(len(resposta)):
+                    lista.append( list(resposta[i]) )
+                sg.popup('Quantidade de registros: ' + str(len(resposta)))
+                indice = 0
+                atualiza()
+    elif event == "-TODOS-":
+        todos()
+    elif event == "->>-":
+        indice += 1
+        if indice >= len(lista): indice = len(lista)-1
+        atualiza()
+    elif event == "-<<-":
+        indice -= 1
+        if indice <= 0: indice = 0
+        atualiza()
+
+window.close()
+
+# Fazer as mudanças para a base persistente
+con.commit()
+
+# Fechar a comunicação com o servidor
+cursor.close()
+con.close()
