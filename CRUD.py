@@ -23,7 +23,7 @@ def todos():
     resposta = []
     with con:
         with con.cursor() as cursor:
-            cursor.execute("SELECT * FROM amigos;")
+            cursor.execute("SELECT * FROM matricula;")
             resposta = cursor.fetchall()
     lista.clear()
     for i in range(len(resposta)):
@@ -39,7 +39,7 @@ with con:
     with con.cursor() as cursor:
         cursor.execute("""CREATE TABLE IF NOT EXISTS matricula (
             
-  (cod_matricula 			INTEGER 		PRIMARY KEY, 
+  	(cod_matricula 			INTEGER 		PRIMARY KEY, 
 	cod_tipo_matricula 		SMALLSERIAL 	NOT NULL 	REFERENCES tipo_matricula(cod_tipo_matricula),  
 	cod_instituicao 		SMALLSERIAL  	REFERENCES instituicao(cod_instituicao), 
 	nome_matricula 			VARCHAR(100) 	NOT NULL, 
