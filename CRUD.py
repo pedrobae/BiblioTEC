@@ -1,5 +1,5 @@
-#alterar para o caso do pi
-from PyQt5.QtSql import QSqlDatabase, QSqlQuery
+#alterar para o caso do pi e para o postgresql
+from PySympleGUI import QSqlDatabase, QSqlQuery
 import sys
 
 arquivo = 'agenda.sqlite'
