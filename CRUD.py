@@ -93,7 +93,7 @@ layout = [
     ]
 ]
 
-window = sg.Window("Cadastro dos Amigos", layout, use_default_focus=False)
+window = sg.Window("BiblioTEC - Matricula", layout, use_default_focus=False)
 
 # Run the Event Loop
 while True:
