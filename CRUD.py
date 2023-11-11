@@ -37,20 +37,7 @@ def todos():
 con = psycopg2.connect(host="localhost", database="BiblioTEC", user="postgres", password="123456")
 with con:
     with con.cursor() as cursor:
-        cursor.execute("""CREATE TABLE IF NOT EXISTS matricula (
-            
-  	(cod_matricula 			INTEGER 		PRIMARY KEY, 
-	cod_tipo_matricula 		SMALLSERIAL 	NOT NULL 	REFERENCES tipo_matricula(cod_tipo_matricula),  
-	cod_instituicao 		SMALLSERIAL  	REFERENCES instituicao(cod_instituicao), 
-	nome_matricula 			VARCHAR(100) 	NOT NULL, 
-	dt_matricula 			DATE 			NOT NULL, 
-	sexo 					CHAR(1) 		NOT NULL, 
-	dt_nscm 				DATE,  
-	email_matricula 		VARCHAR(150),  
-	endereco_matricula 		VARCHAR(500),  
-	CPF						NUMERIC(11),  
-	dt_termino 				DATE );""")
-
+        cursor.execute
 lista=[]
 indice = 0
 
