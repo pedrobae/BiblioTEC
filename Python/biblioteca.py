@@ -13,6 +13,7 @@ from datetime import datetime, date, timedelta
 
 # Realizar Emprestimo - Checa reservas para atualizar datas previstas e preeencher data de emprestimo)
 def emprestimo(cod_mat, cod_exemp, today = date.today()):
+    retorno = 0
     con = None
     try:
         with psycopg2.connect(
@@ -44,7 +45,8 @@ def emprestimo(cod_mat, cod_exemp, today = date.today()):
                         update_exemp = "UPDATE exemplar SET cod_situacao = 2 WHERE cod_exemplar = {0}".format(cod_exemp)
                         cur.execute(update_exemp)
                         
-                        print("Empréstimo Efetuado")
+                        # print("Empréstimo Efetuado")
+                        retorno = 1
                         
                     elif cod_mat == queue[0][1]:
                         insert_emp = "INSERT INTO emprestimo (cod_matricula, cod_exemplar, dt_emprestimo) VALUES ({0}, {1}, '{2}')".format(cod_mat, cod_exemp, str(today))
@@ -64,24 +66,29 @@ def emprestimo(cod_mat, cod_exemp, today = date.today()):
                             update_dt_prev = "UPDATE reserva SET dt_prevista_emprestimo = '{0}' WHERE dt_prevista_emprestimo = '{1}'".format(str(new_dt_prev), str(queue[i][4]))
                             cur.execute(update_dt_prev)
 
-                        print("Empréstimo Efetuado")
+                        # print("Empréstimo Efetuado")
+                        retorno = 1
 
                     else:
-                        print("O exemplar está reservado.")
+                        # print("O exemplar está reservado.")
+                        retorno = 2
                 else:
-                    print("O exemplar está emprestado, realize a devolução primeiro.")
+                    # print("O exemplar está emprestado, realize a devolução primeiro.")
+                    retorno = 3
         
     except Exception as error:
         print(error)
     finally:
         if con is not None:
             con.close()
+    return retorno
 
 
 
 
 # Realizar Reserva - Define a ordem para calcular a data de emprestimo prevista
 def reserva(cod_mat, cod_exemp, today = date.today(), now = datetime.now()):
+    retorno = 0
     con = None
     try:
         with psycopg2.connect(
@@ -108,22 +115,25 @@ def reserva(cod_mat, cod_exemp, today = date.today(), now = datetime.now()):
                     insert_script = "INSERT INTO reserva (cod_matricula, cod_exemplar, dt_reserva, dt_prevista_emprestimo) VALUES ({0}, {1}, '{2}', '{3}')".format(cod_mat, cod_exemp, str(now), str(delay))
                     cur.execute(insert_script)
 
-                    print("Reserva Efetuada")
+                    # print("Reserva Efetuada")
+                    retorno = 1
                     
                 else:
-                    print("O exemplar está disponível.")
+                    # print("O exemplar está disponível.")
+                    retorno = 2
             
     except Exception as error:
         print(error)
     finally:
         if con is not None:
             con.close()
-
+    return retorno
 
 
 
 # Devoluçao - Acusa uma reserva
 def devolucao(cod_exemp, today = date.today(), now = datetime.now()):
+    retorno = 0
     con = None
     try:
         with psycopg2.connect(
@@ -148,7 +158,8 @@ def devolucao(cod_exemp, today = date.today(), now = datetime.now()):
                     update_exemp = "UPDATE exemplar SET cod_situacao = 1 WHERE cod_exemplar = {0}".format(cod_exemp)
                     cur.execute(update_exemp)
 
-                    print("Devolução Efetuada")
+                    # print("Devolução Efetuada")
+                    retorno = 1
                     
                     select_res = "SELECT * FROM reserva r WHERE r.cod_exemplar = {0} AND r.situacao_res = 'ATIVA' ORDER BY r.dt_reserva ASC".format(str(cod_exemp))
                     cur.execute(select_res)
@@ -161,19 +172,19 @@ def devolucao(cod_exemp, today = date.today(), now = datetime.now()):
                         cur.execute(select_mat)
                         matricula_reserva = cur.fetchall()
                         
-                        print("O livro está reservado por", matricula_reserva[0][3], "- e-mail: ", matricula_reserva[0][7], "- Codigo de Matricula: ", matricula_reserva[0][0])
-                           
+                        # print("O exemplar está reservado por", matricula_reserva[0][3], "- e-mail: ", matricula_reserva[0][7], "- Codigo de Matricula: ", matricula_reserva[0][0])
+                        retorno = 2
+                        
                     else:
-                        print("O exemplar não está reservado.")
+                        # print("O exemplar não está reservado.")
+                        retorno = 3
                         
                 else:
-                    print("O exemplar não está emprestado.")
+                    # print("O exemplar não está emprestado.")
+                    retorno = 4
                     
     except Exception as error:
         print(error)
     finally:
         if con is not None:
             con.close()
-
-
-
