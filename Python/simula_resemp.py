@@ -1,6 +1,6 @@
 import psycopg2
 import random
-from datetime import timedelta
+from datetime import timedelta, date, datetime
 from biblioteca import reserva, emprestimo, devolucao
 
 # Data - Maior ocorrencias para datas mais recentes
@@ -40,7 +40,7 @@ def ocurrence(data):
         with psycopg2.connect(database = "BiblioTEC", user = "postgres", password = "123456", host = "localhost", port = "5432") as con:
             with con.cursor() as cur:
                 # Escolher uma matricula
-                select_mat = "SELECT cod_matricula FROM matricula WHERE dt_matricula < {0}".format*(data)
+                select_mat = "SELECT cod_matricula FROM matricula"
                 cur.execute(select_mat)
                 mat = random.choice(cur.fetchall())
 
@@ -51,7 +51,13 @@ def ocurrence(data):
 
                 # Livros emprestados viram reservas
                 if exemp[1] == 2:
-                    reserva(mat[0], exemp[0], data, data)
+                    retorno = reserva(mat[0], exemp[0], data, data)
+                    if retorno == 1:
+                        resultado = "Reserva Efetuada"
+                    elif retorno == 2:
+                        resultado = "O exemplar está disponível."
+                    print(resultado)
+                    
                     
                 else:
                     # Checar reservas do exemplar 
@@ -60,11 +66,25 @@ def ocurrence(data):
                     reservas = cur.fetchall()
                     
                     if reservas == []:
-                        emprestimo(mat[0], exemp[0], data)
+                        retorno = emprestimo(mat[0], exemp[0], data)
+                        if retorno == 1:
+                            resultado = "Empréstimo Efetuado"
+                        elif retorno == 2:
+                            resultado = "O exemplar está reservado."
+                        elif retorno == 3:
+                            resultado = "O exemplar está emprestado, realize a devolução primeiro."
+                        print(resultado)
                     
                     else:
                         mat_res = reservas[0]
-                        emprestimo(mat_res[0], exemp[0], data)
+                        retorno = emprestimo(mat_res[0], exemp[0], data)
+                        if retorno == 1:
+                            resultado = "Empréstimo Efetuado"
+                        elif retorno == 2:
+                            resultado = "O exemplar está reservado."
+                        elif retorno == 3:
+                            resultado = "O exemplar está emprestado, realize a devolução primeiro."
+                        print(resultado)
     except Exception as error:
         print(error)
     finally:
@@ -99,8 +119,17 @@ def update_dev(data):
                         
                     flag_dev = random.choices([0, 1], weights = [1 - prob_dev, prob_dev])
                     if flag_dev == [1]:
-                        devolucao(emp[0], data, data)
-                        
+                        retorno = devolucao(emp[0], data, data)
+                        if retorno == 1:
+                            resultado = "Devolução Efetuada"
+                        elif retorno == 2:
+                            resultado = "O livro está reservado"
+                        elif retorno == 3:
+                            resultado = "O exemplar não está reservado."
+                        elif retorno == 4:
+                            resultado = "O exemplar não está emprestado."
+                        print(resultado)
+
                         # Checar as reservas do exemplar
                         select_res = "SELECT cod_matricula FROM reserva WHERE cod_exemplar = {0} AND situacao_res = 'ATIVA' ORDER BY dt_reserva ASC".format(emp[0])
                         cur.execute(select_res)
@@ -108,10 +137,16 @@ def update_dev(data):
                         
                         if res != []:
                             prob_emp = 0.8
-                            
                             flag_emp = random.choices([0, 1], weights = [1 - prob_emp, prob_emp])
                             if flag_emp == [1]:                                                           
                                 emprestimo(res[0], emp[0], data)
+                                if retorno == 1:
+                                    resultado = "Empréstimo Efetuado"
+                                elif retorno == 2:
+                                    resultado = "O exemplar está reservado."
+                                elif retorno == 3:
+                                    resultado = "O exemplar está emprestado, realize a devolução primeiro."
+                                print(resultado)
     except Exception as error:
         print(error)
     finally:
