@@ -188,3 +188,4 @@ def devolucao(cod_exemp, today = date.today(), now = datetime.now()):
     finally:
         if con is not None:
             con.close()
+    return retorno
