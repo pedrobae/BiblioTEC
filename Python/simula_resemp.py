@@ -40,7 +40,7 @@ def ocurrence(data):
         with psycopg2.connect(database = "BiblioTEC", user = "postgres", password = "123456", host = "localhost", port = "5432") as con:
             with con.cursor() as cur:
                 # Escolher uma matricula
-                select_mat = "SELECT cod_matricula FROM matricula"
+                select_mat = "SELECT cod_matricula FROM matricula WHERE dt_matricula < {0}".format*(data)
                 cur.execute(select_mat)
                 mat = random.choice(cur.fetchall())
 
