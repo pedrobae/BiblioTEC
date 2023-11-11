@@ -123,7 +123,7 @@ def update_dev(data):
                         if retorno == 1:
                             resultado = "Devolução Efetuada"
                         elif retorno == 2:
-                            resultado = "O livro está reservado"
+                            resultado = "O exemplar está reservado"
                         elif retorno == 3:
                             resultado = "O exemplar não está reservado."
                         elif retorno == 4:
@@ -139,7 +139,7 @@ def update_dev(data):
                             prob_emp = 0.8
                             flag_emp = random.choices([0, 1], weights = [1 - prob_emp, prob_emp])
                             if flag_emp == [1]:                                                           
-                                emprestimo(res[0], emp[0], data)
+                                retorno = emprestimo(res[0], emp[0], data)
                                 if retorno == 1:
                                     resultado = "Empréstimo Efetuado"
                                 elif retorno == 2:
