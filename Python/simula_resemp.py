@@ -1,6 +1,6 @@
 import psycopg2
 import random
-from datetime import timedelta, date, datetime
+from datetime import timedelta, date
 from func_op import reserva, emprestimo, devolucao
 
 # Data - Maior ocorrencias para datas mais recentes
@@ -104,9 +104,9 @@ def update_dev(data):
                 emp_ativos = cur.fetchall()
                 
                 for emp in emp_ativos:
-                    delta = (emp[1] - data).days
+                    delta = (data - emp[1]).days
                     prob_dev = 0
-                    
+
                     if delta < 0:
                         prob_dev = (delta + 14)/100
                     elif delta < 3:
@@ -139,7 +139,7 @@ def update_dev(data):
                             prob_emp = 0.8
                             flag_emp = random.choices([0, 1], weights = [1 - prob_emp, prob_emp])
                             if flag_emp == [1]:                                                           
-                                retorno = emprestimo(res[0], emp[0], data)
+                                retorno = emprestimo(res[0][0], emp[0], data)
                                 if retorno == 1:
                                     resultado = "Empréstimo Efetuado"
                                 elif retorno == 2:
@@ -170,6 +170,7 @@ def update_res(data):
                     
                     if atraso > 7:
                         cancel_res = "UPDATE reserva SET situacao_res = 'CANCELADA' WHERE cod_reserva = {0}".format(res[1])
+                        cur.execute(cancel_res)
     except Exception as error:
         print(error)
     finally:
