@@ -1,7 +1,7 @@
 import psycopg2
 import random
 from datetime import timedelta, date, datetime
-from biblioteca import reserva, emprestimo, devolucao
+from func_op import reserva, emprestimo, devolucao
 
 # Data - Maior ocorrencias para datas mais recentes
 def timeline_ocu(dt_ini, dt_fim):
