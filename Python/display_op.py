@@ -1,5 +1,5 @@
 import PySimpleGUI as sg
-from biblioteca import reserva, emprestimo, devolucao
+from func_op import reserva, emprestimo, devolucao
 
 def operacoes():
     largura = 550
@@ -63,5 +63,3 @@ def operacoes():
 
     #fecho a janela
     window.close()
-
-operacoes()
