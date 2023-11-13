@@ -2,21 +2,21 @@ import PySimpleGUI as sg
 from biblioteca import reserva, emprestimo, devolucao
 
 def operacoes():
-    largura = 600
-    altura = 400
+    largura = 550
+    altura = 150
     layout = [
         [
-            sg.Text('Código de Matrícula:', size =(largura/4, altura/4)),
-            sg.InputText(key = 'cod_mat')
+            sg.Text('Código de Matrícula:', size = (21)),
+            sg.InputText(size = (48), key = 'cod_mat')
         ],
         [
-            sg.Text('Código de Exemplar:', size =(largura/4, altura/4)),
-            sg.InputText(key = 'cod_exemp')
+            sg.Text('Código de Exemplar:', size = (21)),
+            sg.InputText(size = (48), key = 'cod_exemp')
         ],
         [
-            sg.Button('Reservar', size(largura/3, altura/2), key = '-RESERVAR-'),
-            sg.Button('Emprestar', size(largura/3, altura/2), key = '-EMPRESTAR-'),
-            sg.Button('Devolver', size(largura/3, altura/2), key = '-DEVOLVER-'),
+            sg.Button('Reservar', size = (20, 5), key = '-RESERVAR-'),
+            sg.Button('Emprestar', size = (20, 5), key = '-EMPRESTAR-'),
+            sg.Button('Devolver', size = (20, 5), key = '-DEVOLVER-'),
         ]
     ]
 
