@@ -29,7 +29,7 @@ def operacoes():
             break
 
         elif evento == "-RESERVAR-":
-            retorno = biblioteca.reserva(valores['cod_mat'], valores['cod_exemp'])
+            retorno = reserva(valores['cod_mat'], valores['cod_exemp'])
 
             if retorno == 1:
                 resultado = "Reserva Efetuada"
@@ -38,14 +38,30 @@ def operacoes():
             sg.popup(resultado)
 
         elif evento == "-EMPRESTAR-":
-            retorno = biblioteca.emprestimo(valores['cod_mat'], valores['cod_exemp'])
+            retorno = emprestimo(valores['cod_mat'], valores['cod_exemp'])
 
             if retorno == 1:
-                resultado =
-            sg.popup()
+                resultado = "Empréstimo Efetuado"
+            elif retorno == 2:
+                resultado = "O exemplar está reservado."
+            elif retorno == 3:
+                resultado = "O exemplar está emprestado, realize a devolução primeiro."
+            sg.popup(resultado)
 
         elif evento == "-DEVOLVER-":
-            sg.popup()
+            retorno = devolucao(valores['cod_exemp'])
+            if retorno == 1:
+                resultado = "Devolução Efetuada"
+            elif retorno == 2:
+                resultado = "O exemplar está reservado"
+            elif retorno == 3:
+                resultado = "O exemplar não está reservado."
+            elif retorno == 4:
+                resultado = "O exemplar não está emprestado."
+            print(resultado)
+            sg.popup(resultado)
 
     #fecho a janela
     window.close()
+
+operacoes()
