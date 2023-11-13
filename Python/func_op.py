@@ -33,6 +33,7 @@ def emprestimo(cod_mat, cod_exemp, today = date.today()):
                     select_script = "SELECT * FROM reserva  r WHERE r.cod_exemplar = {0} AND r.situacao_res = 'ATIVA' ORDER BY r.dt_reserva ASC".format(str(cod_exemp))
                     cur.execute(select_script)
                     queue = []
+                    
                     for tuple in cur.fetchall():
                         queue.append(tuple)
 
