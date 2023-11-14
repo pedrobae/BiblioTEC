@@ -32,7 +32,7 @@ def acervo_disp():
 
 
 # Selecionar Acervo Emprestado
-def acervo_emp():
+def acervo_empr():
     con = None
     try:
         with psycopg2.connect(
@@ -53,7 +53,7 @@ def acervo_emp():
                                             AND dt_devolucao IS NULL '''
                 cur.execute(select_acerv)
 
-                acervo_emp = cur.fetchall()
+                acervo_empr = cur.fetchall()
 
     except Exception as error:
         print(error)
@@ -61,7 +61,7 @@ def acervo_emp():
         if con is not None:
             con.close()
 
-    return acervo_emp
+    return acervo_empr
 
 
 
