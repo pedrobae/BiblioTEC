@@ -1,0 +1,111 @@
+import psycopg2
+
+# Selecionar Acervo Disponível
+def acervo_disp():
+    con = None
+    try:
+        with psycopg2.connect(
+                        database = "BiblioTEC", 
+                        user = "postgres", 
+                        password = "123456", 
+                        host = "localhost",
+                        port = "5432") as con:
+            
+            with con.cursor as cur:
+
+                select_acerv = "SELECT e.cod_exemplar, l.titulo, e.dt_aquisicao FROM exemplar e JOIN livro l ON (e.ISBN = l.ISBN) WHERE e.cod_situacao = 1"
+                cur.execute(select_acerv)
+
+                acervo_disp = cur.fetchall()
+
+    except Exception as error:
+        print(error)
+    finally:
+        if con is not None:
+            con.close()
+
+    return acervo_disp
+
+
+
+# Selecionar Acervo Emprestado
+def acervo_emp():
+    con = None
+    try:
+        with psycopg2.connect(
+                        database = "BiblioTEC", 
+                        user = "postgres", 
+                        password = "123456", 
+                        host = "localhost",
+                        port = "5432") as con:
+            
+            with con.cursor as cur:
+
+                select_acerv = "SELECT e.cod_exemplar, l.titulo, e.dt_aquisicao FROM exemplar e JOIN livro l ON (e.ISBN = l.ISBN) WHERE e.cod_situacao = 2"
+                cur.execute(select_acerv)
+
+                acervo_emp = cur.fetchall()
+
+    except Exception as error:
+        print(error)
+    finally:
+        if con is not None:
+            con.close()
+
+    return acervo_emp
+
+
+
+# Selecionar Acervo Perdido
+def acervo_perd():
+    con = None
+    try:
+        with psycopg2.connect(
+                        database = "BiblioTEC", 
+                        user = "postgres", 
+                        password = "123456", 
+                        host = "localhost",
+                        port = "5432") as con:
+            
+            with con.cursor as cur:
+
+                select_acerv = "SELECT e.cod_exemplar, l.titulo, e.dt_aquisicao FROM exemplar e JOIN livro l ON (e.ISBN = l.ISBN) WHERE e.cod_situacao = 4"
+                cur.execute(select_acerv)
+
+                acervo_perd = cur.fetchall()
+
+    except Exception as error:
+        print(error)
+    finally:
+        if con is not None:
+            con.close()
+
+    return acervo_perd
+
+
+
+# Selecionar Acervo em Manutenção
+def acervo_manu():
+    con = None
+    try:
+        with psycopg2.connect(
+                        database = "BiblioTEC", 
+                        user = "postgres", 
+                        password = "123456", 
+                        host = "localhost",
+                        port = "5432") as con:
+            
+            with con.cursor as cur:
+
+                select_acerv = "SELECT e.cod_exemplar, l.titulo, e.dt_aquisicao FROM exemplar e JOIN livro l ON (e.ISBN = l.ISBN) WHERE e.cod_situacao = 3"
+                cur.execute(select_acerv)
+
+                acervo_manu = cur.fetchall()
+
+    except Exception as error:
+        print(error)
+    finally:
+        if con is not None:
+            con.close()
+
+    return acervo_manu

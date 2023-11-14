@@ -1,5 +1,5 @@
 import PySimpleGUI as sg
-from func_op import reserva, emprestimo, devolucao
+from func_operacoes import reserva, emprestimo, devolucao
 
 def operacoes():
     largura = 550
