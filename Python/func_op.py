@@ -1,16 +1,6 @@
 import psycopg2
 from datetime import datetime, date, timedelta
 
-# Registro de Exemplar
-
-
-
-
-# Registro de Matricula
-
-
-
-
 # Realizar Emprestimo - Checa reservas para atualizar datas previstas e preeencher data de emprestimo)
 def emprestimo(cod_mat, cod_exemp, today = date.today()):
     retorno = 0
@@ -83,7 +73,6 @@ def emprestimo(cod_mat, cod_exemp, today = date.today()):
         if con is not None:
             con.close()
     return retorno
-
 
 
 
