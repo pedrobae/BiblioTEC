@@ -11,15 +11,15 @@ def acervo_disp():
                         host = "localhost",
                         port = "5432") as con:
             
-            with con.cursor as cur:
+            with con.cursor() as cur:
 
-                select_acerv = '''  SELECT e.cod_exemplar, l.titulo, e.dt_aquisicao 
+                select_acerv =  ''' SELECT e.cod_exemplar, l.titulo, e.dt_aquisicao 
                                         FROM exemplar e 
                                             JOIN livro l ON (e.ISBN = l.ISBN) 
                                         WHERE e.cod_situacao = 1 '''
                 cur.execute(select_acerv)
 
-                acervo_disp = cur.fetchall()
+                acervo = cur.fetchall()
 
     except Exception as error:
         print(error)
@@ -27,7 +27,7 @@ def acervo_disp():
         if con is not None:
             con.close()
 
-    return acervo_disp
+    return acervo
 
 
 
@@ -41,8 +41,8 @@ def acervo_empr():
                         password = "123456", 
                         host = "localhost",
                         port = "5432") as con:
-            
-            with con.cursor as cur:
+        
+            with con.cursor() as cur:
 
                 select_acerv =  ''' SELECT e.cod_exemplar, l.titulo, m.nome_matricula AS "Matricula do Emprestimo", emp.dt_prevista_devolucao
                                         FROM exemplar e 
@@ -53,7 +53,7 @@ def acervo_empr():
                                             AND dt_devolucao IS NULL '''
                 cur.execute(select_acerv)
 
-                acervo_empr = cur.fetchall()
+                acervo = cur.fetchall()
 
     except Exception as error:
         print(error)
@@ -61,7 +61,7 @@ def acervo_empr():
         if con is not None:
             con.close()
 
-    return acervo_empr
+    return acervo
 
 
 
@@ -76,7 +76,7 @@ def acervo_perd():
                         host = "localhost",
                         port = "5432") as con:
             
-            with con.cursor as cur:
+            with con.cursor() as cur:
 
                 select_acerv =  ''' SELECT e.cod_exemplar, l.titulo, m.nome_matricula AS "Matricula do Ultimo Empréstimo"
                                         FROM exemplar e 
@@ -87,7 +87,7 @@ def acervo_perd():
                                             AND dt_devolucao IS NULL '''
                 cur.execute(select_acerv)
 
-                acervo_perd = cur.fetchall()
+                acervo = cur.fetchall()
 
     except Exception as error:
         print(error)
@@ -95,7 +95,7 @@ def acervo_perd():
         if con is not None:
             con.close()
 
-    return acervo_perd
+    return acervo
 
 
 
@@ -110,7 +110,7 @@ def acervo_manu():
                         host = "localhost",
                         port = "5432") as con:
             
-            with con.cursor as cur:
+            with con.cursor() as cur:
 
                 select_acerv =  ''' SELECT e.cod_exemplar, l.titulo
                                         FROM exemplar e 
@@ -119,7 +119,7 @@ def acervo_manu():
                 
                 cur.execute(select_acerv)
 
-                acervo_manu = cur.fetchall()
+                acervo = cur.fetchall()
 
     except Exception as error:
         print(error)
@@ -127,4 +127,4 @@ def acervo_manu():
         if con is not None:
             con.close()
 
-    return acervo_manu
+    return acervo

@@ -1,32 +1,32 @@
 import PySimpleGUI as sg
 from func_operacoes import reserva, emprestimo, devolucao
-from func_acervo import acervo_disp, acervo_empr, acervo_manu, acervo_perd
+from display_acervo import display_disp, display_empr, display_manu, display_perd
 
-def operacoes():
-    largura = 700
-    altura = 150
+def display_operacoes():
+    largura = 500
+    altura = 180
     layout = [
         [
-            sg.Text('Código de Matrícula:', size = (21)),
-            sg.InputText(size = (48), key = 'cod_mat'),
-            sg.Text('ACERVO', size = (21))
+            sg.Text('Código de Matrícula:', size = (17)),
+            sg.InputText(size = (25), key = 'cod_mat'),
+            sg.Text('ACERVO', size = (20))
         ],
         [
-            sg.Text('Código de Exemplar:', size = (21)),
-            sg.InputText(size = (48), key = 'cod_exemp'),
-            sg.Button('Disponível', size = (21), key = '-ACERVO_DISP-')
+            sg.Text('Código de Exemplar:', size = (17)),
+            sg.InputText(size = (25), key = 'cod_exemp'),
+            sg.Button('Disponível', size = (20), key = '-ACERVO_DISP-')
         ],
         [
-            sg.Button('Reservar', size = (21), key = '-RESERVAR-'),
-            sg.Button('Emprestado', size = (21), key = '-ACERVO_EMPR-')
+            sg.Button('Reservar', size = (40), key = '-RESERVAR-'),
+            sg.Button('Emprestado', size = (20), key = '-ACERVO_EMPR-')
         ],
         [
-            sg.Button('Emprestar', size = (21), key = '-EMPRESTAR-'),
-            sg.Button('Perdido', size = (21), key = '-ACERVO_PERD-')
+            sg.Button('Emprestar', size = (40), key = '-EMPRESTAR-'),
+            sg.Button('Perdido', size = (20), key = '-ACERVO_PERD-')
         ],
         [
-            sg.Button('Devolver', size = (21), key = '-DEVOLVER-'),
-            sg.Button('Manutenção', size = (21), key = '-ACERVO_MANU-')
+            sg.Button('Devolver', size = (40), key = '-DEVOLVER-'),
+            sg.Button('Manutenção', size = (20), key = '-ACERVO_MANU-')
         ]
     ]
 
@@ -70,16 +70,16 @@ def operacoes():
             sg.popup(resultado)
 
         elif evento == "-ACERVO_DISP-":
-            sg.popup(acervo_disp())
+            display_disp()
 
         elif evento == "-ACERVO_EMPR-":
-            sg.popup(acervo_disp())
+            display_empr()
 
         elif evento == "-ACERVO_PERD-":
-            sg.popup(acervo_disp())
+            display_perd()
 
         elif evento == "-ACERVO_MANU-":
-            sg.popup(acervo_disp())
+            display_manu()
 
     #fecho a janela
     window.close()
