@@ -34,7 +34,7 @@ def timeline_ocu(dt_ini, dt_fim):
 
 
 
-def ocurrence(data): 
+def ocurrence(data, hora): 
     con = None
     try:
         with psycopg2.connect(database = "BiblioTEC", user = "postgres", password = "123456", host = "localhost", port = "5432") as con:
@@ -51,7 +51,7 @@ def ocurrence(data):
 
                 # Livros emprestados viram reservas
                 if exemp[1] == 2:
-                    retorno = reserva(mat[0], exemp[0], data, data)
+                    retorno = reserva(mat[0], exemp[0], data, hora)
                     if retorno == 1:
                         resultado = "Reserva Efetuada"
                     elif retorno == 2:
@@ -104,6 +104,9 @@ def update_dev(data):
                 emp_ativos = cur.fetchall()
                 
                 for emp in emp_ativos:
+                    
+                    hora = data + timedelta(hours=8) + timedelta(minutes=13)*random(range(50))
+
                     delta = (data - emp[1]).days
                     prob_dev = 0
 
@@ -119,7 +122,7 @@ def update_dev(data):
                         
                     flag_dev = random.choices([0, 1], weights = [1 - prob_dev, prob_dev])
                     if flag_dev == [1]:
-                        retorno = devolucao(emp[0], data, data)
+                        retorno = devolucao(emp[0], data, hora)
                         if retorno == 1:
                             resultado = "Devolução Efetuada"
                         elif retorno == 2:
@@ -184,9 +187,9 @@ def pop_bibliotec(dt_ini, dt_fim):
     distr = timeline_ocu(dt_ini, dt_fim)
     
     for data in distr:
-    
+
         #DEVOLUÇÕES
-        update_dev(data)
+        update_dev(data, hora)
 
         # RESERVAS ATRASADAS
         update_res(data)
@@ -194,5 +197,6 @@ def pop_bibliotec(dt_ini, dt_fim):
         # OCORRENCIAS
         n = distr[data]
         while n > 0:
+            hora = data + timedelta(hours=8) + timedelta(minutes=13)*random(range(50))
             n -= 1
-            ocurrence(data)
+            ocurrence(data, hora)
