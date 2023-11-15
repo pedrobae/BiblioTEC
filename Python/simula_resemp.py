@@ -1,6 +1,6 @@
 import psycopg2
 import random
-from datetime import timedelta, date
+from datetime import timedelta, date, datetime, time
 from func_operacoes import reserva, emprestimo, devolucao
 
 # Data - Maior ocorrencias para datas mais recentes
@@ -104,8 +104,9 @@ def update_dev(data):
                 emp_ativos = cur.fetchall()
                 
                 for emp in emp_ativos:
-                    
-                    hora = data + timedelta(hours=8) + timedelta(minutes=13)*random(range(50))
+
+                    delta = time(hour=8 + random.randrange(11), minute=random.randrange(60), second=random.randrange(60))
+                    hora = datetime.combine(data, delta)
 
                     delta = (data - emp[1]).days
                     prob_dev = 0
@@ -197,6 +198,5 @@ def pop_bibliotec(dt_ini, dt_fim):
         # OCORRENCIAS
         n = distr[data]
         while n > 0:
-            hora = data + timedelta(hours=8) + timedelta(minutes=13)*random(range(50))
             n -= 1
             ocurrence(data, hora)

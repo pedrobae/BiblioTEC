@@ -142,7 +142,7 @@ def devolucao(cod_exemp, today = date.today(), now = datetime.now()):
                 if emprestimo != []:
                     cod_emp = emprestimo[0][0]
                 
-                    update_emp = "UPDATE emprestimo SET dt_devolucao = '{0}' WHERE cod_emprestimo = {1}".format(str(today), cod_emp)
+                    update_emp = "UPDATE emprestimo SET dt_devolucao = '{0}' WHERE cod_emprestimo = {1}".format(str(now), cod_emp)
                     cur.execute(update_emp)
 
                     update_exemp = "UPDATE exemplar SET cod_situacao = 1 WHERE cod_exemplar = {0}".format(cod_exemp)
