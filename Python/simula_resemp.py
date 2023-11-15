@@ -198,5 +198,9 @@ def pop_bibliotec(dt_ini, dt_fim):
         # OCORRENCIAS
         n = distr[data]
         while n > 0:
+
+            delta = time(hour=8 + random.randrange(11), minute=random.randrange(60), second=random.randrange(60))
+            hora = datetime.combine(data, delta)
+            
             n -= 1
             ocurrence(data, hora)
