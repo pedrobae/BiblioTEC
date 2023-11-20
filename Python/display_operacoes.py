@@ -104,3 +104,6 @@ def display_operacoes():
 
     #fecho a janela
     window.close()
+
+if __name__ == "__main__":
+    display_operacoes()
