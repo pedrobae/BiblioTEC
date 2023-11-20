@@ -104,5 +104,3 @@ def display_operacoes():
 
     #fecho a janela
     window.close()
-
-display_operacoes()
