@@ -6,7 +6,7 @@ def wind_disp():
     layout = [
         [sg.Table(acervo, ['Código do Exemplar','Titulo','Data de Aquisição'])]
         ]
-    return sg.Window('Acervo Disponível', layout)
+    return sg.Window('Acervo Disponível', layout, finalize=True)
 
 
 
@@ -15,7 +15,7 @@ def wind_empr():
     layout = [
         [sg.Table(acervo, ['Código do Exemplar','Titulo','Matricula do Empréstimo', 'Data Prevista de Devolução'])]
         ]
-    return sg.Window('Acervo Emprestado', layout)
+    return sg.Window('Acervo Emprestado', layout, finalize=True)
 
 
 
@@ -24,7 +24,7 @@ def wind_manu():
     layout = [
         [sg.Table(acervo, ['Código do Exemplar','Titulo'])]
         ]
-    return sg.Window('Acervo em Manutenção', layout)
+    return sg.Window('Acervo em Manutenção', layout, finalize=True)
 
 
 def wind_perd():
@@ -32,4 +32,4 @@ def wind_perd():
     layout = [
         [sg.Table(acervo, ['Código do Exemplar','Titulo','Matricula do Último Empréstimo'])]
         ]
-    return sg.Window('Acervo Perdido', layout)
+    return sg.Window('Acervo Perdido', layout, finalize=True)

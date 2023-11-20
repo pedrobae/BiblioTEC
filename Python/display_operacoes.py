@@ -3,8 +3,6 @@ import func_operacoes as fo
 import window_acervo as wa
 
 def window_operacoes():
-    largura = 500
-    altura = 180
     column_1 = [
         [
             sg.Text('Código de Matrícula:', size = (17)),
@@ -48,25 +46,25 @@ def window_operacoes():
     ]
 
     layout = [
-        [sg.Column(column_1),sg.Column(column_2, s=(1,altura), background_color='black'),sg.Column(column_3)]
+        [sg.Column(column_1),sg.Column(column_2, s=(1,180), background_color='black'),sg.Column(column_3)]
     ]
 
-    return sg.Window('Operações', layout, size = (largura,altura))
+    return sg.Window('Operações', layout, size = (500, 180), finalize=True)
 
 def display_operacoes():
-    wind_opera = window_operacoes
-    wind_disp, wind_empr, wind_manu, wind_perd = None, None, None, None
+    window_ope = window_operacoes()
+    window_disp, window_empr, window_manu, window_perd = None, None, None, None
 
     while True:
         window, evento, valores = sg.read_all_windows()
         
         if evento == sg.WIN_CLOSED:
             window.close()
-            if window == wind_opera:
+            if window == window_ope:
                 open = 'menu'
                 break
-            elif window in (wind_disp, wind_empr, wind_manu, wind_perd):
-                wind_disp, wind_empr, wind_manu, wind_perd = None, None, None, None
+            elif window in (window_disp, window_empr, window_manu, window_perd):
+                window_disp, window_empr, window_manu, window_perd = None, None, None, None
 
         elif evento == "-RESERVAR-":
             retorno = fo.reserva(valores['cod_mat'], valores['cod_exemp'])
@@ -99,17 +97,17 @@ def display_operacoes():
             print(resultado)
             sg.popup(resultado)
 
-        elif evento == "-ACERVO_DISP-" and not wind_disp:
-            wind_disp = wa.display_disp()
+        elif evento == "-ACERVO_DISP-" and not window_disp:
+            window_disp = wa.wind_disp()
 
-        elif evento == "-ACERVO_EMPR-" and not wind_empr:
-            wind_empr = wa.display_empr()
+        elif evento == "-ACERVO_EMPR-" and not window_empr:
+            window_empr = wa.wind_empr()
             
-        elif evento == "-ACERVO_MANU-" and not wind_manu:
-            wind_manu = wa.display_manu()
+        elif evento == "-ACERVO_MANU-" and not window_manu:
+            window_manu = wa.wind_manu()
 
-        elif evento == "-ACERVO_PERD-" and not wind_perd:
-            wind_perd = wa.display_perd()
+        elif evento == "-ACERVO_PERD-" and not window_perd:
+            window_perd = wa.wind_perd()
 
     #fecho a janela
     window.close()
