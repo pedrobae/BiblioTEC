@@ -1,5 +1,5 @@
 import PySimpleGUI as sg
-import display_acervo as da
+import window_acervo as wa
 import display_operacoes as do
 import display_cadastro as dc
 
@@ -22,16 +22,16 @@ while True:
         break
 
     if evento == 'Disponível':
-        da.display_disp()
+        wa.display_disp()
 
     if evento == 'Emprestado':
-        da.display_empr()
+        wa.display_empr()
 
     if evento == 'Manutenção':
-        da.display_manu()
+        wa.display_manu()
     
     if evento == 'Perdido':
-        da.display_perd()
+        wa.display_perd()
 
     if evento in ('Empréstimo', 'Devolução', 'Reserva'):
         open = 'oper'

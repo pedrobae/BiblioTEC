@@ -1,8 +1,8 @@
 import PySimpleGUI as sg
 import func_operacoes as fo
-import display_acervo as da
+import window_acervo as wa
 
-def display_operacoes():
+def window_operacoes():
     largura = 500
     altura = 180
     column_1 = [
@@ -51,13 +51,22 @@ def display_operacoes():
         [sg.Column(column_1),sg.Column(column_2, s=(1,altura), background_color='black'),sg.Column(column_3)]
     ]
 
-    window = sg.Window('Operações', layout, size = (largura,altura))
+    return sg.Window('Operações', layout, size = (largura,altura))
+
+def display_operacoes():
+    wind_opera = window_operacoes
+    wind_disp, wind_empr, wind_manu, wind_perd = None, None, None, None
 
     while True:
-        evento, valores = window.read()
+        window, evento, valores = sg.read_all_windows()
         
         if evento == sg.WIN_CLOSED:
-            break
+            window.close()
+            if window == wind_opera:
+                open = 'menu'
+                break
+            elif window in (wind_disp, wind_empr, wind_manu, wind_perd):
+                wind_disp, wind_empr, wind_manu, wind_perd = None, None, None, None
 
         elif evento == "-RESERVAR-":
             retorno = fo.reserva(valores['cod_mat'], valores['cod_exemp'])
@@ -90,20 +99,23 @@ def display_operacoes():
             print(resultado)
             sg.popup(resultado)
 
-        elif evento == "-ACERVO_DISP-":
-            da.display_disp()
+        elif evento == "-ACERVO_DISP-" and not wind_disp:
+            wind_disp = wa.display_disp()
 
-        elif evento == "-ACERVO_EMPR-":
-            da.display_empr()
+        elif evento == "-ACERVO_EMPR-" and not wind_empr:
+            wind_empr = wa.display_empr()
+            
+        elif evento == "-ACERVO_MANU-" and not wind_manu:
+            wind_manu = wa.display_manu()
 
-        elif evento == "-ACERVO_PERD-":
-            da.display_perd()
-
-        elif evento == "-ACERVO_MANU-":
-            da.display_manu()
+        elif evento == "-ACERVO_PERD-" and not wind_perd:
+            wind_perd = wa.display_perd()
 
     #fecho a janela
     window.close()
+
+#    if open == 'menu':
+#        display_menu
 
 if __name__ == "__main__":
     display_operacoes()
