@@ -16,7 +16,8 @@ def acervo_disp():
                 select_acerv =  ''' SELECT e.cod_exemplar, l.titulo, e.dt_aquisicao 
                                         FROM exemplar e 
                                             JOIN livro l ON (e.ISBN = l.ISBN) 
-                                        WHERE e.cod_situacao = 1 '''
+                                        WHERE e.cod_situacao = 1 
+                                            ORDER BY l.titulo'''
                 cur.execute(select_acerv)
 
                 acervo = cur.fetchall()
@@ -50,7 +51,8 @@ def acervo_empr():
                                             JOIN emprestimo emp     ON (e.cod_exemplar = emp.cod_exemplar)
                                             JOIN matricula m        ON (emp.cod_matricula = m.cod_matricula)
                                         WHERE e.cod_situacao = 2
-                                            AND dt_devolucao IS NULL '''
+                                            AND dt_devolucao IS NULL 
+                                            ORDER BY l.titulo'''
                 cur.execute(select_acerv)
 
                 acervo = cur.fetchall()
@@ -84,7 +86,8 @@ def acervo_perd():
                                             JOIN emprestimo emp     ON (e.cod_exemplar = emp.cod_exemplar)
                                             JOIN matricula m        ON (emp.cod_matricula = m.cod_matricula)
                                         WHERE e.cod_situacao = 4
-                                            AND dt_devolucao IS NULL '''
+                                            AND dt_devolucao IS NULL 
+                                            ORDER BY l.titulo'''
                 cur.execute(select_acerv)
 
                 acervo = cur.fetchall()
@@ -115,7 +118,8 @@ def acervo_manu():
                 select_acerv =  ''' SELECT e.cod_exemplar, l.titulo
                                         FROM exemplar e 
                                             JOIN livro l    ON (e.ISBN = l.ISBN)
-                                        WHERE e.cod_situacao = 3 '''
+                                        WHERE e.cod_situacao = 3 
+                                        ORDER BY l.titulo'''
                 
                 cur.execute(select_acerv)
 
