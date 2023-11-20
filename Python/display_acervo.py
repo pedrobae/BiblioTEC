@@ -1,52 +1,35 @@
 import PySimpleGUI as sg
 from func_acervo import acervo_disp, acervo_empr, acervo_manu, acervo_perd
 
-def display_disp():
+def wind_disp():
     acervo = acervo_disp()
     layout = [
         [sg.Table(acervo, ['Código do Exemplar','Titulo','Data de Aquisição'])]
         ]
-    window = sg.Window('Acervo Disponível', layout)
-    while True:
-        evento, valores = window.read()
-        if evento == sg.WIN_CLOSED:
-            break
+    return sg.Window('Acervo Disponível', layout)
 
 
 
-def display_empr():
+def wind_empr():
     acervo = acervo_empr()
     layout = [
         [sg.Table(acervo, ['Código do Exemplar','Titulo','Matricula do Empréstimo', 'Data Prevista de Devolução'])]
         ]
-    window = sg.Window('Acervo Emprestado', layout)
-    while True:
-        evento, valores = window.read()
-        if evento == sg.WIN_CLOSED:
-            break
+    return sg.Window('Acervo Emprestado', layout)
 
 
 
-def display_manu():
+def wind_manu():
     acervo = acervo_manu()
     layout = [
         [sg.Table(acervo, ['Código do Exemplar','Titulo'])]
         ]
-    window = sg.Window('Acervo em Manutenção', layout)
-    while True:
-        evento, valores = window.read()
-        if evento == sg.WIN_CLOSED:
-            break
+    return sg.Window('Acervo em Manutenção', layout)
 
 
-
-def display_perd():
+def wind_perd():
     acervo = acervo_perd()
     layout = [
         [sg.Table(acervo, ['Código do Exemplar','Titulo','Matricula do Último Empréstimo'])]
         ]
-    window = sg.Window('Acervo Perdido', layout)
-    while True:
-        evento, valores = window.read()
-        if evento == sg.WIN_CLOSED:
-            break
+    return sg.Window('Acervo Perdido', layout)
