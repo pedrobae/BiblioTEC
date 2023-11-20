@@ -1,33 +1,54 @@
 import PySimpleGUI as sg
-from func_operacoes import reserva, emprestimo, devolucao
-from display_acervo import display_disp, display_empr, display_manu, display_perd
+import func_operacoes as fo
+import display_acervo as da
 
 def display_operacoes():
     largura = 500
     altura = 180
-    layout = [
+    column_1 = [
         [
             sg.Text('Código de Matrícula:', size = (17)),
             sg.InputText(size = (25), key = 'cod_mat'),
-            sg.Text('ACERVO', size = (20))
         ],
         [
             sg.Text('Código de Exemplar:', size = (17)),
             sg.InputText(size = (25), key = 'cod_exemp'),
-            sg.Button('Disponível', size = (20), key = '-ACERVO_DISP-')
         ],
         [
             sg.Button('Reservar', size = (40), key = '-RESERVAR-'),
-            sg.Button('Emprestado', size = (20), key = '-ACERVO_EMPR-')
         ],
         [
             sg.Button('Emprestar', size = (40), key = '-EMPRESTAR-'),
-            sg.Button('Perdido', size = (20), key = '-ACERVO_PERD-')
         ],
         [
             sg.Button('Devolver', size = (40), key = '-DEVOLVER-'),
+        ]
+    ]
+
+    column_2 = [
+        
+    ]
+
+    column_3 = [
+        [
+            sg.Text('ACERVO', size = (20))
+        ],
+        [
+            sg.Button('Disponível', size = (20), key = '-ACERVO_DISP-')
+        ],
+        [
+            sg.Button('Emprestado', size = (20), key = '-ACERVO_EMPR-')
+        ],
+        [
+            sg.Button('Perdido', size = (20), key = '-ACERVO_PERD-')
+        ],
+        [
             sg.Button('Manutenção', size = (20), key = '-ACERVO_MANU-')
         ]
+    ]
+
+    layout = [
+        [sg.Column(column_1),sg.Column(column_2, s=(1,altura), background_color='black'),sg.Column(column_3)]
     ]
 
     window = sg.Window('Operações', layout, size = (largura,altura))
@@ -39,7 +60,7 @@ def display_operacoes():
             break
 
         elif evento == "-RESERVAR-":
-            retorno = reserva(valores['cod_mat'], valores['cod_exemp'])
+            retorno = fo.reserva(valores['cod_mat'], valores['cod_exemp'])
             if retorno == 1:
                 resultado = "Reserva Efetuada"
             elif retorno == 2:
@@ -47,7 +68,7 @@ def display_operacoes():
             sg.popup(resultado)
 
         elif evento == "-EMPRESTAR-":
-            retorno = emprestimo(valores['cod_mat'], valores['cod_exemp'])
+            retorno = fo.emprestimo(valores['cod_mat'], valores['cod_exemp'])
             if retorno == 1:
                 resultado = "Empréstimo Efetuado"
             elif retorno == 2:
@@ -57,7 +78,7 @@ def display_operacoes():
             sg.popup(resultado)
 
         elif evento == "-DEVOLVER-":
-            retorno = devolucao(valores['cod_exemp'])
+            retorno = fo.devolucao(valores['cod_exemp'])
             if retorno == 1:
                 resultado = "Devolução Efetuada"
             elif retorno == 2:
@@ -70,16 +91,18 @@ def display_operacoes():
             sg.popup(resultado)
 
         elif evento == "-ACERVO_DISP-":
-            display_disp()
+            da.display_disp()
 
         elif evento == "-ACERVO_EMPR-":
-            display_empr()
+            da.display_empr()
 
         elif evento == "-ACERVO_PERD-":
-            display_perd()
+            da.display_perd()
 
         elif evento == "-ACERVO_MANU-":
-            display_manu()
+            da.display_manu()
 
     #fecho a janela
     window.close()
+
+display_operacoes()
