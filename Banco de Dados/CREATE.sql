@@ -133,7 +133,7 @@ CREATE TABLE emprestimo (
 ALTER TABLE reserva
 	ADD COLUMN situacao_res CHAR(9) 		
 		CHECK (situacao_res IN ('ATIVA', 'INATIVA', 'CANCELADA'))
-			DEFAULT 'ATIVA'
+			DEFAULT 'ATIVA';
 
 ALTER TABLE emprestimo
 	ALTER COLUMN dt_devolucao TYPE TIMESTAMP;
