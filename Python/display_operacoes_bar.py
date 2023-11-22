@@ -41,16 +41,16 @@ while True:
         break
 
     if evento == 'Disponível':
-        wa.display_disp()
+        wa.window_disp()
 
     if evento == 'Emprestado':
-        wa.display_empr()
+        wa.window_empr()
 
     if evento == 'Manutenção':
-        wa.display_manu()
+        wa.window_manu()
     
     if evento == 'Perdido':
-        wa.display_perd()
+        wa.window_perd()
 
     if evento in ('Empréstimo', 'Devolução', 'Reserva'):
         open = 'oper'
