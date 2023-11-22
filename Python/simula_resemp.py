@@ -190,7 +190,7 @@ def pop_bibliotec(dt_ini, dt_fim):
     for data in distr:
 
         #DEVOLUÇÕES
-        update_dev(data, hora)
+        update_dev(data)
 
         # RESERVAS ATRASADAS
         update_res(data)
