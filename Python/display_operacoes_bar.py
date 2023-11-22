@@ -10,10 +10,29 @@ menu_def = [
     ]
 
 layout = [
-    [sg.MenubarCustom(menu_def)]
+    [   
+        sg.MenubarCustom(menu_def)
+    ],
+    [
+        sg.Text('Código de Matrícula:', size = (17)),
+        sg.InputText(size = (25), key = 'cod_mat'),
+    ],
+    [
+        sg.Text('Código de Exemplar:', size = (17)),
+        sg.InputText(size = (25), key = 'cod_exemp'),
+    ],
+    [
+        sg.Button('Reservar', size = (40), key = '-RESERVAR-'),
+    ],
+    [
+        sg.Button('Emprestar', size = (40), key = '-EMPRESTAR-'),
+    ],
+    [
+        sg.Button('Devolver', size = (40), key = '-DEVOLVER-'),
+    ]
 ]
 
-window = sg.Window('Operações', layout, size = (500, 100))
+window = sg.Window('Operações', layout, size = (300, 200))
 
 while True:
     evento, valores = window.read()
