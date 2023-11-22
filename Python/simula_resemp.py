@@ -66,18 +66,18 @@ def ocurrence(data, hora):
                         elif retorno == 2:
                             resultado = "O exemplar está reservado."
                         elif retorno == 3:
-                            resultado = "O exemplar está emprestado, realize a devolução primeiro."
+                            resultado = "O exemplar está emprestado."
                         print(resultado)
                     
                     else:
                         mat_res = reservas[0]
                         retorno = emprestimo(mat_res[0], exemp[0], data)
                         if retorno == 1:
-                            resultado = "Empréstimo Efetuado"
+                            resultado = "Empréstimo Efetuado."
                         elif retorno == 2:
                             resultado = "O exemplar está reservado."
                         elif retorno == 3:
-                            resultado = "O exemplar está emprestado, realize a devolução primeiro."
+                            resultado = "O exemplar está emprestado."
                         print(resultado)
     except Exception as error:
         print(error)
@@ -119,11 +119,11 @@ def update_dev(data):
                     if flag_dev == [1]:
                         retorno = devolucao(emp[0], data, hora)
                         if retorno == 1:
-                            resultado = "Devolução Efetuada"
+                            resultado = "Devolução Efetuada."
                         elif retorno == 2:
-                            resultado = "O exemplar está reservado"
+                            resultado = "Devolução Efetuada.\nO exemplar está reservado."
                         elif retorno == 3:
-                            resultado = "O exemplar não está reservado."
+                            resultado = "Devolução Efetuada.\nO exemplar não está reservado."
                         elif retorno == 4:
                             resultado = "O exemplar não está emprestado."
                         print(resultado)
@@ -139,11 +139,11 @@ def update_dev(data):
                             if flag_emp == [1]:                                                           
                                 retorno = emprestimo(res[0][0], emp[0], data)
                                 if retorno == 1:
-                                    resultado = "Empréstimo Efetuado"
+                                    resultado = "Empréstimo Efetuado."
                                 elif retorno == 2:
                                     resultado = "O exemplar está reservado."
                                 elif retorno == 3:
-                                    resultado = "O exemplar está emprestado, realize a devolução primeiro."
+                                    resultado = "O exemplar já está emprestado."
                                 print(resultado)
     except Exception as error:
         print(error)
