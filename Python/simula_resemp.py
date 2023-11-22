@@ -34,51 +34,53 @@ def ocurrence(data, hora):
         with psycopg2.connect(database = "BiblioTEC", user = "postgres", password = "123456", host = "localhost", port = "5432") as con:
             with con.cursor() as cur:
                 # Escolher uma matricula
-                select_mat = "SELECT cod_matricula FROM matricula"
+                select_mat = "SELECT cod_matricula FROM matricula WHERE dt_matricula < '{0}' AND dt_termino > '{1}'".format(data, data)
                 cur.execute(select_mat)
-                mat = random.choice(cur.fetchall())
+                allmat = cur.fetchall()
+                if allmat != []:
+                    mat = random.choice(allmat)
 
-                # Escolher um exemplar
-                select_exemp = "SELECT cod_exemplar, cod_situacao FROM exemplar WHERE cod_situacao NOT IN (3, 4) AND dt_aquisicao < '{0}'".format(data)
-                cur.execute(select_exemp)
-                exemp = random.choice(cur.fetchall())
+                    # Escolher um exemplar
+                    select_exemp = "SELECT cod_exemplar, cod_situacao FROM exemplar WHERE cod_situacao NOT IN (3, 4) AND dt_aquisicao < '{0}'".format(data)
+                    cur.execute(select_exemp)
+                    exemp = random.choice(cur.fetchall())
 
                 # Livros emprestados viram reservas
-                if exemp[1] == 2:
-                    retorno = reserva(mat[0], exemp[0], data, hora)
-                    if retorno == 1:
-                        resultado = "Reserva Efetuada"
-                    elif retorno == 2:
-                        resultado = "O exemplar está disponível."
-                    print(resultado)
-                    
-                    
-                else:
-                    # Checar reservas do exemplar 
-                    select_res = "SELECT cod_matricula FROM reserva WHERE cod_exemplar = {0} AND situacao_res = 'ATIVA' ORDER BY dt_reserva ASC".format(exemp[0])
-                    cur.execute(select_res)
-                    reservas = cur.fetchall()
-                    
-                    if reservas == []:
-                        retorno = emprestimo(mat[0], exemp[0], data)
+                    if exemp[1] == 2:
+                        retorno = reserva(mat[0], exemp[0], data, hora)
                         if retorno == 1:
-                            resultado = "Empréstimo Efetuado"
+                            resultado = "Reserva Efetuada"
                         elif retorno == 2:
-                            resultado = "O exemplar está reservado."
-                        elif retorno == 3:
-                            resultado = "O exemplar está emprestado."
+                            resultado = "O exemplar está disponível."
                         print(resultado)
-                    
+                        
+                        
                     else:
-                        mat_res = reservas[0]
-                        retorno = emprestimo(mat_res[0], exemp[0], data)
-                        if retorno == 1:
-                            resultado = "Empréstimo Efetuado."
-                        elif retorno == 2:
-                            resultado = "O exemplar está reservado."
-                        elif retorno == 3:
-                            resultado = "O exemplar está emprestado."
-                        print(resultado)
+                        # Checar reservas do exemplar 
+                        select_res = "SELECT cod_matricula FROM reserva WHERE cod_exemplar = {0} AND situacao_res = 'ATIVA' ORDER BY dt_reserva ASC".format(exemp[0])
+                        cur.execute(select_res)
+                        reservas = cur.fetchall()
+                        
+                        if reservas == []:
+                            retorno = emprestimo(mat[0], exemp[0], data)
+                            if retorno == 1:
+                                resultado = "Empréstimo Efetuado"
+                            elif retorno == 2:
+                                resultado = "O exemplar está reservado."
+                            elif retorno == 3:
+                                resultado = "O exemplar está emprestado."
+                            print(resultado)
+                        
+                        else:
+                            mat_res = reservas[0]
+                            retorno = emprestimo(mat_res[0], exemp[0], data)
+                            if retorno == 1:
+                                resultado = "Empréstimo Efetuado."
+                            elif retorno == 2:
+                                resultado = "O exemplar está reservado."
+                            elif retorno == 3:
+                                resultado = "O exemplar está emprestado."
+                            print(resultado)
     except Exception as error:
         print(error)
     finally:
@@ -114,6 +116,7 @@ def update_dev(data):
                     else:
                         update_loss = "UPDATE exemplar SET cod_situacao = 4 WHERE cod_exemplar = {0}".format(emp[0])
                         cur.execute(update_loss)
+                        print('EXEMPLAR PERDIDO')
                         
                     flag_dev = random.choices([0, 1], weights = [1 - prob_dev, prob_dev])
                     if flag_dev == [1]:
@@ -182,6 +185,7 @@ def pop_bibliotec(dt_ini, dt_fim):
     distr = timeline_ocu(dt_ini, dt_fim)
     
     for data in distr:
+        print(data)
 
         #DEVOLUÇÕES
         update_dev(data)
@@ -199,5 +203,4 @@ def pop_bibliotec(dt_ini, dt_fim):
             n -= 1
             ocurrence(data, hora)
 
-pop_bibliotec(date(2016, 1, 1), date(2019, 12, 31))
-pop_bibliotec(date(2022, 1, 1), date(2023, 12, 31))
+pop_bibliotec(date(2021, 1, 1), date(2023, 12, 31))
