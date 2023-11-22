@@ -13,13 +13,7 @@ def timeline_ocu(dt_ini, dt_fim):
         mes = data.month
         dia = data.weekday()
         # Não ter emprestimos em fim de semana e nos meses de janeiro, julho e dexembro
-        if dia > 4:
-            distr[data] = 0
-
-        elif mes in [12, 1, 7]:
-            distr[data] = 0
-            
-        else:
+        if dia < 5 and mes not in [12, 1, 7]:
             prob = i/interv.days
             list_ocu = [0, 1]
             distr[data] = random.choices(list_ocu, weights = [1 - prob, prob])[0]
@@ -204,3 +198,6 @@ def pop_bibliotec(dt_ini, dt_fim):
             
             n -= 1
             ocurrence(data, hora)
+
+pop_bibliotec(date(2016, 1, 1), date(2019, 12, 31))
+pop_bibliotec(date(2022, 1, 1), date(2023, 12, 31))
