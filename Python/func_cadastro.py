@@ -2,11 +2,23 @@ import psycopg2
 import datetime
 
 # Registro de Exemplar
-
-
-
-
+'''
+def nome_da_função (coluna1, coluna2, ..., colunaN):
+    conecta no banco
+        realiza o insert
+    desconecta do banco
+'''
 # Registro de Matricula
+
+
+
+
+# Registro de Livro
+
+
+
+
+# Registro de Autor
 
 
 
