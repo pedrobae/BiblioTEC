@@ -106,7 +106,7 @@ def reserva(cod_mat, cod_exemp, today = date.today(), now = datetime.now()):
                     cur.execute(insert_script)
 
                     # print("Reserva Efetuada")
-                    retorno = ("Reserva Efetuada.\nA data prevista de Empréstimo é ", str(delay))
+                    retorno = "Reserva Efetuada.\nA data prevista de Empréstimo é " + str(delay)
                     
                 else:
                     # print("O exemplar está disponível.")
@@ -160,7 +160,7 @@ def devolucao(cod_exemp, today = date.today(), now = datetime.now()):
                         matricula_reserva = cur.fetchall()
                         
                         # print("O exemplar está reservado por", matricula_reserva[0][3], "- e-mail: ", matricula_reserva[0][7], "- Codigo de Matricula: ", matricula_reserva[0][0])
-                        retorno = ("Devolução efetuada.\nO exemplar está reservado por", matricula_reserva[0][3], "- e-mail: ", matricula_reserva[0][7], "- Codigo de Matricula: ", matricula_reserva[0][0])
+                        retorno = "Devolução efetuada.\nO exemplar está reservado por " + str(matricula_reserva[0][3]) + "\ne-mail: " + str(matricula_reserva[0][7]) +"\nCodigo de Matricula: " + str(matricula_reserva[0][0])
                         
                     else:
                         # print("O exemplar não está reservado.")
