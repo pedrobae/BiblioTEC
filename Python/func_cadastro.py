@@ -2,7 +2,12 @@ import psycopg2
 import datetime
 
 # Registro de Exemplar
-def registra_exemplar (isbn, dt_aquisicao, cod_estante, cod_situacao, estado_exempl):
+
+
+
+
+# Registro de Matricula
+def registro_matricula (cod_matricula, cod_tipo_matricula, cod_instituicao, nome_matricula, dt_matricula, sexo, dt_nscm, email_matricula, endereco_matricula, CPF, dt_termino):
     retorno = None
     # Conecta com o banco
     con = None
@@ -15,21 +20,21 @@ def registra_exemplar (isbn, dt_aquisicao, cod_estante, cod_situacao, estado_exe
                         port = "5432") as con:
         
             with con.cursor() as cur:
-                # Seleciona os codigos de autor existentes e coloca em uma lista
-                select_exe = "SELECT isbn FROM exemplar"
-                cur.execute(select_exe)
-                lista_exe = []
+                # Seleciona os codigos de matrícula existentes e coloca em uma lista
+                select_mat = "SELECT cod_matricula FROM exemplar"
+                cur.execute(select_mat)
+                lista_mat = []
                 for value in cur.fetchall():
-                    lista_exe += value
+                    lista_mat += value
 
-                # Checa se o cod_autor existe na lista
-                if isbn in lista_exe:
-                    retorno = 'O livro já está cadastrado'
+                # Checa se o cod_matricula existe na lista
+                if cod_matricula in lista_mat:
+                    retorno = 'O Código de Matrícula já está cadastrado'
                 else:
                     # Realiza o cadastro
-                    insert_exe = "INSERT INTO exemplar VALUES ({0}, '{1}', '{2}', '{3}', '{4}', '{5}')".format(isbn, dt_aquisicao, cod_estante, cod_situacao, estado_exempl)
-                    cur.execute(insert_exe)
-                    retorno = 'Cadastro Efetuado'
+                    insert_mat = "INSERT INTO matricula VALUES ({0}, '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}')".format(cod_matricula, cod_tipo_matricula, cod_instituicao, nome_matricula, dt_matricula, sexo, dt_nscm, email_matricula, endereco_matricula, CPF, dt_termino)
+                    cur.execute(insert_mat)
+                    retorno = 'Matrícula Efetuado'
 
     except Exception as error:
         print(error)
@@ -38,11 +43,6 @@ def registra_exemplar (isbn, dt_aquisicao, cod_estante, cod_situacao, estado_exe
             con.close()
     if retorno:
         return retorno
-    
-
-
-# Registro de Matricula
-
 
 
 
@@ -153,6 +153,3 @@ finally:
     if con is not None:
         con.close()
 '''
-
-if __name__ == "__main__":
-    registra_livro(6589132684, 'O Caminho dos Reis', '2010-8-31', 'Trama')
