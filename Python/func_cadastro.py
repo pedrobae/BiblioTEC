@@ -69,9 +69,14 @@ def registra_livro(isbn, titulo, dt_publ, editora, edicao = 'NULL', local_publ =
                 if isbn in lista_livro:
                     retorne = 'O Código ISBN já está cadastrado'
                 else:
+                    if subtitulo:
+                        subtitulo = "'{0}'".format(subtitulo)
+                    if local_publ:
+                        local_publ = "'{0}'".format(local_publ)
+                    
                     insert_livro = '''
                         INSERT INTO livro (isbn, titulo, subtitulo, dt_publ, editora, edicao, local_publ)
-                        VALUES ({0}, '{1}', '{2}', '{3}', '{4}', {5}, '{6}')'''.format(isbn, titulo, subtitulo, dt_publ, editora, edicao, local_publ)
+                        VALUES ({0}, '{1}', {2}, '{3}', '{4}', {5}, {6})'''.format(isbn, titulo, subtitulo, dt_publ, editora, edicao, local_publ)
 
                     cur.execute(insert_livro)
                     retorne = 'Cadastro Efetuado'
@@ -150,4 +155,4 @@ finally:
 '''
 
 if __name__ == "__main__":
-    registra_livro(6589132682, 'O caminho dos Reis', '2010-8-31', 'Trama')
+    registra_livro(6589132683, 'O Caminho dos Reis', '2010-8-31', 'Trama')
