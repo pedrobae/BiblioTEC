@@ -2,12 +2,58 @@ import psycopg2
 import datetime
 
 # Registro de Exemplar
+def registra_exemplar(cod_exemplar, isbn, cod_estante, estado_exempl):
+    retorno = None
+    # Conecta com o banco
+    con = None
+    try:
+        with psycopg2.connect(
+                        database="BiblioTEC",
+                        user="postgres",
+                        password="123456",
+                        host="localhost",
+                        port="5432") as con:
 
+            with con.cursor() as cur:
+                # Seleciona os ISBNs existentes e coloca em uma lista
+                select_isbn = "SELECT isbn FROM livro"
+                cur.execute(select_isbn)
+                lista_isbn = []
+                for value in cur.fetchall():
+                    lista_isbn += value
+
+                # Checa se o ISBN está cadastrado
+                if isbn in lista_isbn:
+                    # Seleciona os exemplares
+                    select_exemp = "SELECT cod_exemplar FROM exemplar"
+                    cur.execute(select_exemp)
+                    lista_exemp = []
+                    for value in cur.fetchall():
+                        lista_exemp += value
+
+                    # Checa se o exemplar esta cadastrados
+                    if cod_exemplar in lista_exemp:
+                        retorno = "O código de matricula já está cadastrado"
+                    else:
+                        dt_aquisicao = datetime.date.today()
+                        insert_exe = '''INSERT INTO exemplar VALUES (DEFAULT, {0}, '{1}', '{2}', 1, '{3}')'''.format(isbn, str(dt_aquisicao), cod_estante, estado_exempl)
+                        cur.execute(insert_exe)
+                        retorno = 'Cadastro do exemplar efetuado.'
+                else:
+                    retorno = 'Necessário cadastrar o livro'
+
+    except Exception as error:
+        print(error)
+        retorno = 'Erro ao cadastrar exemplar.'
+    finally:
+        if con is not None:
+            con.close()
+    return retorno
 
 
 
 # Registro de Matricula
-def registro_matricula (cod_matricula, cod_tipo_matricula, cod_instituicao, nome_matricula, dt_matricula, sexo, dt_nscm, email_matricula, endereco_matricula, CPF, dt_termino):
+def registra_matricula (cod_matricula, cod_tipo_matricula, cod_instituicao, nome_matricula, sexo, dt_nscm = 'NULL', email_matricula = 'NULL', endereco_matricula = 'NULL', CPF = 'NULL'):
     retorno = None
     # Conecta com o banco
     con = None
@@ -21,7 +67,7 @@ def registro_matricula (cod_matricula, cod_tipo_matricula, cod_instituicao, nome
         
             with con.cursor() as cur:
                 # Seleciona os codigos de matrícula existentes e coloca em uma lista
-                select_mat = "SELECT cod_matricula FROM exemplar"
+                select_mat = "SELECT cod_matricula FROM matricula"
                 cur.execute(select_mat)
                 lista_mat = []
                 for value in cur.fetchall():
@@ -32,9 +78,21 @@ def registro_matricula (cod_matricula, cod_tipo_matricula, cod_instituicao, nome
                     retorno = 'O Código de Matrícula já está cadastrado'
                 else:
                     # Realiza o cadastro
-                    insert_mat = "INSERT INTO matricula VALUES ({0}, '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}')".format(cod_matricula, cod_tipo_matricula, cod_instituicao, nome_matricula, dt_matricula, sexo, dt_nscm, email_matricula, endereco_matricula, CPF, dt_termino)
+                    dt_matricula = str(datetime.date.today())
+
+                    if dt_nscm != 'NULL':
+                        dt_nscm = "'{0}'".format(dt_nscm)
+
+                    if email_matricula != 'NULL':
+                        email_matricula = "'{0}'".format(email_matricula)
+
+                    if endereco_matricula != 'NULL':
+                        endereco_matricula = "'{0}'".format(endereco_matricula)
+
+                    insert_mat = '''INSERT INTO matricula (cod_matricula, cod_tipo_matricula, cod_instituicao, nome_matricula, dt_matricula, sexo, dt_nscm, email_matricula, endereco_matricula, CPF) 
+                                    VALUES ({0}, {1}, {2}, '{3}', '{4}', '{5}', {6}, {7}, {8}, {9})'''.format(cod_matricula, cod_tipo_matricula, cod_instituicao, nome_matricula, dt_matricula, sexo, dt_nscm, email_matricula, endereco_matricula, CPF)
                     cur.execute(insert_mat)
-                    retorno = 'Matrícula Efetuado'
+                    retorno = 'Matrícula Efetuada'
 
     except Exception as error:
         print(error)
@@ -71,6 +129,7 @@ def registra_livro(isbn, titulo, dt_publ, editora, edicao = 'NULL', local_publ =
                 else:
                     if subtitulo != 'NULL':
                         subtitulo = "'{0}'".format(subtitulo)
+
                     if local_publ != 'NULL':
                         local_publ = "'{0}'".format(local_publ)
                     
