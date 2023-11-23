@@ -2,20 +2,51 @@ import psycopg2
 import datetime
 
 # Registro de Exemplar
-'''
-def nome_da_função (coluna1, coluna2, ..., colunaN):
-    conecta no banco
-        realiza o insert
-    desconecta do banco
-'''
+def registra_exemplar (isbn, dt_aquisicao, cod_estante, cod_situacao, estado_exempl):
+    retorno = None
+    # Conecta com o banco
+    con = None
+    try:
+        with psycopg2.connect(
+                        database = "BiblioTEC", 
+                        user = "postgres", 
+                        password = "123456", 
+                        host = "localhost",
+                        port = "5432") as con:
+        
+            with con.cursor() as cur:
+                # Seleciona os codigos de autor existentes e coloca em uma lista
+                select_exe = "SELECT isbn FROM exemplar"
+                cur.execute(select_exe)
+                lista_exe = []
+                for value in cur.fetchall():
+                    lista_exe += value
+
+                # Checa se o cod_autor existe na lista
+                if isbn in lista_exe:
+                    retorno = 'O livro já está cadastrado'
+                else:
+                    # Realiza o cadastro
+                    insert_exe = "INSERT INTO exemplar VALUES ({0}, '{1}', '{2}', '{3}', '{4}', '{5}')".format(isbn, dt_aquisicao, cod_estante, cod_situacao, estado_exempl)
+                    cur.execute(insert_exe)
+                    retorno = 'Cadastro Efetuado'
+
+    except Exception as error:
+        print(error)
+    finally:
+        if con is not None:
+            con.close()
+    if retorno:
+        return retorno
+    
+
+
 # Registro de Matricula
 
 
 
 
 # Registro de Livro
-import psycopg2
-
 def registra_livro(isbn, titulo, dt_publ, editora, edicao = 'NULL', local_publ = 'NULL', subtitulo = 'NULL'):
     con = None
     retorne = None
