@@ -66,34 +66,16 @@ def display_operacoes_bar():
 
         elif evento == "-RESERVAR-":
             retorno = fo.reserva(valores['cod_mat'], valores['cod_exemp'])
-            if retorno == 1:
-                resultado = "Reserva Efetuada."
-            elif retorno == 2:
-                resultado = "O exemplar está disponível."
-            sg.popup(resultado)
+            sg.popup(retorno)
 
         elif evento == "-EMPRESTAR-":
             retorno = fo.emprestimo(valores['cod_mat'], valores['cod_exemp'])
-            if retorno == 1:
-                resultado = "Empréstimo Efetuado."
-            elif retorno == 2:
-                resultado = "O exemplar está reservado."
-            elif retorno == 3:
-                resultado = "O exemplar está emprestado."
-            sg.popup(resultado)
+            sg.popup(retorno)
 
         elif evento == "-DEVOLVER-":
             retorno = fo.devolucao(valores['cod_exemp'])
-            if retorno == 1:
-                resultado = "Devolução Efetuada."
-            elif retorno == 2:
-                resultado = "O exemplar está reservado."
-            elif retorno == 3:
-                resultado = "Devolução Efetuada.\nO exemplar não está reservado."
-            elif retorno == 4:
-                resultado = "Devolução Efetuada.\nO exemplar não está emprestado."
-            print(resultado)
-            sg.popup(resultado)
+            sg.popup(retorno)
+
         elif evento in ('Empréstimo', 'Devolução', 'Reserva'):
             sg.popup("Já está aberto")
 
