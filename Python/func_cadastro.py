@@ -69,9 +69,9 @@ def registra_livro(isbn, titulo, dt_publ, editora, edicao = 'NULL', local_publ =
                 if isbn in lista_livro:
                     retorne = 'O Código ISBN já está cadastrado'
                 else:
-                    if subtitulo:
+                    if subtitulo != 'NULL':
                         subtitulo = "'{0}'".format(subtitulo)
-                    if local_publ:
+                    if local_publ != 'NULL':
                         local_publ = "'{0}'".format(local_publ)
                     
                     insert_livro = '''
@@ -155,4 +155,4 @@ finally:
 '''
 
 if __name__ == "__main__":
-    registra_livro(6589132683, 'O Caminho dos Reis', '2010-8-31', 'Trama')
+    registra_livro(6589132684, 'O Caminho dos Reis', '2010-8-31', 'Trama')

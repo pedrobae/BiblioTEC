@@ -40,3 +40,5 @@ SELECT mat.nome_matricula, mat.cod_tipo_matricula, ex.cod_exemplar, liv.titulo, 
         ON (ex.ISBN = liv.ISBN )
     WHERE emp.cod_matricula ='INSERIR CODIGO DE MATRICULA'
     ORDER BY dt_emprestimo DESC
+
+SELECT * FROM livro
