@@ -16,7 +16,7 @@ def nome_da_função (coluna1, coluna2, ..., colunaN):
 # Registro de Livro
 import psycopg2
 
-def registro_livro():
+def registra_livro(isbn, titulo, dt_publ, editora, edicao = 'NULL', local_publ = 'NULL', subtitulo = 'NULL'):
     con = None
     retorne = None
     try:
@@ -28,11 +28,22 @@ def registro_livro():
             port="5432"
         ) as con:
             with con.cursor() as cur:
-                insert_livro = '''
-                    INSERT INTO livros (isbn, titulo, subtitulo, dt_publ, editora, edicao, local_publ)
-                    VALUES (({0}, '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}')".format(isbn, titulo, subtitulo, dt_publ, editora, edicao, local_publ))'''
 
-                cur.execute(insert_livro)
+                select_livro = "SELECT isbn FROM livro"
+                cur.execute(select_livro)
+                lista_livro = []
+                for value in cur.fetchall():
+                    lista_livro += value
+
+                if isbn in lista_livro:
+                    retorne = 'O Código ISBN já está cadastrado'
+                else:
+                    insert_livro = '''
+                        INSERT INTO livro (isbn, titulo, subtitulo, dt_publ, editora, edicao, local_publ)
+                        VALUES ({0}, '{1}', '{2}', '{3}', '{4}', {5}, '{6}')'''.format(isbn, titulo, subtitulo, dt_publ, editora, edicao, local_publ)
+
+                    cur.execute(insert_livro)
+                    retorne = 'Cadastro Efetuado'
 
     except Exception as error:
         print(error)
@@ -108,4 +119,4 @@ finally:
 '''
 
 if __name__ == "__main__":
-    registra_autor(30, 'Brandon Sanderson', 'Estados Unidos')
+    registra_livro(6589132682, 'O caminho dos Reis', '2010-8-31', 'Trama')
