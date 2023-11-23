@@ -37,7 +37,7 @@ def emprestimo(cod_mat, cod_exemp, today = date.today()):
                         cur.execute(update_exemp)
                         
                         # print("Empréstimo Efetuado")
-                        retorno = 1
+                        retorno = "Empréstimo Efetuado."
                         
                     elif int(cod_mat) == int(queue[0][1]):
                         insert_emp = "INSERT INTO emprestimo (cod_matricula, cod_exemplar, dt_emprestimo) VALUES ({0}, {1}, '{2}')".format(cod_mat, cod_exemp, str(today))
@@ -58,14 +58,14 @@ def emprestimo(cod_mat, cod_exemp, today = date.today()):
                             cur.execute(update_dt_prev)
 
                         # print("Empréstimo Efetuado")
-                        retorno = 1
+                        retorno = "Empréstimo Efetuado."
 
                     else:
                         # print("O exemplar está reservado.")
-                        retorno = 2
+                        retorno = "O exemplar está reservado."
                 else:
                     # print("O exemplar está emprestado, realize a devolução primeiro.")
-                    retorno = 3
+                    retorno = "O exemplar está emprestado."
         
     except Exception as error:
         print(error)
@@ -106,11 +106,11 @@ def reserva(cod_mat, cod_exemp, today = date.today(), now = datetime.now()):
                     cur.execute(insert_script)
 
                     # print("Reserva Efetuada")
-                    retorno = 1
+                    retorno = ("Reserva Efetuada.\nA data prevista de Empréstimo é ", str(delay))
                     
                 else:
                     # print("O exemplar está disponível.")
-                    retorno = 2
+                    retorno = "O exemplar está disponível."
             
     except Exception as error:
         print(error)
@@ -147,9 +147,6 @@ def devolucao(cod_exemp, today = date.today(), now = datetime.now()):
 
                     update_exemp = "UPDATE exemplar SET cod_situacao = 1 WHERE cod_exemplar = {0}".format(cod_exemp)
                     cur.execute(update_exemp)
-
-                    # print("Devolução Efetuada")
-                    retorno = 1
                     
                     select_res = "SELECT * FROM reserva r WHERE r.cod_exemplar = {0} AND r.situacao_res = 'ATIVA' ORDER BY r.dt_reserva ASC".format(str(cod_exemp))
                     cur.execute(select_res)
@@ -163,15 +160,15 @@ def devolucao(cod_exemp, today = date.today(), now = datetime.now()):
                         matricula_reserva = cur.fetchall()
                         
                         # print("O exemplar está reservado por", matricula_reserva[0][3], "- e-mail: ", matricula_reserva[0][7], "- Codigo de Matricula: ", matricula_reserva[0][0])
-                        retorno = 2
+                        retorno = ("Devolução efetuada.\nO exemplar está reservado por", matricula_reserva[0][3], "- e-mail: ", matricula_reserva[0][7], "- Codigo de Matricula: ", matricula_reserva[0][0])
                         
                     else:
                         # print("O exemplar não está reservado.")
-                        retorno = 3
+                        retorno = "Devolução efetuada.\nO exemplar não está reservado."
                         
                 else:
                     # print("O exemplar não está emprestado.")
-                    retorno = 4
+                    retorno = "O exemplar não está emprestado."
                     
     except Exception as error:
         print(error)
