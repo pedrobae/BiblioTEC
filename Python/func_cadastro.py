@@ -14,7 +14,34 @@ def nome_da_função (coluna1, coluna2, ..., colunaN):
 
 
 # Registro de Livro
+import psycopg2
 
+def registro_livro():
+    con = None
+    retorne = None
+    try:
+        with psycopg2.connect(
+            database="BiblioTEC",
+            user="postgres",
+            password="123456",
+            host="localhost",
+            port="5432"
+        ) as con:
+            with con.cursor() as cur:
+                insert_livro = '''
+                    INSERT INTO livros (isbn, titulo, subtitulo, dt_publ, editora, edicao, local_publ)
+                    VALUES (({0}, '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}')".format(isbn, titulo, subtitulo, dt_publ, editora, edicao, local_publ))'''
+
+                cur.execute(insert_livro)
+
+    except Exception as error:
+        print(error)
+    finally:
+        if con is not None:
+            con.close()
+
+    if retorne:
+        return retorne
 
 
 
