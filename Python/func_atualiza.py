@@ -23,15 +23,15 @@ def atualiza_livro(ISBN, titulo = None, subtitulo = None, dt_publ = None, editor
                 if ISBN in lista_ISBN:
                     # Atualizo os valores passados
                     if titulo:
-                        update_tit = "UPDATE livro SET titulo = {0} WHERE ISBN = {1}".format(titulo, ISBN)
+                        update_tit = "UPDATE livro SET titulo = '{0}' WHERE ISBN = {1}".format(titulo, ISBN)
                         cur.execute(update_tit)
                         retorno = "Título atualizado com sucesso."
                     if subtitulo:
-                        update_subt = "UPDATE livro SET subtitulo = {0} WHERE ISBN = {1}".format(subtitulo, ISBN)
+                        update_subt = "UPDATE livro SET subtitulo = '{0}' WHERE ISBN = {1}".format(subtitulo, ISBN)
                         cur.execute(update_subt)
                         retorno = "Subtítulo atualizado com sucesso."
                     if dt_publ:
-                        update_dtp = "UPDATE livro SET dt_publ = {0} WHERE ISBN = {1}".format(dt_publ, ISBN)
+                        update_dtp = "UPDATE livro SET dt_publ = '{0}' WHERE ISBN = {1}".format(dt_publ, ISBN)
                         cur.execute(update_dtp)
                         retorno = "Data de publicação atualizada com sucesso."
                     if editora:
@@ -43,7 +43,7 @@ def atualiza_livro(ISBN, titulo = None, subtitulo = None, dt_publ = None, editor
                         cur.execute(update_edic)
                         retorno = "Edição atualizada com sucesso."
                     if local_publ:
-                        update_local = "UPDATE livro SET local_publ = {0} WHERE ISBN = {1}".format(local_publ, ISBN)
+                        update_local = "UPDATE livro SET local_publ = '{0}' WHERE ISBN = {1}".format(local_publ, ISBN)
                         cur.execute(update_local)
                         retorno = "Local de publicação atualizado com sucesso."
                     
@@ -56,7 +56,6 @@ def atualiza_livro(ISBN, titulo = None, subtitulo = None, dt_publ = None, editor
         if con is not None:
             con.close()
             
-    
     return retorno
 
 
@@ -91,7 +90,7 @@ def atualiza_exemplar(cod_exemplar, cod_estante = None, cod_situacao = None, est
                         cur.execute(update_cod_situacao)
                         retorno = "Situação do exemplar atualizada com sucesso."
                     if estado_exemplar:
-                        update_estado_exemplar = "UPDATE exemplar SET estado_exemplar = {0} WHERE cod_exemplar = {1}".format(estado_exemplar, cod_exemplar)
+                        update_estado_exemplar = "UPDATE exemplar SET estado_exemplar = '{0}' WHERE cod_exemplar = {1}".format(estado_exemplar, cod_exemplar)
                         cur.execute(update_estado_exemplar)
                         retorno = "Estado do exemplar atualizado com sucesso."
                 else:
@@ -103,7 +102,6 @@ def atualiza_exemplar(cod_exemplar, cod_estante = None, cod_situacao = None, est
         if con is not None:
             con.close()
             
-    
     return retorno
 
 
@@ -132,19 +130,19 @@ def atualiza_matricula(cod_matricula, nome_matricula = None, sexo = None, dt_nsc
                 if cod_matricula in lista_cod_matricula:
                     # Atualizo os valores passados
                     if nome_matricula:
-                        update_nome_matricula = "UPDATE matricula SET nome_matricula = {0} WHERE cod_matricula = {1}".format(nome_matricula, cod_matricula)
+                        update_nome_matricula = "UPDATE matricula SET nome_matricula = '{0}' WHERE cod_matricula = {1}".format(nome_matricula, cod_matricula)
                         cur.execute(update_nome_matricula)
                         retorno = "Nome atualizado com sucesso."
                     if sexo:
-                        update_sexo = "UPDATE matricula SET sexo = {0} WHERE cod_matricula = {1}".format(sexo, cod_matricula)
+                        update_sexo = "UPDATE matricula SET sexo = '{0}' WHERE cod_matricula = {1}".format(sexo, cod_matricula)
                         cur.execute(update_sexo)
                         retorno = "Gênero atualizado com sucesso."
                     if dt_nscm:
-                        update_dtn = "UPDATE matricula SET dt_nscm = {0} WHERE cod_matricula = {1}".format(dt_nscm, cod_matricula)
+                        update_dtn = "UPDATE matricula SET dt_nscm = '{0}' WHERE cod_matricula = {1}".format(dt_nscm, cod_matricula)
                         cur.execute(update_dtn)
                         retorno = "Data de nascimento atualizada com sucesso."
                     if email_matricula:
-                        update_email = "UPDATE matricula SET email_matricula = {0} WHERE cod_matricula = {1}".format(email_matricula, cod_matricula)
+                        update_email = "UPDATE matricula SET email_matricula = '{0}' WHERE cod_matricula = {1}".format(email_matricula, cod_matricula)
                         cur.execute(update_email)
                         retorno = "E-mail atualizado com sucesso."
                     if CPF:
@@ -152,7 +150,7 @@ def atualiza_matricula(cod_matricula, nome_matricula = None, sexo = None, dt_nsc
                         cur.execute(update_cpf)
                         retorno = "CPF atualizado com sucesso."
                     if dt_termino:
-                        update_dtt = "UPDATE matricula SET dt_termino = {0} WHERE cod_matricula = {1}".format(dt_termino, cod_matricula)
+                        update_dtt = "UPDATE matricula SET dt_termino = '{0}' WHERE cod_matricula = {1}".format(dt_termino, cod_matricula)
                         cur.execute(update_dtt)
                         retorno = "Data de término atualizada com sucesso."
                     
@@ -165,7 +163,6 @@ def atualiza_matricula(cod_matricula, nome_matricula = None, sexo = None, dt_nsc
         if con is not None:
             con.close()
             
-    
     return retorno
 
 
@@ -192,11 +189,11 @@ def atualiza_autor(cod_autor, nome_autor = None, pais_autor = None):
                 if cod_autor in lista_autor:
                     # Atualizo os valores passados
                     if nome_autor:
-                        update_nome_autor = "UPDATE autor SET nome_autor = {0} WHERE cod_autor = {1}".format(nome_autor, cod_autor)
+                        update_nome_autor = "UPDATE autor SET nome_autor = '{0}' WHERE cod_autor = {1}".format(nome_autor, cod_autor)
                         cur.execute(update_nome_autor)
                         retorno = "Nome do autor atualizado com sucesso."
                     if pais_autor:
-                        update_pais_autor = "UPDATE autor SET pais_autor = {0} WHERE cod_autor = {1}".format(nome_autor, cod_autor)
+                        update_pais_autor = "UPDATE autor SET pais_autor = '{0}' WHERE cod_autor = {1}".format(nome_autor, cod_autor)
                         cur.execute(update_pais_autor)
                         retorno = "País de origem do autor atualizado com sucesso."
 
@@ -210,7 +207,4 @@ def atualiza_autor(cod_autor, nome_autor = None, pais_autor = None):
         if con is not None:
             con.close()
             
-    
     return retorno
-
-
