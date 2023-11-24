@@ -1,6 +1,5 @@
 import PySimpleGUI as sg
 import window_acervo as wa
-# import display_cadastro as dc
 import func_operacoes as fo
 
 def menu_bar():
