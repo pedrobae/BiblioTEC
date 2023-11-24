@@ -1,9 +1,10 @@
 import PySimpleGUI as sg
 import func_operacoes as fo
 import window_acervo as wa
+import display_menu as dm
 
 def window_operacoes():
-    column_1 = [
+    culuna_ope = [
         [
             sg.Text('Código de Matrícula:', size = (17)),
             sg.InputText(size = (25), key = 'cod_mat'),
@@ -23,11 +24,7 @@ def window_operacoes():
         ]
     ]
 
-    column_2 = [
-        
-    ]
-
-    column_3 = [
+    coluna_acervo = [
         [
             sg.Text('ACERVO', size = (20))
         ],
@@ -46,12 +43,13 @@ def window_operacoes():
     ]
 
     layout = [
-        [sg.Column(column_1),sg.Column(column_2, s=(1,180), background_color='black'),sg.Column(column_3)]
+        [sg.Column(culuna_ope),sg.Column([], s=(1,180), background_color='black'),sg.Column(coluna_acervo)]
     ]
 
     return sg.Window('Operações', layout, size = (500, 180), finalize=True)
 
 def display_operacoes():
+    open = None
     window_ope = window_operacoes()
     window_disp, window_empr, window_manu, window_perd = None, None, None, None
 
@@ -93,8 +91,8 @@ def display_operacoes():
     #fecho a janela
     window.close()
 
-#    if open == 'menu':
-#        display_menu
+    if open == 'menu':
+        dm.display_menu()
 
 if __name__ == "__main__":
     display_operacoes()
