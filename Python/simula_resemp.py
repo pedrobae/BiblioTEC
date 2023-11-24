@@ -202,5 +202,3 @@ def pop_bibliotec(dt_ini, dt_fim):
             
             n -= 1
             ocurrence(data, hora)
-
-pop_bibliotec(date(2021, 1, 1), date(2023, 12, 31))
