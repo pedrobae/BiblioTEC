@@ -148,7 +148,7 @@ def acervo_liv():
             
             with con.cursor() as cur:
 
-                select_acerv =  ''' SELECT *
+                select_acerv =  ''' SELECT ISBN, Titulo, Subtitulo, dt_publ, editora, local_publ
                                         FROM livro
                                         ORDER BY titulo'''
                 
