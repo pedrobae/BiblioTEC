@@ -132,3 +132,97 @@ def acervo_manu():
             con.close()
 
     return acervo
+
+
+
+# Acervo de Livros
+def acervo_liv():
+    con = None
+    try:
+        with psycopg2.connect(
+                        database = "BiblioTEC", 
+                        user = "postgres", 
+                        password = "123456", 
+                        host = "localhost",
+                        port = "5432") as con:
+            
+            with con.cursor() as cur:
+
+                select_acerv =  ''' SELECT *
+                                        FROM livro
+                                        ORDER BY titulo'''
+                
+                cur.execute(select_acerv)
+
+                acervo = cur.fetchall()
+
+    except Exception as error:
+        print(error)
+    finally:
+        if con is not None:
+            con.close()
+
+    return acervo
+
+
+
+# Acervo de Matrícula
+def acervo_mat():
+    con = None
+    try:
+        with psycopg2.connect(
+                        database = "BiblioTEC", 
+                        user = "postgres", 
+                        password = "123456", 
+                        host = "localhost",
+                        port = "5432") as con:
+            
+            with con.cursor() as cur:
+
+                select_acerv =  ''' SELECT m.cod_matricula, tm.descr_matricula, m.nome_matricula, m.sexo, m.dt_nscm, m.dt_termino
+                                        FROM matricula m
+                                            JOIN tipo_matricula tm      ON m.cod_tipo_matricula = tm.cod_tipo_matricula
+                                        ORDER BY nome_matricula '''
+                
+                cur.execute(select_acerv)
+
+                acervo = cur.fetchall()
+
+    except Exception as error:
+        print(error)
+    finally:
+        if con is not None:
+            con.close()
+
+    return acervo
+
+
+
+# Acervo de Autor
+def acervo_aut():
+    con = None
+    try:
+        with psycopg2.connect(
+                        database = "BiblioTEC", 
+                        user = "postgres", 
+                        password = "123456", 
+                        host = "localhost",
+                        port = "5432") as con:
+            
+            with con.cursor() as cur:
+
+                select_acerv =  ''' SELECT *
+                                        FROM autor
+                                        ORDER BY nome_autor '''
+                
+                cur.execute(select_acerv)
+
+                acervo = cur.fetchall()
+
+    except Exception as error:
+        print(error)
+    finally:
+        if con is not None:
+            con.close()
+
+    return acervo
