@@ -28,9 +28,9 @@ def window_menu():
     ]
 
     layout = [
-        [sg.Image("logo.png", expand_x=True, expand_y=True)],
+        [sg.Image(source = 'Python/images/logo.png', expand_x=True, expand_y=True, s= (200, 180),)],
         [sg.HorizontalSeparator(color='#b948b4')],
-        [sg.Column(coluna_cad, s=(200, 180)), sg.Column([], s=(2,180), background_color='#b948b4'), sg.Column(coluna_oper, s=(200, 180)), sg.Column([], s=(2,180), background_color='#b948b4'), sg.Column(coluna_acrv,s=(182, 180))]
+        [sg.Column(coluna_cad, s=(200, 180)), sg.Column([], s=(1,180), background_color='#b948b4'), sg.Column(coluna_oper, s=(200, 180)), sg.Column([], s=(1,180), background_color='#b948b4'), sg.Column(coluna_acrv,s=(182, 180))]
     ]
 
     return sg.Window('Menu', layout, size= (665, 400), finalize=True, font='Corbel')
