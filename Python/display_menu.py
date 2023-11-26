@@ -2,6 +2,7 @@ import PySimpleGUI as sg
 import display_cadastro as dc
 import display_operacoes as do
 import window_acervo as wa
+import theme
 
 def window_menu():
     
@@ -28,10 +29,11 @@ def window_menu():
 
     layout = [
 #       [sg.Image(source=menu_imagem)],
-        [sg.Column(coluna_cad, s=(182, 180)), sg.Column([], s=(1,180), background_color='black'), sg.Column(coluna_oper, s=(182, 180)), sg.Column([], s=(1,180), background_color='black'), sg.Column(coluna_acrv,s=(182, 180))]
+        [sg.HorizontalSeparator(color='#b948b4')],
+        [sg.Column(coluna_cad, s=(200, 180)), sg.Column([], s=(2,180), background_color='#b948b4'), sg.Column(coluna_oper, s=(200, 180)), sg.Column([], s=(2,180), background_color='#b948b4'), sg.Column(coluna_acrv,s=(182, 180))]
     ]
 
-    return sg.Window('Menu', layout, size= (620, 400), finalize=True)
+    return sg.Window('Menu', layout, size= (665, 400), finalize=True, font='Corbel')
 
 
 def display_menu():
@@ -107,4 +109,5 @@ def display_menu():
             
 
 if __name__ == "__main__":
+    theme.biblioTEC()
     display_menu()
