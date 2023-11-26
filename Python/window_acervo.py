@@ -1,5 +1,5 @@
 import PySimpleGUI as sg
-import func_acervo as fa
+from Funcoes import func_acervo as fa
 
 def wind_disp():
     acervo = fa.acervo_disp()

@@ -1,7 +1,7 @@
 import psycopg2
 import random
 from datetime import timedelta, date, datetime, time
-from func_operacoes import reserva, emprestimo, devolucao
+from Funcoes import func_operacoes as fo
 
 # Data - Maior ocorrencias para datas mais recentes
 def timeline_ocu(dt_ini, dt_fim):
@@ -47,7 +47,7 @@ def ocurrence(data, hora):
 
                 # Livros emprestados viram reservas
                     if exemp[1] == 2:
-                        retorno = reserva(mat[0], exemp[0], data, hora)
+                        retorno = fo.reserva(mat[0], exemp[0], data, hora)
                         print(retorno)
                         
                         
@@ -58,12 +58,12 @@ def ocurrence(data, hora):
                         reservas = cur.fetchall()
                         
                         if reservas == []:
-                            retorno = emprestimo(mat[0], exemp[0], data)
+                            retorno = fo.emprestimo(mat[0], exemp[0], data)
                             print(retorno)
                         
                         else:
                             mat_res = reservas[0]
-                            retorno = emprestimo(mat_res[0], exemp[0], data)
+                            retorno = fo.emprestimo(mat_res[0], exemp[0], data)
                             print(retorno)
     except Exception as error:
         print(error)
@@ -104,7 +104,7 @@ def update_dev(data):
                         
                     flag_dev = random.choices([0, 1], weights = [1 - prob_dev, prob_dev])
                     if flag_dev == [1]:
-                        retorno = devolucao(emp[0], data, hora)
+                        retorno = fo.devolucao(emp[0], data, hora)
                         print(retorno)
 
                         # Checar as reservas do exemplar
@@ -116,7 +116,7 @@ def update_dev(data):
                             prob_emp = 0.8
                             flag_emp = random.choices([0, 1], weights = [1 - prob_emp, prob_emp])
                             if flag_emp == [1]:                                                           
-                                retorno = emprestimo(res[0][0], emp[0], data)
+                                retorno = fo.emprestimo(res[0][0], emp[0], data)
                                 print(retorno)
     except Exception as error:
         print(error)

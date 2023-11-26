@@ -1,6 +1,6 @@
 import PySimpleGUI as sg
-import func_acervo as fa
-import func_cadastro as fc
+from Funcoes import func_acervo as fa
+from Funcoes import func_cadastro as fc
 import display_menu as dm
 
 # Função que gera a janela das matriculas

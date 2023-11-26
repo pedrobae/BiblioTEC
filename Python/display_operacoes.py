@@ -1,5 +1,5 @@
 import PySimpleGUI as sg
-import func_operacoes as fo
+from Funcoes import func_operacoes as fo
 import window_acervo as wa
 import display_menu as dm
 import theme

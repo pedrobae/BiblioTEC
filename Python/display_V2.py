@@ -1,6 +1,6 @@
 import PySimpleGUI as sg
 import window_acervo as wa
-import func_operacoes as fo
+from Funcoes import func_operacoes as fo
 
 def menu_bar():
     menu_def = [
