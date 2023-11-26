@@ -8,7 +8,7 @@ def biblioTEC():
         'TEXT': 'White',
         'INPUT': 'White',
         'TEXT_INPUT': 'Black',
-        'SCROLL': '#99CC99',
+        'SCROLL': '#b948b4',
         'BUTTON': ('Black', 'White'),
         'PROGRESS': ('#D1826B', '#CC8019'),
         'BORDER': 1, 'SLIDER_DEPTH': 0, 
