@@ -29,17 +29,18 @@ def window_matricula_bar():
         [ menu_bar() ],
         [ sg.Text ('Código de Matrícula:',  size = (17)),   sg.InputText(size = (25), key = 'cod_mat')      ],
         [ sg.Text ('Tipo Matrícula:',       size = (17)),   sg.InputText(size = (25), key = 'tipo_mat')     ],
-        [ sg.Text ('Instituicao',           size = (17)),   sg.InputText(size = (25), key = 'intituicao')   ],
-        [ sg.Text ('Nome',                  size = (17)),   sg.InputText(size = (25), key = 'nome')         ],
-        [ sg.Text ('Gênero',                size = (17)),   sg.InputText(size = (25), key = 'genero')       ],
-        [ sg.Text ('Data de Nascimento',    size = (17)),   sg.InputText(size = (25), key = 'dt_nscm')      ],
-        [ sg.Text ('E-mail',                size = (17)),   sg.InputText(size = (25), key = 'e-mail')       ],
-        [ sg.Text ('Endereço',              size = (17)),   sg.InputText(size = (25), key = 'endereco')     ],
-        [ sg.Text ('CPF',                   size = (17)),   sg.InputText(size = (25), key = 'cpf')          ],
-        [ sg.Text ('Data de Término',       size = (17)),   sg.InputText(size = (25), key = 'dt_termino')   ]
+        [ sg.Text ('Instituicao: ',         size = (17)),   sg.InputText(size = (25), key = 'intituicao')   ],
+        [ sg.Text ('Nome: ',                size = (17)),   sg.InputText(size = (25), key = 'nome')         ],
+        [ sg.Text ('Gênero: ',              size = (17)),   sg.InputText(size = (25), key = 'genero')       ],
+        [ sg.Text ('Data de Nascimento: ',  size = (17)),   sg.InputText(size = (25), key = 'dt_nscm')      ],
+        [ sg.Text ('E-mail: ',              size = (17)),   sg.InputText(size = (25), key = 'e-mail')       ],
+        [ sg.Text ('Endereço: ',            size = (17)),   sg.InputText(size = (25), key = 'endereco')     ],
+        [ sg.Text ('CPF: ',                 size = (17)),   sg.InputText(size = (25), key = 'cpf')          ],
+        [ sg.Text ('Data de Término: ',     size = (17)),   sg.InputText(size = (25), key = 'dt_termino')   ],
+        [ sg.Button ('Cadastrar', s= (17), key= '-CAD-'),   sg.Button('Atualizar', size=(17), key= '-ATT-') ]
     ]
 
-    return sg.Window('Matrícula', layout, size = (300, 400), finalize=True)
+    return sg.Window('Matrícula', layout, size = (500, 330), finalize=True)
 
 
 def display_operacoes_bar():
@@ -71,8 +72,19 @@ def display_operacoes_bar():
             wa.wind_perd()
 
         elif evento == 'Matricula':
-            wa.wind_manu()
             open = 'cad_mat'
+            break
+
+        elif evento == 'Exemplar':
+            open = 'cad_exemp'
+            break
+        
+        elif evento == 'Autor':
+            open = 'cad_aut'
+            break
+
+        elif evento == 'Livro':
+            open = 'cad_liv'
             break
 
         elif evento == "-RESERVAR-":
@@ -95,6 +107,15 @@ def display_operacoes_bar():
     if open == 'cad_mat':
         display_matricula_bar()
 
+    elif open == 'cad_exemp':
+        display_exemplar_bar()
+    
+    elif open == 'cad_liv':
+        display_livro_bar()
+    
+    elif open == 'cad_aut':
+        display_autor_bar()
+
 
 def display_matricula_bar():
     open = None
@@ -111,8 +132,53 @@ def display_matricula_bar():
 
             elif window == window_acervo_mat:
                 window_acervo_mat = None
+        
+        elif evento == 'Disponível':
+            wa.wind_disp()
 
+        elif evento == 'Emprestado':
+            wa.wind_empr()
+
+        elif evento == 'Manutenção':
+            wa.wind_manu()
+        
+        elif evento == 'Perdido':
+            wa.wind_perd()
+
+        elif evento == 'Matricula':
+            sg.popup("Já está aberto")
+            break
+
+        elif evento == 'Exemplar':
+            open = 'cad_exemp'
+            break
+        
+        elif evento == 'Autor':
+            open = 'cad_aut'
+            break
+
+        elif evento == 'Livro':
+            open = 'cad_liv'
+            break
+
+        elif evento in ('Empréstimo', 'Devolução', 'Reserva'):
+            open = 'opera'
+            break
+
+    window.close()
+
+    if open == 'opera':
+        display_operacoes_bar()
+
+    elif open == 'cad_exemp':
+        display_exemplar_bar()
+    
+    elif open == 'cad_liv':
+        display_livro_bar()
+    
+    elif open == 'cad_aut':
+        display_autor_bar()
 
 
 if __name__ == "__main__":
-    display_operacoes_bar()
+    display_matricula_bar()
