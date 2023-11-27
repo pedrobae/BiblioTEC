@@ -1,5 +1,5 @@
 
-26/11 - Verificar se vai inserir assim ou alerar cod_exemplar 
+-- 26/11 - Verificar se vai inserir assim ou alerar cod_exemplar 
 
 
 INSERT INTO exemplar (cod_exemplar, isbn, dt_aquisicao, cod_estante, cod_situacao, estado_exemplar)
