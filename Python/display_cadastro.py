@@ -1,8 +1,9 @@
-import PySimpleGUI as sg
-from Funcoes import func_acervo as fa
-from Funcoes import func_cadastro as fc
-import display_menu as dm
+import PySimpleGUI      as sg
+import window_acervo    as wa
+import display_menu     as dm
 import theme
+
+from Funcoes import func_cadastro   as fc
 
 def window_mat():
     layout = [
@@ -54,6 +55,7 @@ def window_aut():
 
 # Função que cria o display e realiza as operações (mat)
 def display_mat():
+    open = None
     # Abro a janela
     window = window_mat()
     # Loop de leitura da tela
@@ -69,13 +71,78 @@ def display_mat():
             sg.popup(output)
         # Evento de atualizar
         elif evento == '-ATUALIZA-':
-            output2 = fc.atualiza_matricula(valores['-COD_MAT-'], valores['-TIPO_MAT-'], valores ['-INST_MAT-'], valores ['-SEXO_MAT-'], valores ['-NASC_MAT-'], valores ['-EMAIL_MAT-'], valores ['-ENDE_MAT-'], valores ['-CPF_MAT-'])
-            sg.popup(output2)
+            output = fc.atualiza_matricula(valores['-COD_MAT-'], valores['-TIPO_MAT-'], valores ['-INST_MAT-'], valores ['-SEXO_MAT-'], valores ['-NASC_MAT-'], valores ['-EMAIL_MAT-'], valores ['-ENDE_MAT-'], valores ['-CPF_MAT-'])
+            sg.popup(output)
     # Fechar janela
     window.close()
     if open == 'menu':
         dm.display_menu()
 
+
+
+# Função que cria o display e realiza as operações (exemplar)
+def display_exemp():
+    open = None
+    window_ex = window_exemp()
+    window_disp, window_empr, window_manu, window_perd = None, None, None, None
+
+    while True:
+        window, evento, valores = sg.read_all_windows()
+
+        if evento == sg.WIN_CLOSED:
+            window.close()
+            if window == window_ex:
+                open = 'menu'
+                break
+            elif window == window_disp:
+                window_disp = None
+            elif window == window_empr:
+                window_empr = None
+            elif window == window_manu:
+                window_manu = None
+            elif window == window_perd:
+                window_perd = None
+
+        elif evento == "-ACERVO_DISP-" and not window_disp:
+            window_disp = wa.wind_disp()
+        elif evento == "-ACERVO_EMPR-" and not window_empr:
+            window_empr = wa.wind_empr()
+        elif evento == "-ACERVO_MANU-" and not window_manu:
+            window_manu = wa.wind_manu()
+        elif evento == "-ACERVO_PERD-" and not window_perd:
+            window_perd = wa.wind_perd()
+
+    window.close()
+    if open == 'menu':
+        dm.display_menu()
+
+
+# Função que cria o display e realiza as operações (livro)
+def display_liv():
+    window = window_liv()
+
+    while True:
+
+    window.close()
+    if open == 'menu':
+        dm.display_menu()
+
+
+
+# Função que cria o display e realiza as operações (autor)
+def display_aut():
+
+    window = window_aut()
+
+    while True:
+
+    window.close()
+    if open == 'menu':
+        dm.display_menu()
+
+
+
+#--------------------------------------------#
 if __name__ == "__main__":
     theme.biblioTEC()
     display_mat()
