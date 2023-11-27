@@ -5,7 +5,6 @@ import display_menu as dm
 import theme
 
 def window_mat():
-    # Layout
     layout = [
         [sg.Text("Código de Matricula: ", size = (20)), sg.Input(size=(25, 1), key = '-COD_MAT-')],
         [sg.Text("Tipo de Matrícula: ", size = (20)), sg.Input(size=(25, 1), key = '-TIPO_MAT-')],
@@ -20,35 +19,60 @@ def window_mat():
     ]
     # Gera a Janela e retorna
     return sg.Window(title= "Matrícula", layout = layout, size = (425, 300), font = 'Corbel')
-    
+
+
+
+# Cria a janela do exemplar (precisa colocar os botões do acervo)
+def window_exemp():
+    layout = [
+        []
+    ]
+
+    return sg.Window(title= "Exemplar", layout = layout, font = 'Corbel')
+
+
+
+# Cria a janela do livro
+def window_liv():
+    layout = [
+        []
+    ]
+
+    return sg.Window(title= "Livro", layout = layout, font = 'Corbel')
+
+
+
+# Cria a janela do autor
+def window_aut():
+    layout = [
+        []
+    ]
+
+    return sg.Window(title= "Autor", layout = layout, font = 'Corbel')
+
+
+
 # Função que cria o display e realiza as operações (mat)
 def display_mat():
-
     # Abro a janela
     window = window_mat()
-
     # Loop de leitura da tela
     while True:
         evento, valores = window.read()
-
         # Evento de fechamento de tela
         if evento == sg.WIN_CLOSED:
             open = 'menu'
             break
-
         # Evento de cadastro
         elif evento == '-CADASTRO-':
             output = fc.registra_matricula(valores['-COD_MAT-'], valores['-TIPO_MAT-'], valores ['-INST_MAT-'], valores ['-SEXO_MAT-'], valores ['-NASC_MAT-'], valores ['-EMAIL_MAT-'], valores ['-ENDE_MAT-'], valores ['-CPF_MAT-'])
             sg.popup(output)
-
         # Evento de atualizar
         elif evento == '-ATUALIZA-':
             output2 = fc.atualiza_matricula(valores['-COD_MAT-'], valores['-TIPO_MAT-'], valores ['-INST_MAT-'], valores ['-SEXO_MAT-'], valores ['-NASC_MAT-'], valores ['-EMAIL_MAT-'], valores ['-ENDE_MAT-'], valores ['-CPF_MAT-'])
             sg.popup(output2)
-
     # Fechar janela
     window.close()
-
     if open == 'menu':
         dm.display_menu()
 
