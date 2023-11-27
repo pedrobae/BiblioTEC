@@ -36,24 +36,36 @@ def window_exemp():
 # Cria a janela do livro
 def window_liv():
     layout = [
-        []
+        [sg.Text("ISBN do Livro: ", size = (20)), sg.Input(size=(25, 1), key = '-ISBN_LIV-')],
+        [sg.Text("Título: ", size = (20)), sg.Input(size=(25, 1), key = '-TITU_LIV-')],
+        [sg.Text("Subtítulo: ", size = (20)), sg.Input(size=(25, 1), key = '-SUB_LIV-')],
+        [sg.Text("Data de publicação: ", size = (20)), sg.Input(size=(25, 1), key = '-DT_PUBL_LIV-')],
+        [sg.Text("Editora: ", size = (20)), sg.Input(size=(25, 1), key = '-EDIT_LIV-')],
+        [sg.Text("Edição: ", size = (20)), sg.Input(size=(25, 1), key = '-EDIC_LIV-')],
+        [sg.Text("Local de publicação: ", size = (20)), sg.Input(size=(25, 1), key = '-LOC_PUBL_LIV-')],
+        [sg.HorizontalSeparator(pad = ((0,0), (5,5)), color = "#b948b4")],
+        [sg.Button('Cadastrar', size = (20), key = '-CADASTRO-'), sg.Button('Atualizar', size = (20), key = '-ATUALIZA-')]
     ]
 
-    return sg.Window(title= "Livro", layout = layout, font = 'Corbel')
+    return sg.Window(title= "Livro", layout = layout, size = (425, 300), font = 'Corbel')
 
 
 
 # Cria a janela do autor
 def window_aut():
     layout = [
-        []
+        [sg.Text("Código do Autor: ", size = (20)), sg.Input(size=(25, 1), key = '-COD_AUT-')],
+        [sg.Text("Nome do Autor: ", size = (20)), sg.Input(size=(25, 1), key = '-NOME_AUT-')],
+        [sg.Text("País de Origem: ", size = (20)), sg.Input(size=(25, 1), key = '-PAIS_AUT-')],
+        [sg.HorizontalSeparator(pad = ((0,0), (5,5)), color = "#b948b4")],
+        [sg.Button('Cadastrar', size = (20), key = '-CADASTRO-'), sg.Button('Atualizar', size = (20), key = '-ATUALIZA-')]
     ]
 
-    return sg.Window(title= "Autor", layout = layout, font = 'Corbel')
+    return sg.Window(title= "Autor", layout = layout, size = (425, 300), font = 'Corbel')
 
 
 
-# Função que cria o display e realiza as operações (mat)
+# Função que cria o display e realiza as operações (Matrícula)
 def display_mat():
     open = None
     # Abro a janela
@@ -117,12 +129,25 @@ def display_exemp():
         dm.display_menu()
 
 
-# Função que cria o display e realiza as operações (livro)
+# Função que cria o display e realiza as operações (Livro)
 def display_liv():
+    open = None
     window = window_liv()
-
     while True:
-
+        evento, valores = window.read()
+        # Evento de fechamento de tela
+        if evento == sg.WIN_CLOSED:
+            open = 'menu'
+            break
+        # Evento de cadastro
+        elif evento == '-CADASTRO-':
+            output = fc.registra_livro(valores['-ISBN_LIV-'], valores['-TITU_LIV-'], valores ['-SUB_LIV-'], valores ['-DT_PUBL_LIV-'], valores ['-EDIT_LIV-'], valores ['-EDIC_LIV-'], valores ['-LOC_PUBL_LIV-'])
+            sg.popup(output)
+        # Evento de atualizar
+        elif evento == '-ATUALIZA-':
+            output = fc.atualiza_livro(valores['-ISBN_LIV-'], valores['-TITU_LIV-'], valores ['-SUB_LIV-'], valores ['-DT_PUBL_LIV-'], valores ['-EDIT_LIV-'], valores ['-EDIC_LIV-'], valores ['-LOC_PUBL_LIV-'])
+            sg.popup(output)
+    # Fechar janela
     window.close()
     if open == 'menu':
         dm.display_menu()
@@ -131,14 +156,27 @@ def display_liv():
 
 # Função que cria o display e realiza as operações (autor)
 def display_aut():
-
+    open = None
     window = window_aut()
-
     while True:
-
+        evento, valores = window.read()
+        # Evento de fechamento de tela
+        if evento == sg.WIN_CLOSED:
+            open = 'menu'
+            break
+        # Evento de cadastro
+        elif evento == '-CADASTRO-':
+            output = fc.registra_autor(valores['-COD_AUT-'], valores['-NOME_AUT-'], valores ['-PAIS_AUT-'])
+            sg.popup(output)
+        # Evento de atualizar
+        elif evento == '-ATUALIZA-':
+            output = fc.atualiza_autor(valores['-COD_AUT-'], valores['-NOME_AUT-'], valores ['-PAIS_AUT-'])
+            sg.popup(output)
+    # Fechar janela
     window.close()
     if open == 'menu':
         dm.display_menu()
+
 
 
 
@@ -146,3 +184,5 @@ def display_aut():
 if __name__ == "__main__":
     theme.biblioTEC()
     display_mat()
+    display_liv()
+    display_aut()
