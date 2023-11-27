@@ -7,30 +7,36 @@ import theme
 def window_menu():
     
     coluna_cad = [
-        [sg.Text('Cadastros', size = (20), justification='center')],
-        [sg.Button('Autor', size = (20), key = '-CADASTRO_AUTOR-')],
-        [sg.Button('Livro', size = (20), key = '-CADASTRO_LIVRO-')],
-        [sg.Button('Exemplar', size = (20), key = '-CADASTRO_EXEMPLAR-')],
-        [sg.Button('Matrícula', size = (20), key = '-CADASTRO_MATRICULA-')]
+        [sg.Text(   'Cadastros',    size = (20),    justification='center')         ],
+        [sg.Button( 'Autor',        size = (20),    key = '-CADASTRO_AUTOR-')       ],
+        [sg.Button( 'Livro',        size = (20),    key = '-CADASTRO_LIVRO-')       ],
+        [sg.Button( 'Exemplar',     size = (20),    key = '-CADASTRO_EXEMPLAR-')    ],
+        [sg.Button( 'Matrícula',    size = (20),    key = '-CADASTRO_MATRICULA-')   ]
     ]
 
     coluna_oper = [
-        [sg.Text('Operações', size = (20), justification='center')],
-        [sg.Button('Operações', size = (20), key = '-OPERACOES-')]
+        [sg.Text(   'Operações',    size = (20),    justification='center')                 ],
+        [sg.Button( 'Reservar',     size = (20),    key = '-RESERVAR-', p=((0,0),(3,3)))    ],
+        [sg.Button( 'Emprestar',    size = (20),    key = '-EMPRESTAR-', p=((0,0),(3,3)))   ],
+        [sg.Button( 'Devolver',     size = (20),    key = '-DEVOLVER-', p=((0,0),(3,3)))    ]
     ]
-
+    
     coluna_acrv = [
-        [sg.Text('Acervo', size = (20), justification='center')],
-        [sg.Button('Disponível', size = (20), key = '-ACERVO_DISP-')],
-        [sg.Button('Emprestado', size = (20), key = '-ACERVO_EMPR-')],
-        [sg.Button('Perdido', size = (20), key = '-ACERVO_PERD-')],
-        [sg.Button('Manutenção', size = (20), key = '-ACERVO_MANU-')]
+        [sg.Text(   'Acervo',       size = (20),    justification='center')     ],
+        [sg.Button( 'Disponível',   size = (20),    key = '-ACERVO_DISP-')      ],
+        [sg.Button( 'Emprestado',   size = (20),    key = '-ACERVO_EMPR-')      ],
+        [sg.Button( 'Perdido',      size = (20),    key = '-ACERVO_PERD-')      ],
+        [sg.Button( 'Manutenção',   size = (20),    key = '-ACERVO_MANU-')      ]
     ]
 
     layout = [
         [sg.Image(source = 'Python/images/logo_small.png', expand_x=True, expand_y=True, s= (200, 180),)],
         [sg.HorizontalSeparator(color='#b000b4')],
-        [sg.Column(coluna_cad, s=(200, 180)), sg.Column([], s=(1,180), background_color='#b948b4'), sg.Column(coluna_oper, s=(200, 180)), sg.Column([], s=(1,180), background_color='#b948b4'), sg.Column(coluna_acrv,s=(182, 180))]
+        [sg.Column(coluna_cad, s=(200, 180)), 
+         sg.Column([], s=(1,180), background_color='#b948b4', p=((0,11),(0,0))), 
+         sg.Column(coluna_oper, s=(200, 180)), 
+         sg.Column([], s=(1,180), background_color='#b948b4'), 
+         sg.Column(coluna_acrv,s=(182, 180))]
     ]
 
     return sg.Window('Menu', layout, size= (665, 400), finalize=True, font='Corbel')

@@ -5,7 +5,6 @@ import display_menu as dm
 import theme
 
 def window_mat():
-    
     # Layout
     layout = [
         [sg.Text("Código de Matricula: ", size = (20)), sg.Input(size=(25, 1), key = '-COD_MAT-')],
@@ -17,13 +16,12 @@ def window_mat():
         [sg.Text("Endereço: ", size = (20)), sg.Input(size=(25, 1), key = '-ENDE_MAT-')],
         [sg.Text("CPF: ", size = (20)), sg.Input(size=(25, 1), key = '-CPF_MAT-')],
         [sg.HorizontalSeparator(pad = ((0,0), (5,5)), color = "#b948b4")],
-        [sg.Button('Cadastrar', size = (20), key = '-CADASTRO-'), sg.Button('Atualizar', size = (21), key = '-ATUALIZA-')]
+        [sg.Button('Cadastrar', size = (20), key = '-CADASTRO-'), sg.Button('Atualizar', size = (20), key = '-ATUALIZA-')]
     ]
-
     # Gera a Janela e retorna
     return sg.Window(title= "Matrícula", layout = layout, size = (425, 300), font = 'Corbel')
     
-# Função que cria o display e realiza as operações
+# Função que cria o display e realiza as operações (mat)
 def display_mat():
 
     # Abro a janela
@@ -34,7 +32,7 @@ def display_mat():
         evento, valores = window.read()
 
         # Evento de fechamento de tela
-        if evento == sg.WIN_CLOSED():
+        if evento == sg.WIN_CLOSED:
             open = 'menu'
             break
 
