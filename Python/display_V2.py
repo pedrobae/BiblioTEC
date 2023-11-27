@@ -1,6 +1,8 @@
+# ------------------------ ABANDONADO ------------------------ #
 import PySimpleGUI as sg
 import window_acervo as wa
 from Funcoes import func_operacoes as fo
+import theme
 
 def menu_bar():
     menu_def = [
@@ -181,4 +183,5 @@ def display_matricula_bar():
 
 
 if __name__ == "__main__":
+    theme.biblioTEC()
     display_matricula_bar()
