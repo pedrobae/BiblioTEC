@@ -33,7 +33,7 @@ def window_menu():
         [sg.Image(source = 'Python/images/logo_small.png', expand_x=True, expand_y=True, s= (200, 180),)],
         [sg.HorizontalSeparator(color='#b000b4')],
         [sg.Column(coluna_cad, s=(200, 180)), 
-         sg.Column([], s=(1,180), background_color='#b948b4', p=((0,11),(0,0))), 
+         sg.Column([], s=(1,180), background_color='#b948b4', p=((6,10),(0,0))), 
          sg.Column(coluna_oper, s=(200, 180)), 
          sg.Column([], s=(1,180), background_color='#b948b4'), 
          sg.Column(coluna_acrv,s=(182, 180))]
@@ -96,7 +96,7 @@ def display_menu():
             window.close()
             break
 
-        elif evento == "-OPERACOES-":
+        elif evento in ("-RESERVAR-", "-EMPRESTAR-", "-DEVOLVER-"):
             open = 'OPERACOES'
             window.close()
             break

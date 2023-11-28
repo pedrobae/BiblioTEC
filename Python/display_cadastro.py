@@ -29,10 +29,23 @@ def window_mat():
 # Cria a janela do exemplar (precisa colocar os botões do acervo)
 def window_exemp():
     layout = [
-        []
+        [   sg.Text('Código do Exemplar:',      size = (20)),       sg.Input(size=(23, 1),      key = '-COD_EXEMP-'     ) ],
+        [   sg.Text('ISBN: ',                   size = (20)),       sg.Input(size=(23, 1),      key = '-ISBN_EXEMP-'    ) ],
+        [   sg.Text('Código da Estante:',       size = (20)),       sg.Input(size=(23, 1),      key = '-COD_ESTANTE-'   ) ],
+        [   sg.Text('Situação:',                size = (20)),       sg.Input(size=(23, 1),      key = '-SITUACAO-'      ) ],
+        [   sg.Text('Estado de Conservação:',   size = (20)),       sg.Input(size=(23, 1),      key = '-ESTADO_CONS-'   ) ],
+        [   sg.HorizontalSeparator(pad = ((0,0), (5,7)), color = "#b948b4"                                              ) ],
+        [   sg.Button('Cadastrar',              size = (20),        key = '-CADASTRO-',         p=((5,0),(0,0))         ), 
+            sg.Button('Atualizar',              size = (20),        key = '-ATUALIZA-',         p=((6,0),(0,0))         ) ],
+        [   sg.HorizontalSeparator(pad = ((0,0), (5,0)), color = "#b948b4"                                              ) ],
+        [   sg.Text(    'ACERVO',               size = (50),        justification='center'                              ) ],
+        [   sg.Button(  'Disponível',           size = (9),         key = '-ACERVO_DISP-',      p=((5,0),(0,0))         ),
+            sg.Button(  'Emprestado',           size = (9),         key = '-ACERVO_EMPR-',      p=((8,0),(0,0))         ),
+            sg.Button(  'Perdido',              size = (9),         key = '-ACERVO_PERD-',      p=((8,0),(0,0))         ),
+            sg.Button(  'Manutenção',           size = (9),         key = '-ACERVO_MANU-',      p=((8,0),(0,0))         ) ]
     ]
 
-    return sg.Window(title= "Exemplar", layout = layout, font = 'Corbel', finalize = True)
+    return sg.Window("Exemplar", layout, font='Corbel', finalize=True, size=(410, 275))
 
 
 
@@ -50,7 +63,7 @@ def window_liv():
         [sg.Button('Cadastrar', size = (13, 2), key = '-CADASTRO-'), sg.Button('Atualizar', size = (13, 2), key = '-ATUALIZA-'), sg.Button('Lista de\nLivros', size = (13, 2), k= '-LISTA-')]
     ]
 
-    return sg.Window(title= "Livro", layout = layout, size = (425, 300), font = 'Corbel', finalize = True)
+    return sg.Window(title= "Livro", layout = layout, size = (425, 285), font = 'Corbel', finalize = True)
 
 
 
@@ -61,10 +74,10 @@ def window_aut():
         [sg.Text("Nome do Autor: ", size = (20)), sg.Input(size=(25, 1), key = '-NOME_AUT-')],
         [sg.Text("País de Origem: ", size = (20)), sg.Input(size=(25, 1), key = '-PAIS_AUT-')],
         [sg.HorizontalSeparator(pad = ((0,0), (5,5)), color = "#b948b4")],
-        [sg.Button('Cadastrar', size = (20), key = '-CADASTRO-'), sg.Button('Atualizar', size = (20), key = '-ATUALIZA-')]
+        [sg.Button('Cadastrar', size = (13, 2), key = '-CADASTRO-'), sg.Button('Atualizar', size = (13, 2), key = '-ATUALIZA-'), sg.Button('Lista de\nAutores', size = (13, 2), k= '-LISTA-')]
     ]
 
-    return sg.Window(title= "Autor", layout = layout, size = (425, 300), font = 'Corbel', finalize = True)
+    return sg.Window(title= "Autor", layout = layout, size = (425, 170), font = 'Corbel', finalize = True)
 
 
 
@@ -144,6 +157,24 @@ def display_exemp():
         elif evento == "-ACERVO_PERD-" and not window_perd:
             window_perd = wa.wind_perd()
 
+        elif evento == "-CADASTRO-":
+            output = fc.registra_exemplar(valores['-COD_EXEMP-'], valores['-ISBN_EXEMP-'], valores['-COD_ESTANTE-'], valores['-ESTADO_CONS-'])
+            sg.popup(output)
+
+        elif evento == "-ATUALIZA-":
+            if valores['-SITUACAO-'] == 'Disponível':
+                cod_sit = 1
+            elif valores['-SITUACAO-'] == 'Emprestado':
+                cod_sit = 2
+            elif valores['-SITUACAO-'] == 'Manutenção':
+                cod_sit = 3
+            elif valores['-SITUACAO-'] == 'Perdido':
+                cod_sit = 4
+            else:
+                cod_sit = ''
+            output = fa.atualiza_exemplar(valores['-COD_EXEMP-'], valores['-COD_ESTANTE-'], cod_sit, valores['-ESTADO_CONS-'])
+            sg.popup(output)
+
     window.close()
     if open == 'menu':
         dm.display_menu()
@@ -187,22 +218,32 @@ def display_liv():
 # Função que cria o display e realiza as operações (autor)
 def display_aut():
     open = None
-    window = window_aut()
+
+    window_a = window_aut()
+    window_lista = None
+
     while True:
-        evento, valores = window.read()
-        # Evento de fechamento de tela
+        window, evento, valores = sg.read_all_windows()
+
         if evento == sg.WIN_CLOSED:
-            open = 'menu'
-            break
-        # Evento de cadastro
+            window.close()
+            if window == window_a:
+                open = 'menu'
+                break
+            elif window == window_lista:
+                window_lista = None
+
         elif evento == '-CADASTRO-':
             output = fc.registra_autor(valores['-COD_AUT-'], valores['-NOME_AUT-'], valores ['-PAIS_AUT-'])
             sg.popup(output)
-        # Evento de atualizar
+
         elif evento == '-ATUALIZA-':
             output = fc.atualiza_autor(valores['-COD_AUT-'], valores['-NOME_AUT-'], valores ['-PAIS_AUT-'])
             sg.popup(output)
-    # Fechar janela
+
+        elif evento == '-LISTA-':
+            window_lista = wa.wind_aut()
+
     window.close()
     if open == 'menu':
         dm.display_menu()

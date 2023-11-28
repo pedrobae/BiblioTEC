@@ -35,7 +35,7 @@ def registra_exemplar(cod_exemplar, isbn, cod_estante, estado_exempl):
                     # Checa se o exemplar esta cadastrados
                     cod_exemplar = int(cod_exemplar)
                     if cod_exemplar in lista_exemp:
-                        retorno = "O código de matricula já está cadastrado"
+                        retorno = "O código de exemplar já está cadastrado"
                     else:
                         if cod_estante != '':
                             cod_estante = int(cod_estante)
