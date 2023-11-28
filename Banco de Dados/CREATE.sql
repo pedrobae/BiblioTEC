@@ -1,3 +1,6 @@
+-- Active: 1700675802032@@localhost@5432@BiblioTEC
+
+SET DATESTYLE TO POSTGRES, DMY ;
 -- criar tabela autor
 DROP TABLE IF EXISTS autor CASCADE ; 
 CREATE TABLE autor ( 
@@ -55,7 +58,7 @@ CREATE TABLE estante (
 -- criar tabela livro  
 DROP TABLE IF EXISTS livro CASCADE ; 
 CREATE TABLE livro ( 
-	ISBN 					NUMERIC(10) 	PRIMARY KEY, 
+	ISBN 					CHAR(10) 		PRIMARY KEY, 
 	titulo 					VARCHAR(100) 	NOT NULL, 
 	subtitulo 				VARCHAR(100) , 
 	dt_publ 				DATE 			NOT NULL,  
@@ -68,7 +71,7 @@ CREATE TABLE livro (
 DROP TABLE IF EXISTS exemplar CASCADE ; 
 CREATE TABLE exemplar ( 
 	cod_exemplar 			SERIAL 			PRIMARY KEY,  
-	ISBN 					NUMERIC(10) 	REFERENCES livro(ISBN),  
+	ISBN 					CHAR(10)	 	REFERENCES livro(ISBN),  
 	dt_aquisicao 			DATE 			NOT NULL,  
 --	cod_instituição			SMALLSERIAL 	REFERENCES estante(cod_instituicao), 
 	cod_estante 			SMALLSERIAL		REFERENCES estante(cod_estante), 
@@ -96,7 +99,7 @@ CREATE TABLE matricula (
 DROP TABLE IF EXISTS autoria CASCADE ; 
 CREATE TABLE autoria ( 
 	cod_autor 				SMALLSERIAL 	REFERENCES autor(cod_autor), 
-	ISBN 					NUMERIC(10) 	REFERENCES livro(ISBN),
+	ISBN 					CHAR(10)	 	REFERENCES livro(ISBN),
 	PRIMARY KEY (cod_autor, ISBN)
 );  
 
@@ -104,7 +107,7 @@ CREATE TABLE autoria (
 DROP TABLE IF EXISTS classificacao CASCADE ; 
 CREATE TABLE classificacao ( 
 	cod_tema	 			SMALLSERIAL 	REFERENCES tema(cod_tema) , 
-	ISBN 					NUMERIC(10) 	REFERENCES livro(ISBN) ,
+	ISBN 					CHAR(10) 		REFERENCES livro(ISBN) ,
 	PRIMARY KEY (cod_tema, ISBN)
 ); 
 
@@ -137,3 +140,28 @@ ALTER TABLE reserva
 
 ALTER TABLE emprestimo
 	ALTER COLUMN dt_devolucao TYPE TIMESTAMP;
+
+
+ALTER SEQUENCE emprestimo_cod_emprestimo_seq
+	RESTART;
+
+ALTER SEQUENCE estante_cod_estante_seq
+	RESTART;
+
+ALTER SEQUENCE exemplar_cod_exemplar_seq
+	RESTART;
+
+ALTER SEQUENCE instituicao_cod_instituicao_seq
+	RESTART;
+
+ALTER SEQUENCE reserva_cod_reserva_seq
+	RESTART;
+
+ALTER SEQUENCE situacao_cod_situacao_seq
+	RESTART;
+
+ALTER SEQUENCE tema_cod_tema_seq
+	RESTART;
+
+ALTER SEQUENCE tipo_matricula_cod_tipo_matricula_seq
+	RESTART;

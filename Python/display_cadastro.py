@@ -47,7 +47,7 @@ def window_liv():
         [sg.Text("Edição: ", size = (20)), sg.Input(size=(25, 1), key = '-EDIC_LIV-')],
         [sg.Text("Local de publicação: ", size = (20)), sg.Input(size=(25, 1), key = '-LOC_PUBL_LIV-')],
         [sg.HorizontalSeparator(pad = ((0,0), (5,5)), color = "#b948b4")],
-        [sg.Button('Cadastrar', size = (20), key = '-CADASTRO-'), sg.Button('Atualizar', size = (20), key = '-ATUALIZA-')]
+        [sg.Button('Cadastrar', size = (13, 2), key = '-CADASTRO-'), sg.Button('Atualizar', size = (13, 2), key = '-ATUALIZA-'), sg.Button('Lista de\nLivros', size = (13, 2), k= '-LISTA-')]
     ]
 
     return sg.Window(title= "Livro", layout = layout, size = (425, 300), font = 'Corbel', finalize = True)
@@ -152,21 +152,31 @@ def display_exemp():
 # Função que cria o display e realiza as operações (Livro)
 def display_liv():
     open = None
-    window = window_liv()
+    # Abro a janela
+    window_l = window_liv()
+    window_lista = None
+    # Loop de leitura da tela
     while True:
-        evento, valores = window.read()
+        window, evento, valores = sg.read_all_windows()
         # Evento de fechamento de tela
         if evento == sg.WIN_CLOSED:
-            open = 'menu'
-            break
+            window.close()
+            if window == window_l:
+                open = 'menu'
+                break
+            elif window == window_lista:
+                window_lista = None
         # Evento de cadastro
         elif evento == '-CADASTRO-':
-            output = fc.registra_livro(valores['-ISBN_LIV-'], valores['-TITU_LIV-'], valores ['-SUB_LIV-'], valores ['-DT_PUBL_LIV-'], valores ['-EDIT_LIV-'], valores ['-EDIC_LIV-'], valores ['-LOC_PUBL_LIV-'])
+            output = fc.registra_livro(valores['-ISBN_LIV-'], valores['-TITU_LIV-'], valores ['-DT_PUBL_LIV-'], valores ['-EDIT_LIV-'], valores ['-EDIC_LIV-'], valores ['-LOC_PUBL_LIV-'], valores ['-SUB_LIV-'])
             sg.popup(output)
         # Evento de atualizar
         elif evento == '-ATUALIZA-':
             output = fc.atualiza_livro(valores['-ISBN_LIV-'], valores['-TITU_LIV-'], valores ['-SUB_LIV-'], valores ['-DT_PUBL_LIV-'], valores ['-EDIT_LIV-'], valores ['-EDIC_LIV-'], valores ['-LOC_PUBL_LIV-'])
             sg.popup(output)
+        # Evento de Lista
+        elif evento == '-LISTA-':
+            window_lista = wa.wind_liv()
     # Fechar janela
     window.close()
     if open == 'menu':
