@@ -179,7 +179,7 @@ def acervo_mat():
             
             with con.cursor() as cur:
 
-                select_acerv =  ''' SELECT m.cod_matricula, tm.descr_matricula, m.nome_matricula, m.sexo, m.dt_nscm, m.dt_termino
+                select_acerv =  ''' SELECT m.cod_matricula, tm.descr_tipo_matricula, m.nome_matricula, m.sexo, m.dt_nscm, m.dt_termino
                                         FROM matricula m
                                             JOIN tipo_matricula tm      ON m.cod_tipo_matricula = tm.cod_tipo_matricula
                                         ORDER BY nome_matricula '''

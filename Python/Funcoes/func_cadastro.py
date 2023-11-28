@@ -22,6 +22,7 @@ def registra_exemplar(cod_exemplar, isbn, cod_estante, estado_exempl):
                 for value in cur.fetchall():
                     lista_isbn += value
 
+                isbn = int(isbn)
                 # Checa se o ISBN está cadastrado
                 if isbn in lista_isbn:
                     # Seleciona os exemplares
@@ -32,9 +33,13 @@ def registra_exemplar(cod_exemplar, isbn, cod_estante, estado_exempl):
                         lista_exemp += value
 
                     # Checa se o exemplar esta cadastrados
+                    cod_exemplar = int(cod_exemplar)
                     if cod_exemplar in lista_exemp:
                         retorno = "O código de matricula já está cadastrado"
                     else:
+                        if cod_estante != '':
+                            cod_estante = int(cod_estante)
+
                         dt_aquisicao = datetime.date.today()
                         insert_exe = '''INSERT INTO exemplar VALUES (DEFAULT, {0}, '{1}', '{2}', 1, '{3}')'''.format(isbn, str(dt_aquisicao), cod_estante, estado_exempl)
                         cur.execute(insert_exe)
@@ -53,7 +58,7 @@ def registra_exemplar(cod_exemplar, isbn, cod_estante, estado_exempl):
 
 
 # Registro de Matricula
-def registra_matricula (cod_matricula, cod_tipo_matricula, cod_instituicao, nome_matricula, sexo, dt_nscm = 'NULL', email_matricula = 'NULL', endereco_matricula = 'NULL', CPF = 'NULL'):
+def registra_matricula (cod_matricula, cod_tipo_matricula, cod_instituicao, nome_matricula, sexo, dt_nscm = '', email_matricula = '', endereco_matricula = '', CPF = ''):
     retorno = None
     # Conecta com o banco
     con = None
@@ -73,6 +78,7 @@ def registra_matricula (cod_matricula, cod_tipo_matricula, cod_instituicao, nome
                 for value in cur.fetchall():
                     lista_mat += value
 
+                cod_matricula = int(cod_matricula)
                 # Checa se o cod_matricula existe na lista
                 if cod_matricula in lista_mat:
                     retorno = 'O Código de Matrícula já está cadastrado'
@@ -80,14 +86,27 @@ def registra_matricula (cod_matricula, cod_tipo_matricula, cod_instituicao, nome
                     # Realiza o cadastro
                     dt_matricula = str(datetime.date.today())
 
-                    if dt_nscm != 'NULL':
+                    if dt_nscm != '':
                         dt_nscm = "'{0}'".format(dt_nscm)
+                    else:
+                        dt_nscm = 'NULL'
 
-                    if email_matricula != 'NULL':
+                    if email_matricula != '':
                         email_matricula = "'{0}'".format(email_matricula)
+                    else:
+                        email_matricula = 'NULL'
 
-                    if endereco_matricula != 'NULL':
+                    if endereco_matricula != '':
                         endereco_matricula = "'{0}'".format(endereco_matricula)
+                    else:
+                        endereco_matricula = 'NULL'
+
+                    if cod_tipo_matricula != '':
+                        cod_tipo_matricula = int(cod_tipo_matricula)
+                    if cod_instituicao != '':
+                        cod_instituicao = int(cod_instituicao)
+                    if CPF != '':
+                        CPF = int(CPF)
 
                     insert_mat = '''INSERT INTO matricula (cod_matricula, cod_tipo_matricula, cod_instituicao, nome_matricula, dt_matricula, sexo, dt_nscm, email_matricula, endereco_matricula, CPF) 
                                     VALUES ({0}, {1}, {2}, '{3}', '{4}', '{5}', {6}, {7}, {8}, {9})'''.format(cod_matricula, cod_tipo_matricula, cod_instituicao, nome_matricula, dt_matricula, sexo, dt_nscm, email_matricula, endereco_matricula, CPF)
@@ -105,9 +124,9 @@ def registra_matricula (cod_matricula, cod_tipo_matricula, cod_instituicao, nome
 
 
 # Registro de Livro
-def registra_livro(isbn, titulo, dt_publ, editora, edicao = 'NULL', local_publ = 'NULL', subtitulo = 'NULL'):
+def registra_livro(isbn, titulo, dt_publ, editora, edicao = '', local_publ = '', subtitulo = ''):
     con = None
-    retorne = None
+    retorno = None
     try:
         with psycopg2.connect(
             database="BiblioTEC",
@@ -124,21 +143,29 @@ def registra_livro(isbn, titulo, dt_publ, editora, edicao = 'NULL', local_publ =
                 for value in cur.fetchall():
                     lista_livro += value
 
+                isbn = int(isbn)
                 if isbn in lista_livro:
-                    retorne = 'O Código ISBN já está cadastrado'
+                    retorno = 'O Código ISBN já está cadastrado'
                 else:
-                    if subtitulo != 'NULL':
+                    if subtitulo != '':
                         subtitulo = "'{0}'".format(subtitulo)
+                    else:
+                        subtitulo = 'NULL'
 
-                    if local_publ != 'NULL':
+                    if local_publ != '':
                         local_publ = "'{0}'".format(local_publ)
+                    else:
+                        local_publ = 'NULL'
+
+                    if edicao != '':
+                        edicao = int(edicao)
                     
                     insert_livro = '''
                         INSERT INTO livro (isbn, titulo, subtitulo, dt_publ, editora, edicao, local_publ)
                         VALUES ({0}, '{1}', {2}, '{3}', '{4}', {5}, {6})'''.format(isbn, titulo, subtitulo, dt_publ, editora, edicao, local_publ)
 
                     cur.execute(insert_livro)
-                    retorne = 'Cadastro Efetuado'
+                    retorno = 'Cadastro Efetuado'
 
     except Exception as error:
         print(error)
@@ -146,8 +173,8 @@ def registra_livro(isbn, titulo, dt_publ, editora, edicao = 'NULL', local_publ =
         if con is not None:
             con.close()
 
-    if retorne:
-        return retorne
+    if retorno:
+        return retorno
 
 
 
@@ -173,6 +200,7 @@ def registra_autor (cod_autor, nome_autor, pais_autor):
                     lista_aut += value
 
                 # Checa se o cod_autor existe na lista
+                cod_autor = int(cod_autor)
                 if cod_autor in lista_aut:
                     retorno = 'O Código de Autor ja está cadastrado'
                 else:

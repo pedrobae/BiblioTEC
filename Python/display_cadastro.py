@@ -4,22 +4,25 @@ import display_menu     as dm
 import theme
 
 from Funcoes import func_cadastro   as fc
+from Funcoes import func_atualiza   as fa
 
 def window_mat():
     layout = [
         [sg.Text("Código de Matricula: ", size = (20)), sg.Input(size=(25, 1), key = '-COD_MAT-')],
         [sg.Text("Tipo de Matrícula: ", size = (20)), sg.Input(size=(25, 1), key = '-TIPO_MAT-')],
         [sg.Text("Instituição: ", size = (20)), sg.Input(size=(25, 1), key = '-INST_MAT-')],
+        [sg.Text("Nome: ", size = (20)), sg.Input(size=(25, 1), key = '-NOME_MAT-')],
         [sg.Text("Sexo: ", size = (20)), sg.Input(size=(25, 1), key = '-SEXO_MAT-')],
         [sg.Text("Data de Nascimento: ", size = (20)), sg.Input(size=(25, 1), key = '-NASC_MAT-')],
         [sg.Text("E-mail: ", size = (20)), sg.Input(size=(25, 1), key = '-EMAIL_MAT-')],
         [sg.Text("Endereço: ", size = (20)), sg.Input(size=(25, 1), key = '-ENDE_MAT-')],
         [sg.Text("CPF: ", size = (20)), sg.Input(size=(25, 1), key = '-CPF_MAT-')],
+        [sg.Text("Data de Término: ", size = (20)), sg.Input(size=(25, 1), key = '-TERM_MAT-')],
         [sg.HorizontalSeparator(pad = ((0,0), (5,5)), color = "#b948b4")],
-        [sg.Button('Cadastrar', size = (20), key = '-CADASTRO-'), sg.Button('Atualizar', size = (20), key = '-ATUALIZA-')]
+        [sg.Button('Cadastrar', size = (13, 2), key = '-CADASTRO-'), sg.Button('Atualizar', size = (13, 2), key = '-ATUALIZA-'), sg.Button('Lista de\nMatrículas', size = (13, 2), k= '-LISTA-')]
     ]
     # Gera a Janela e retorna
-    return sg.Window(title= "Matrícula", layout = layout, size = (425, 300), font = 'Corbel')
+    return sg.Window(title= "Matrícula", layout = layout, size = (425, 375), font = 'Corbel', finalize = True)
 
 
 
@@ -29,7 +32,7 @@ def window_exemp():
         []
     ]
 
-    return sg.Window(title= "Exemplar", layout = layout, font = 'Corbel')
+    return sg.Window(title= "Exemplar", layout = layout, font = 'Corbel', finalize = True)
 
 
 
@@ -47,7 +50,7 @@ def window_liv():
         [sg.Button('Cadastrar', size = (20), key = '-CADASTRO-'), sg.Button('Atualizar', size = (20), key = '-ATUALIZA-')]
     ]
 
-    return sg.Window(title= "Livro", layout = layout, size = (425, 300), font = 'Corbel')
+    return sg.Window(title= "Livro", layout = layout, size = (425, 300), font = 'Corbel', finalize = True)
 
 
 
@@ -61,7 +64,7 @@ def window_aut():
         [sg.Button('Cadastrar', size = (20), key = '-CADASTRO-'), sg.Button('Atualizar', size = (20), key = '-ATUALIZA-')]
     ]
 
-    return sg.Window(title= "Autor", layout = layout, size = (425, 300), font = 'Corbel')
+    return sg.Window(title= "Autor", layout = layout, size = (425, 300), font = 'Corbel', finalize = True)
 
 
 
@@ -69,22 +72,39 @@ def window_aut():
 def display_mat():
     open = None
     # Abro a janela
-    window = window_mat()
+    window_m = window_mat()
+    window_lista = None
     # Loop de leitura da tela
     while True:
-        evento, valores = window.read()
+        window, evento, valores = sg.read_all_windows()
         # Evento de fechamento de tela
         if evento == sg.WIN_CLOSED:
-            open = 'menu'
-            break
+            window.close()
+            if window == window_m:
+                open = 'menu'
+                break
+            elif window == window_lista:
+                window_lista = None
         # Evento de cadastro
         elif evento == '-CADASTRO-':
-            output = fc.registra_matricula(valores['-COD_MAT-'], valores['-TIPO_MAT-'], valores ['-INST_MAT-'], valores ['-SEXO_MAT-'], valores ['-NASC_MAT-'], valores ['-EMAIL_MAT-'], valores ['-ENDE_MAT-'], valores ['-CPF_MAT-'])
+            if valores['-TIPO_MAT-'] == 'Estudante':
+                cod_tipo_mat = 1
+            elif valores['-TIPO_MAT-'] == 'Professor':
+                cod_tipo_mat = 2
+            elif valores['-TIPO_MAT-'] == 'Funcionário':
+                cod_tipo_mat = 3
+            elif valores['-TIPO_MAT-'] == 'Externo':
+                cod_tipo_mat = 4
+
+            output = fc.registra_matricula(valores['-COD_MAT-'], cod_tipo_mat, valores['-INST_MAT-'], valores['-NOME_MAT-'], valores['-SEXO_MAT-'], valores['-NASC_MAT-'], valores['-EMAIL_MAT-'], valores['-ENDE_MAT-'], valores['-CPF_MAT-'])
             sg.popup(output)
         # Evento de atualizar
         elif evento == '-ATUALIZA-':
-            output = fc.atualiza_matricula(valores['-COD_MAT-'], valores['-TIPO_MAT-'], valores ['-INST_MAT-'], valores ['-SEXO_MAT-'], valores ['-NASC_MAT-'], valores ['-EMAIL_MAT-'], valores ['-ENDE_MAT-'], valores ['-CPF_MAT-'])
+            output = fa.atualiza_matricula(valores['-COD_MAT-'], valores['-NOME_MAT-'], valores['-SEXO_MAT-'], valores['-NASC_MAT-'], valores['-EMAIL_MAT-'], valores['-CPF_MAT-'], valores['-TERM_MAT-'])
             sg.popup(output)
+        # Evento de Lista
+        elif evento == '-LISTA-':
+            window_lista = wa.wind_mat()
     # Fechar janela
     window.close()
     if open == 'menu':
@@ -183,6 +203,4 @@ def display_aut():
 #--------------------------------------------#
 if __name__ == "__main__":
     theme.biblioTEC()
-    display_mat()
-    display_liv()
-    display_aut()
+    dm.display_menu()

@@ -47,3 +47,8 @@ SELECT m.cod_matricula, m.nome_matricula
     FROM matricula m
         LEFT JOIN emprestimo em ON m.cod_matricula = em.cod_matricula
     WHERE em.cod_matricula IS NULL
+
+    SELECT m.cod_matricula, tm.descr_tipo_matricula, m.nome_matricula, m.sexo, m.dt_nscm, m.dt_termino
+                                        FROM matricula m
+                                            JOIN tipo_matricula tm      ON m.cod_tipo_matricula = tm.cod_tipo_matricula
+                                        ORDER BY nome_matricula
