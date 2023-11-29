@@ -1,12 +1,12 @@
 -- Active: 1700675802032@@localhost@5432@BiblioTEC
 -- Livros atrasados e quem os emprestou
-SELECT mat.nome_matricula, liv.titulo, emp.dt_devolucao - emp.dt_prevista_devolucao AS "Dias Atrasados"
+SELECT mat.nome_matricula, liv.titulo, EXTRACT(DAYS FROM (emp.dt_devolucao - emp.dt_prevista_devolucao)) AS "Dias de Atraso"
     FROM emprestimo emp 
         JOIN matricula mat      ON (emp.cod_matricula = mat.cod_matricula)
         JOIN exemplar ex        ON (emp.cod_exemplar = ex.cod_exemplar)
         JOIN livro liv          ON (ex.ISBN = liv.ISBN)
     WHERE emp.dt_devolucao > emp.dt_prevista_devolucao
-    ORDER BY "Dias Atrasados" DESC;
+    ORDER BY "Dias de Atraso" DESC;
 
 -- Lista de reserva de um exemplar e seus e-mail
 SELECT mat.nome_matricula, mat.email_matricula, res.dt_prevista_emprestimo, liv.titulo
@@ -18,7 +18,7 @@ SELECT mat.nome_matricula, mat.email_matricula, res.dt_prevista_emprestimo, liv.
     ORDER BY dt_prevista_emprestimo;
 
 -- Consulta de livros emprestados
-SELECT liv.ISBN, liv.titulo, exe.cod_exemplar, mat.cod_matricula, mat.nome, emp.dt_emprestimo, emp.dt_prevista_devolucao
+SELECT liv.ISBN, liv.titulo, exe.cod_exemplar, mat.cod_matricula, mat.nome_matricula, emp.dt_emprestimo, emp.dt_prevista_devolucao
     FROM livro liv 
         JOIN exemplar exe       ON (liv.ISBN = exe.ISBN)
         JOIN emprestimo emp     ON (exe.cod_exemplar = emp.cod_exemplar)
@@ -34,7 +34,7 @@ SELECT mat.nome_matricula, mat.cod_tipo_matricula, ex.cod_exemplar, liv.titulo, 
     WHERE emp.cod_matricula ='INSERIR CODIGO DE MATRICULA'
     ORDER BY dt_emprestimo DESC
 
--- Consultar os 5 livros mais emprestados
+-- Consultar os livros mais emprestados
 SELECT l.titulo, l.subtitulo, COUNT(cod_emprestimo) AS "Número de Empréstimos"
     FROM livro l
         JOIN exemplar ex        ON l.ISBN = ex.ISBN
@@ -47,8 +47,3 @@ SELECT m.cod_matricula, m.nome_matricula
     FROM matricula m
         LEFT JOIN emprestimo em ON m.cod_matricula = em.cod_matricula
     WHERE em.cod_matricula IS NULL
-
-    SELECT m.cod_matricula, tm.descr_tipo_matricula, m.nome_matricula, m.sexo, m.dt_nscm, m.dt_termino
-                                        FROM matricula m
-                                            JOIN tipo_matricula tm      ON m.cod_tipo_matricula = tm.cod_tipo_matricula
-                                        ORDER BY nome_matricula
