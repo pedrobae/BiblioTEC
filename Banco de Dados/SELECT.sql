@@ -34,7 +34,7 @@ SELECT mat.nome_matricula, mat.cod_tipo_matricula, ex.cod_exemplar, liv.titulo, 
     WHERE emp.cod_matricula = 40102
     ORDER BY dt_emprestimo DESC
 
--- Consultar os 5 livros mais emprestados
+-- Consultar os livros mais emprestados
 SELECT l.titulo, l.subtitulo, COUNT(cod_emprestimo) AS "Número de Empréstimos"
     FROM livro l
         JOIN exemplar ex        ON l.ISBN = ex.ISBN

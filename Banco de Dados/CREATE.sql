@@ -1,4 +1,4 @@
--- Active: 1700675802032@@localhost@5432@BiblioTEC
+-- Active: 1701269989672@@127.0.0.1@5432@BiblioTEC
 
 SET DATESTYLE TO POSTGRES, DMY ;
 -- criar tabela autor
