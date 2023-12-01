@@ -1,4 +1,4 @@
--- Active: 1701269989672@@127.0.0.1@5432@BiblioTEC
+-- Active: 1700675802032@@localhost@5432@BiblioTEC
 -- Populando autor
 INSERT INTO autor (cod_autor,nome_autor,pais_autor)
 	VALUES

@@ -128,9 +128,9 @@ CREATE TABLE emprestimo (
 	cod_emprestimo			SERIAL			PRIMARY KEY,
 	cod_matricula 			INTEGER 		REFERENCES matricula(cod_matricula), 
 	cod_exemplar 			SMALLINT 		REFERENCES exemplar(cod_exemplar), 
-	dt_emprestimo 			DATE	 		NOT NULL, 
+	dt_emprestimo 			TIMESTAMP 		NOT NULL, 
 	dt_prevista_devolucao 	DATE ,
-	dt_devolucao 			DATE 
+	dt_devolucao 			TIMESTAMP 
 ); 
 
 ALTER TABLE reserva

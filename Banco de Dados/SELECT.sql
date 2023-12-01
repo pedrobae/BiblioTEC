@@ -1,12 +1,12 @@
 -- Active: 1701269989672@@127.0.0.1@5432@BiblioTEC
 -- Livros atrasados e quem os emprestou
-SELECT mat.nome_matricula, liv.titulo, EXTRACT(day FROM (emp.dt_devolucao - emp.dt_prevista_devolucao)) AS "Dias Atrasados"
+SELECT mat.nome_matricula, liv.titulo, EXTRACT(DAYS FROM (emp.dt_devolucao - emp.dt_prevista_devolucao)) AS "Dias de Atraso"
     FROM emprestimo emp 
         JOIN matricula mat      ON (emp.cod_matricula = mat.cod_matricula)
         JOIN exemplar ex        ON (emp.cod_exemplar = ex.cod_exemplar)
         JOIN livro liv          ON (ex.ISBN = liv.ISBN)
     WHERE emp.dt_devolucao > emp.dt_prevista_devolucao
-    ORDER BY "Dias Atrasados" DESC;
+    ORDER BY "Dias de Atraso" DESC;
 
 -- Lista de reserva de um exemplar e seus e-mail
 SELECT mat.nome_matricula, mat.email_matricula, res.dt_prevista_emprestimo, liv.titulo
