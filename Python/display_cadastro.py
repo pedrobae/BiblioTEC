@@ -203,7 +203,7 @@ def display_liv():
             sg.popup(output)
         # Evento de atualizar
         elif evento == '-ATUALIZA-':
-            output = fc.atualiza_livro(valores['-ISBN_LIV-'], valores['-TITU_LIV-'], valores ['-SUB_LIV-'], valores ['-DT_PUBL_LIV-'], valores ['-EDIT_LIV-'], valores ['-EDIC_LIV-'], valores ['-LOC_PUBL_LIV-'])
+            output = fa.atualiza_livro(valores['-ISBN_LIV-'], valores['-TITU_LIV-'], valores ['-SUB_LIV-'], valores ['-DT_PUBL_LIV-'], valores ['-EDIT_LIV-'], valores ['-EDIC_LIV-'], valores ['-LOC_PUBL_LIV-'])
             sg.popup(output)
         # Evento de Lista
         elif evento == '-LISTA-':
@@ -238,7 +238,7 @@ def display_aut():
             sg.popup(output)
 
         elif evento == '-ATUALIZA-':
-            output = fc.atualiza_autor(valores['-COD_AUT-'], valores['-NOME_AUT-'], valores ['-PAIS_AUT-'])
+            output = fa.atualiza_autor(valores['-COD_AUT-'], valores['-NOME_AUT-'], valores ['-PAIS_AUT-'])
             sg.popup(output)
 
         elif evento == '-LISTA-':
