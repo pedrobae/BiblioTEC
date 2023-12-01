@@ -1,4 +1,4 @@
--- Active: 1700675802032@@localhost@5432@BiblioTEC
+-- Active: 1701269989672@@127.0.0.1@5432@BiblioTEC
 -- Livros atrasados e quem os emprestou
 SELECT mat.nome_matricula, liv.titulo, emp.dt_devolucao - emp.dt_prevista_devolucao AS "Dias Atrasados"
     FROM emprestimo emp 

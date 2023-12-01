@@ -29,7 +29,7 @@ def emprestimo(cod_mat, cod_exemp, today = date.today()):
 
                     if queue == []:
                         insert_emp = "INSERT INTO emprestimo (cod_matricula, cod_exemplar, dt_emprestimo) VALUES ({0}, {1}, '{2}')".format(cod_mat, cod_exemp, str(today))
-                        update_emp = "UPDATE emprestimo SET dt_prevista_devolucao = dt_emprestimo + 14"
+                        update_emp = "UPDATE emprestimo SET dt_prevista_devolucao = dt_emprestimo + interval '14' day"
                         cur.execute(insert_emp)
                         cur.execute(update_emp)
                         
