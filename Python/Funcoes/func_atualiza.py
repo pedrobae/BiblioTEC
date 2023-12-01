@@ -201,7 +201,7 @@ def atualiza_autor(cod_autor, nome_autor = '', pais_autor = ''):
                         cur.execute(update_nome_autor)
                         retorno += "Nome do autor atualizado com sucesso.\n"
                     if pais_autor != '':
-                        update_pais_autor = "UPDATE autor SET pais_autor = '{0}' WHERE cod_autor = {1}".format(nome_autor, cod_autor)
+                        update_pais_autor = "UPDATE autor SET pais_autor = '{0}' WHERE cod_autor = {1}".format(pais_autor, cod_autor)
                         cur.execute(update_pais_autor)
                         retorno += "País de origem do autor atualizado com sucesso."
                 else:
