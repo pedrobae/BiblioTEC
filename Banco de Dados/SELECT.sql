@@ -14,7 +14,7 @@ SELECT mat.nome_matricula, mat.email_matricula, res.dt_prevista_emprestimo, liv.
         JOIN matricula mat      ON (res.cod_matricula = mat.cod_matricula)
         JOIN exemplar ex        ON (res.cod_exemplar = ex.cod_exemplar)
         JOIN livro liv          ON (ex.ISBN = liv.ISBN)
-    WHERE res.dt_emprestimo IS NULL AND res.cod_exemplar = 2
+    WHERE res.dt_emprestimo IS NULL AND res.cod_exemplar = "Insira o codigo do exemplar"
     ORDER BY dt_prevista_emprestimo;
 
 -- Consulta de livros emprestados
@@ -31,7 +31,7 @@ SELECT mat.nome_matricula, mat.cod_tipo_matricula, ex.cod_exemplar, liv.titulo, 
         JOIN emprestimo emp     ON (emp.cod_matricula = mat.cod_matricula)
         JOIN exemplar ex        ON (ex.cod_exemplar= emp.cod_exemplar)
         JOIN livro liv          ON (ex.ISBN = liv.ISBN )
-    WHERE emp.cod_matricula = 40102
+    WHERE emp.cod_matricula = "Inserir o Código de Matricula"
     ORDER BY dt_emprestimo DESC
 
 -- Consultar os livros mais emprestados
